@@ -1,0 +1,5 @@
+<h1>All Feeds</h1>
+
+  <% @feeds.each do |feed| %>
+      <%= link_to feed.name, feed %></br>
+  <% end %>

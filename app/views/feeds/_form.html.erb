@@ -1,0 +1,9 @@
+<%= form_for @feed do |f| %>
+
+  <div class="form-group">
+    <p><%= f.label :name %></p>
+    <p><%= f.text_field :name, class: "form-control" %></p>
+  </div>
+
+  <%= f.submit "Submit" %>
+<% end %></br>
