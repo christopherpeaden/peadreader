@@ -1,6 +1,7 @@
 <h1>Feed page</h1>
 
-<p><%= @feed.name %></p></br>
+<p><%= @feed.title%></p></br>
+<p><%= @feed.url%></p></br>
 
 <%= link_to "Edit", edit_feed_path(@feed), class: "btn btn-default" %>
 <%= link_to "Back", root_path, class: "btn btn-default" %>

@@ -38,6 +38,10 @@ class FeedsController < ApplicationController
     redirect_to root_path
   end
 
+  def feed_items 
+    @feed_items = Feed.get_feed_items
+  end
+
   private
 
     def find_feed

@@ -1,0 +1,7 @@
+<% if @feed.errors.any? %>                                       
+  The form contains <%= pluralize(@feed.errors.count, "error") %>
+  <% @feed.errors.full_messages.each do |msg| %>                  
+    <%= msg %>                                                    
+  <% end %>                                                       
+<% end %>                                                         
+
