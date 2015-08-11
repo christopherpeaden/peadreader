@@ -1,0 +1,15 @@
+BEGIN TRANSACTION;
+CREATE TABLE "schema_migrations" ("version" text NOT NULL);
+INSERT INTO "schema_migrations" VALUES('20150726020240');
+INSERT INTO "schema_migrations" VALUES('20150726025441');
+INSERT INTO "schema_migrations" VALUES('20150726160431');
+INSERT INTO "schema_migrations" VALUES('20150726160702');
+CREATE TABLE "users" ("id" SERIAL PRIMARY KEY NOT NULL, "email" text DEFAULT '' NOT NULL, "encrypted_password" text DEFAULT '' NOT NULL, "reset_password_token" text, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" text, "last_sign_in_ip" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL);
+CREATE TABLE "feeds" ("id" SERIAL PRIMARY KEY NOT NULL, "title" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "url" text);
+INSERT INTO "feeds" VALUES(2,'Ruby on Rails podcast','2015-07-26 16:48:24.406827','2015-07-26 16:48:24.406827','http://feeds.5by5.tv/rubyonrails');
+INSERT INTO "feeds" VALUES(3,'New York Times','2015-07-28 16:59:07.124292','2015-07-28 16:59:07.124292','http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml');
+INSERT INTO "feeds" VALUES(5,'Julian Blanc','2015-07-28 18:06:49.758347','2015-07-28 18:06:49.758347','https://www.youtube.com/feeds/videos.xml?channel_id=UCTyvDKLQnpIivQzX9qa5sWA');
+CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version");
+CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email");
+CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token");
+COMMIT;
