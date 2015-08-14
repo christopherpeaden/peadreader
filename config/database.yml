@@ -1,9 +1,10 @@
 default: &default
   adapter: postgresql 
   encoding: utf8
+  hostname: localhost -h 127.0.0.1
   pool: 5
-  username: peady
-  password:
+  username: feed_reader 
+  password: 
   timeout: 5000
 
 development:
