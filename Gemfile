@@ -17,9 +17,14 @@ gem 'feedjira', '~> 2.0.0'
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'
 # gem 'capistrano-rails', group: :development
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+end
+
+group :test do
+  gem 'minitest-reporters'
 end
 

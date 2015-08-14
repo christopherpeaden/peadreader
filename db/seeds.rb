@@ -5,9 +5,3 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-
-
-10.times do
-  Feed.create(name: Faker::Internet.url)
-end

@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-
-two:
-  name: MyString
+healthy_eating:
+  title: "Healthy Eating"
+  url:   "http://www.feedforall.com/sample-feed.xml"
+  #user: chris
