@@ -20,7 +20,7 @@ class FeedsController < ApplicationController
   end
 
   def index
-    @feeds = Feed.all
+    @feeds = current_user.feeds
   end
 
   def edit
@@ -40,7 +40,7 @@ class FeedsController < ApplicationController
   end
 
   def feed_items 
-    @feed_items = Feed.get_feed_items_from_current_user(current_user.id)
+    @feed_items = Feed.get_feed_items_from_current_user(current_user.feeds)
   end
 
   private
