@@ -7,7 +7,7 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = Feed.new(feed_params)
+    @feed = current_user.feeds.build(feed_params)
 
     if @feed.save
       redirect_to @feed
@@ -40,13 +40,12 @@ class FeedsController < ApplicationController
   end
 
   def feed_items 
-    @feed_items = Feed.get_feed_items
+    @feed_items = Feed.get_feed_items_from_current_user(current_user.id)
   end
 
   private
 
     def find_feed
-      @user = current_user
       @feed = Feed.find(params[:id])
     end
 

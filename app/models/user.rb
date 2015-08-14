@@ -2,14 +2,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  has_many :feeds
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable 
 
-  def self.current
-    Thread.current[:user]
-  end
+  has_many :feeds, dependent: :destroy
 
-  def self.current=(user)
-    Thread.current[:user] = user
-  end
 end
