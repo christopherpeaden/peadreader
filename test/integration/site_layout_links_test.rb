@@ -8,7 +8,6 @@ class SiteLayoutLinksTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", new_user_session_path, text: "Sign In"
     assert_select "a[href=?]", new_user_registration_path, text: "Sign up"
     assert_select "a[href=?]", new_user_password_path, text: "Forgot your password?"
-    assert_select "a[href=?]", '/users/confirmation/new.user', text: "Didn't receive confirmation instructions?"
   end
 
   test "layout links after sign in" do
