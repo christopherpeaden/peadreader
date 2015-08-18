@@ -39,7 +39,7 @@ class FeedsController < ApplicationController
   end
 
   def feed_items 
-    @feed_items = Feed.get_feed_items_from_current_user(current_user.feeds)
+    @feed_items = get_feed_items(current_user.feeds).paginate(page: params[:page])
   end
 
   private
