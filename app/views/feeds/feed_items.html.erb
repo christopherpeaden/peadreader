@@ -2,6 +2,7 @@
 
 <ul class="list-group">
   <% @feed_items.each do |item| %>
-      <li class="list-group-item"><%= link_to item.title, item.url %></li>
+    <li class="list-group-item"><%= link_to item.title, item.url if item.published.to_i > 1439173000 %></li>
   <% end %>
 </ul>
+
