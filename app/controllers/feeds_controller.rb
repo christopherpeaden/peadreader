@@ -38,7 +38,7 @@ class FeedsController < ApplicationController
     redirect_to root_path
   end
 
-  def feed_items 
+  def dashboard
     @feed_items = get_feed_items(current_user.feeds).paginate(page: params[:page])
   end
 

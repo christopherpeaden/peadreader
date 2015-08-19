@@ -1,0 +1,9 @@
+<%= will_paginate objects %>
+
+<ul class="list-group">
+  <% objects.each do |object| %>
+    <li class="list-group-item"><%= "#{object.author}: " if object.author %><%= link_to object.title, object.url %></li>
+  <% end %>
+</ul>
+
+<%= will_paginate objects %>

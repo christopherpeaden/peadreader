@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   authenticated :user do
-    root 'feeds#feed_items', :as => 'authenticated_root'
+    root 'feeds#dashboard', :as => 'authenticated_root'
   end
 
   devise_scope :user do
