@@ -38,8 +38,17 @@ class FeedsController < ApplicationController
     redirect_to root_path
   end
 
+  def refresh
+    @entries = current_user.feeds.entries 
+    @entries.each do |entry|
+      Entry.create(title: item.title, url: item.url, published: item.published)
+    end
+    redirect_to root_url
+  end
+
+
   def dashboard
-    @feed_items = get_feed_items(current_user.feeds).paginate(page: params[:page])
+    @entries = current_user.feeds.entries.paginate(page: params[:page])
   end
 
   private

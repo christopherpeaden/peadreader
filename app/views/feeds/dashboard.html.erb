@@ -1,5 +1,7 @@
 <h1>My Feed</h1>
 
-<div id="feed_items">
-  <%= render 'feed_items', objects: @feed_items %>
+<%= link_to "Refresh", refresh_path %>
+
+<div id="entries">
+  <%= render 'entries', entries: @entries %>
 </div>
