@@ -1,0 +1,9 @@
+<%= will_paginate items %>
+
+<ul class="list-group">
+  <% items.each do |item| %>
+    <li class="list-group-item"><%= link_to item.title, item.url %></li>
+  <% end %>
+</ul>
+
+<%= will_paginate items %>

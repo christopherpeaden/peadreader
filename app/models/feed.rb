@@ -3,6 +3,6 @@ class Feed < ActiveRecord::Base
   validates :url, presence: true
 
   belongs_to :user
-  has_many :entries
+  has_many :items, dependent: :destroy
 
 end

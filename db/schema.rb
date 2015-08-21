@@ -11,21 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150819223201) do
+ActiveRecord::Schema.define(version: 20150821044048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "entries", force: :cascade do |t|
-    t.string   "title"
-    t.string   "url"
-    t.time     "published"
-    t.integer  "feed_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "entries", ["feed_id"], name: "index_entries_on_feed_id", using: :btree
 
   create_table "feeds", force: :cascade do |t|
     t.text     "title"
@@ -36,6 +25,17 @@ ActiveRecord::Schema.define(version: 20150819223201) do
   end
 
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
+
+  create_table "items", force: :cascade do |t|
+    t.string   "title"
+    t.string   "url"
+    t.datetime "published"
+    t.integer  "feed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "items", ["feed_id"], name: "index_items_on_feed_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.text     "email",                  default: "", null: false
@@ -55,6 +55,6 @@ ActiveRecord::Schema.define(version: 20150819223201) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "entries", "feeds"
   add_foreign_key "feeds", "users"
+  add_foreign_key "items", "feeds"
 end

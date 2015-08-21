@@ -39,10 +39,8 @@ class FeedsController < ApplicationController
   end
 
   def refresh
-    @feeds = current_user.feeds
-    @feeds.each do |feed|
-      Entry.create(title: feed.entry.title, url: feed.entry.url, published: feed.entry.published)
-    end
+    fetch_feed_items(current_user.feeds)
+
     redirect_to root_url
   end
 
@@ -51,13 +49,12 @@ class FeedsController < ApplicationController
     @feeds = current_user.feeds
     arr = []
     @feeds.each do |feed|
-      @entries = feed.entries
-      @entries.each do |entry|
-        arr << entry
+      feed.items.each do |item|
+        arr << item
       end
     end
-    @entries = arr
-    @entries = @entries.paginate(page: params[:page])
+    @items = arr.sort! { |x,y| y.published <=> x.published }
+    @items = @items.paginate(page: params[:page])
   end
 
   private
@@ -68,6 +65,10 @@ class FeedsController < ApplicationController
 
     def feed_params
       params.require(:feed).permit(:title, :url)
+    end
+
+    def item_params
+      params.require(:item).permit(:title, :url, :published, :feed_id)
     end
       
 end
