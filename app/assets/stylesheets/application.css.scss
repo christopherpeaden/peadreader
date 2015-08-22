@@ -18,14 +18,18 @@
   @import 'bootstrap';
 
   body {
-    background: -webkit-linear-gradient(90deg, #EFEFBB 10%, #D4D3DD 90%); /* Chrome 10+, Saf5.1+ */
-    background:    -moz-linear-gradient(90deg, #EFEFBB 10%, #D4D3DD 90%); /* FF3.6+ */
-    background:     -ms-linear-gradient(90deg, #EFEFBB 10%, #D4D3DD 90%); /* IE10 */
-    background:      -o-linear-gradient(90deg, #EFEFBB 10%, #D4D3DD 90%); /* Opera 11.10+ */
-    background:         linear-gradient(90deg, #EFEFBB 10%, #D4D3DD 90%); /* W3C */
+    background-color: #B22222;
   }
-
+    
   h1 {
     text-align: center;
     padding-bottom: 25px;
+  }
+
+  #items {
+    margin-top: -20px;
+  }
+
+  .pagination {
+    margin-top: -5px;
   }

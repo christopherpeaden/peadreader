@@ -14,6 +14,8 @@ gem 'faker', '~> 1.4.3'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'feedjira', '~> 2.0.0'
 gem 'will_paginate', '~> 3.0.7'
+gem 'bootstrap-will_paginate'
+gem 'nokogiri'
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'
 # gem 'capistrano-rails', group: :development

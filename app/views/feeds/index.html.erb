@@ -1,5 +1,12 @@
 <h1>All Feeds</h1>
 
+<ul class="list-group">
   <% @feeds.each do |feed| %>
-    <%= link_to feed.title, feed %></br>
-  <% end %>
+    <li class="list-group-item">
+      <%= link_to feed.title, feed %>
+    </li>
+  <% end %></br>
+
+<%= link_to "Import Opml File", '#', class: "btn btn-default" %>
+
+

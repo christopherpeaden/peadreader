@@ -1,4 +1,4 @@
-<%= form_for @feed do |f| %>
+<%= form_for @feed, html: { :multipart: true } do |f| %>
 
   <div class="form-group">
     <p><%= f.label :title %></p>
@@ -8,6 +8,11 @@
   <div class="form-group">
     <p><%= f.label :url %></p>
     <p><%= f.text_field :url, class: "form-control" %></p>
+  </div>
+
+  <div class="form-group">
+    <p><%= f.label "Import Opml File" %></p>
+    <p><%= f.file_field :hum %></p>
   </div>
 
   <%= f.submit "Submit" %>
