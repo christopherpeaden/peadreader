@@ -11,19 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821044048) do
+ActiveRecord::Schema.define(version: 20150823222414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "feeds", force: :cascade do |t|
-    t.text     "title"
+  create_table "categories", force: :cascade do |t|
+    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text     "url"
-    t.integer  "user_id"
   end
 
+  create_table "feeds", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "url"
+    t.integer  "user_id"
+    t.integer  "category_id"
+  end
+
+  add_index "feeds", ["category_id"], name: "index_feeds_on_category_id", using: :btree
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
 
   create_table "items", force: :cascade do |t|
@@ -38,16 +46,16 @@ ActiveRecord::Schema.define(version: 20150821044048) do
   add_index "items", ["feed_id"], name: "index_items_on_feed_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.text     "email",                  default: "", null: false
-    t.text     "encrypted_password",     default: "", null: false
-    t.text     "reset_password_token"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.text     "current_sign_in_ip"
-    t.text     "last_sign_in_ip"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
@@ -55,6 +63,7 @@ ActiveRecord::Schema.define(version: 20150821044048) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "feeds", "categories"
   add_foreign_key "feeds", "users"
   add_foreign_key "items", "feeds"
 end

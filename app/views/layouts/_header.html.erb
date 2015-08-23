@@ -6,6 +6,9 @@
           <% if user_signed_in? %>
             <li><%= link_to image_tag("refresh.jpeg"), refresh_path %></li>
             <li><%= link_to image_tag("subscribe.jpeg"), new_feed_path %></li>
+            <% Category.all.each do |category| %>
+              <%= link_to category.title, root_path(category_id: category.id) %>
+            <% end %>
           <% end %>
         <div class="nav navbar-right">
           <ul class="nav nav-pills">

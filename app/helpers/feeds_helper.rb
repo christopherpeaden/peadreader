@@ -1,8 +1,8 @@
 module FeedsHelper
 
   def fetch_feed_items(feed_list)
-    feed_items = []
     feed_list.each do |feed|
+      feed_items = []
       latest_item = feed.items.find_by(published: feed.items.maximum(:published)) 
       parsed_feed = Feedjira::Feed.fetch_and_parse(feed.url)
       parsed_feed.entries.each do |entry|

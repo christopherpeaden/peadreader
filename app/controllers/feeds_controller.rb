@@ -6,12 +6,23 @@ class FeedsController < ApplicationController
   end
 
   def create
-    @feed = current_user.feeds.build(feed_params)
 
-    if @feed.save
-      redirect_to @feed
+    if !params[:feed][:file].nil?
+      file = params[:feed][:file].read
+      doc = Nokogiri::XML(file)
+      doc.xpath("//outline").each_with_index do |outline, index|
+        if index != 0
+          doc_title = doc.xpath("//outline")[index][:title]
+          doc_url   = doc.xpath("//outline")[index][:xmlUrl]
+          @feed = current_user.feeds.build(title: doc_title, url: doc_url)
+          @feed.save
+        end
+      end
+      flash[:notice] = "Successfully imported OPML file"
+      redirect_to feeds_path
     else
-      render 'new'
+      @feed = current_user.feeds.build(feed_params)
+      @feed.save ? redirect_to(@feed) : render('new')
     end
   end
 
@@ -46,7 +57,7 @@ class FeedsController < ApplicationController
 
 
   def dashboard
-    @feeds = current_user.feeds
+    !params[:category_id].nil? ? @feeds = current_user.feeds.where(category_id: params[:category_id]) : @feeds = current_user.feeds
     arr = []
     @feeds.each do |feed|
       feed.items.each do |item|
@@ -64,11 +75,6 @@ class FeedsController < ApplicationController
     end
 
     def feed_params
-      params.require(:feed).permit(:title, :url)
+      params.require(:feed).permit(:title, :url, :category_id)
     end
-
-    def item_params
-      params.require(:item).permit(:title, :url, :published, :feed_id)
-    end
-      
 end
