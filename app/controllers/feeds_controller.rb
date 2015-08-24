@@ -22,6 +22,7 @@ class FeedsController < ApplicationController
       redirect_to feeds_path
     else
       @feed = current_user.feeds.build(feed_params)
+      
       @feed.save ? redirect_to(@feed) : render('new')
     end
   end
@@ -51,8 +52,8 @@ class FeedsController < ApplicationController
 
   def refresh
     fetch_feed_items(current_user.feeds)
-
-    redirect_to root_url
+                    
+    redirect_to(:back)
   end
 
 
@@ -77,4 +78,5 @@ class FeedsController < ApplicationController
     def feed_params
       params.require(:feed).permit(:title, :url, :category_id)
     end
+
 end

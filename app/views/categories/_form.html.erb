@@ -1,0 +1,9 @@
+<%= form_for @category do |f| %>
+
+  <div class="form-group">
+    <p><%= f.label :title %></p>
+    <p><%= f.text_field :title, class: "form-control" %></p>
+  </div>
+
+  <%= f.submit "Submit" %>
+<% end %>
