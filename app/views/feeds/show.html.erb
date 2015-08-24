@@ -1,9 +1,13 @@
-<h1>Feed page</h1>
+<div class="jumbotron">
+  <h1 class="center"><%= @feed.title %></h1>
 
-<p><%= @feed.title%></p></br>
-<p><%= @feed.url%></p></br>
+  <div class="center">
+    <%= link_to "Edit", edit_feed_path(@feed), class: "btn btn-default" %>
+    <%= link_to "Delete", @feed, method: :delete, data: { confirm: "Delete this feed?" }, class: "btn btn-default" %>
+    <%= link_to "Back", feeds_path, class: "btn btn-default" %>
+  </div>
+</div>
 
-<%= link_to "Edit", edit_feed_path(@feed), class: "btn btn-default" %>
-<%= link_to "Back", feeds_path, class: "btn btn-default" %>
-<%= link_to "Delete", @feed, method: :delete, data: { confirm: "Delete this feed?" }, class: "btn btn-default" %>
-
+<div id="items">
+  <%= render "items", items: @items %>
+</div>

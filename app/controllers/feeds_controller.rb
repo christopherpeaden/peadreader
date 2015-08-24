@@ -28,6 +28,10 @@ class FeedsController < ApplicationController
   end
 
   def show
+    arr = []
+    @feed.items.each { |item| arr << item }
+    @items = arr.sort! { |x,y| y.published <=> x.published }
+    @items = @items.paginate(page: params[:page])
   end
 
   def index
@@ -60,11 +64,7 @@ class FeedsController < ApplicationController
   def dashboard
     !params[:category_id].nil? ? @feeds = current_user.feeds.where(category_id: params[:category_id]) : @feeds = current_user.feeds
     arr = []
-    @feeds.each do |feed|
-      feed.items.each do |item|
-        arr << item
-      end
-    end
+    @feeds.each {|feed| feed.items.each { |item| arr << item } }
     @items = arr.sort! { |x,y| y.published <=> x.published }
     @items = @items.paginate(page: params[:page])
   end
