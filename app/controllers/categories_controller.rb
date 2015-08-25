@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :find_category, only: [:destroy]
+
   def new
     @category = Category.new
   end
@@ -16,7 +17,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to root_path
+    redirect_to(:back)
   end
 
 

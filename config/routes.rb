@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   end
 
   resources :feeds
-  resources :categories, only: [:new, :create]
+  resources :categories, only: [:new, :create, :destroy]
   get "refresh" => "feeds#refresh"
 end
