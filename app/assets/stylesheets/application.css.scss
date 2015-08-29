@@ -14,8 +14,57 @@
  *= require_self
  */
 
+  html {
+    width: 100%;
+    margin: auto;
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  #navbar {
+    width: 80%;
+    margin: auto;
+    height: 130px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: #000000;
+    -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+    -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+    box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  }
+
+  #navbar ul {
+    list-style: none;
+    text-align: center;
+    padding: 10px;
+  }
+
+  #navbar ul li {
+    display: inline;
+    text-transform: uppercase;
+    padding: 0 10px;
+    line-height: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: -5px;
+  }
+
+  #navbar ul li a {
+    text-decoration: none;
+    color: white;
+  }
+
+  #navbar ul li a:hover {
+    color: grey;
+    text-decoration: underline;
+  }
+
   body {
-    background-color: #B22222;
+    background-color: #D3FFCE;
+  }
+
+  .container {
+    width: 100%;
+    position: relative;
   }
     
   h1 {
@@ -26,6 +75,45 @@
     margin-top: -20px;
   }
 
-  .center {
-    text-align: center;
+  .list-group {
+    list-style: none;
   }
+
+  .list-group li {
+    border-bottom: 2px solid #000;
+    margin-bottom: 15px;
+    border-radius: 3px;
+  }
+  
+  .list-group li a {
+  }
+
+  .pagination {
+    list-style: none;
+    padding-top: 10px;
+  }
+
+  .pagination ul li {
+    display: inline;
+  }
+
+  .pagination ul li a {
+    color: black;
+    text-decoration: none;
+  }
+
+  .pagination ul li a:hover {
+    color: grey;
+    text-decoration: underline;
+  }
+
+  .container {
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    border-radius: 2px;
+    -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+    -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+    box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  }
+
