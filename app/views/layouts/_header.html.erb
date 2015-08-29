@@ -1,42 +1,21 @@
-</header>
+<header>
   <nav class="navbar navbar-inverse">
-    <div class="container">
-
-      <ul class="nav nav-pills">
         <li><%= link_to "Feed Reader", root_path, class: 'logo' %></li>
       <% if user_signed_in? %>
-
-        <li>
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Categories <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <% Category.all.each do |category| %>
-                <li><%= link_to category.title, root_path(category_id: category.id) %></li>
-                <li><%= link_to "Delete", category_path(id: category.id), method: :delete, data: { confirm: "Delete category: #{category.title}?" } %></li>
-                <li class="divider"></li>
+                  <li><%= link_to category.title, root_path(category_id: category.id) %></li>
+                  <li><%= link_to "Delete", category_path(id: category.id), method: :delete, data: { confirm: "Delete category: #{category.title}?" } %></li>
               <% end %>
-                <li><%= link_to "Add new category", new_category_path %></li>
-            </ul>
-          </div>
-        </li>
-
+       <% end %>
+       <% if user_signed_in? %>
+        <li><%= link_to "Add new category", new_category_path %></li>
         <li><%= link_to image_tag("refresh.jpeg"), refresh_path %></li>
         <li><%= link_to image_tag("subscribe.jpeg"), new_feed_path %></li>
         <li><%= link_to "Manage Feeds", feeds_path %></li>
         <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" }%></li>
-
-      </ul>
-
       <% else %>
-
-        <ul class="nav nav-pills">
           <li><%= link_to "Sign In", new_user_session_path %></li>
-        </ul>
-
       <% end %>
 
-    </div>
   </nav>
 </header>
