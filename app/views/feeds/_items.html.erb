@@ -2,8 +2,8 @@
 
 <ul class="list-group">
   <% items.each do |item| %>
-    <li class="list-group-item">
-      <%= link_to "#{item.feed.title}: #{item.title}", item.url %></br>
+    <li>
+    <%= link_to "#{item.feed.title}: #{truncate(item.title, length: 150, omission: "...", escape: false) }", item.url, class: "feed-item" %> <%= link_to "More", feed_path(item.feed), class: "btn" if params[:id].nil? %></br>
       <%= "#{item.published.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(item.published)} ago" %>
     </li>
   <% end %>
