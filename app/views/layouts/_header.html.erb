@@ -3,17 +3,24 @@
     <ul>
       <li><%= link_to "Feed Reader", root_path, class: 'logo' %></li>
 
+      <li>
+      <ul>
         <% Category.all.each do |category| %>
           <li><%= link_to category.title, root_path(category_id: category.id) %></li>
           <li><%= link_to "Delete", category_path(id: category.id), method: :delete, data: { confirm: "Delete category: #{category.title}?" } %></li>
         <% end %>
         <li><%= link_to "Add new category", new_category_path %></li>
+      </ul>
+      </li>
 
-      <li><%= link_to image_tag("refresh.jpeg"), refresh_path %></li>
-      <li><%= link_to image_tag("subscribe.jpeg"), new_feed_path %></li>
-      <li><%= link_to "Manage Feeds", feeds_path %></li>
-      <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" }%></li>
-      <li><%= link_to "Sign In", new_user_session_path %></li>
-    </ul>
+      <li>
+        <ul>
+          <li><%= link_to image_tag("refresh.jpeg"), refresh_path %></li>
+          <li><%= link_to image_tag("subscribe.jpeg"), new_feed_path %></li>
+          <li><%= link_to "Manage Feeds", feeds_path %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" }%></li>
+          <li><%= link_to "Sign In", new_user_session_path %></li>
+        </ul>
+      </li>
   </nav>
 </header>
