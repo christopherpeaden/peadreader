@@ -1,6 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-healthy_eating:
-  title: "Healthy Eating"
-  url:   "http://www.feedforall.com/sample-feed.xml"
-  #user: chris
