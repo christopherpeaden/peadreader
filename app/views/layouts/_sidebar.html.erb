@@ -1,0 +1,15 @@
+<div id="sidebar">
+  <ul>
+
+    <% Category.all.each do |category| %>
+      <li><%= link_to category.title, root_path(category_id: category.id) %>
+        <ul>
+          <% category.feeds.each do |feed| %>
+            <li><%= link_to feed.title, feed %></li>
+          <% end %>
+        </ul>
+      </li>
+  <% end %>
+
+  </ul>
+</div>

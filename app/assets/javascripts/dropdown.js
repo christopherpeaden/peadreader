@@ -1,7 +1,7 @@
 $(document).ready(function () {
-  $('#navbar li ul').hide();
+  $('#sidebar li ul').hide();
 
-  $('#navbar li').hover(
+  $('#sidebar li').hover(
     function() {
       $('ul', this).stop().slideDown(200);
   },

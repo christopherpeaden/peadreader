@@ -21,8 +21,8 @@
   }
 
   #navbar {
-    width: 80%;
-    margin: auto;
+    width: 75%;
+    margin-left: 20px;
     height: 130px;
     border: 1px solid black;
     border-radius: 10px;
@@ -73,11 +73,6 @@
     background-color: #D3FFCE;
   }
 
-  .container {
-    width: 100%;
-    position: relative;
-  }
-    
   h1 {
     padding-bottom: 25px;
   }
@@ -110,7 +105,6 @@
     border: 3px solid #D3FFCE;
     border-radius: 3px;
     padding: 10px 6px 6px 6px;
-    
   }
 
   .pagination ul li a {
@@ -126,8 +120,9 @@
   }
 
   .container {
-    width: 80%;
-    margin: auto;
+    width: 75%;
+    margin-left: 20px;
+    float: left;
     background-color: white;
     border-radius: 2px;
     -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
@@ -182,4 +177,32 @@
   .caret:hover {
     color: grey;
   }
+
+  #sidebar {
+    float: right;
+    height: 3500px;
+    width: 400px;
+    background-color: white;
+    margin: -2px 20px 0px 0px;
+    border-radius: 2px;
+    -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+    -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+    box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  }
+
+  #sidebar-header {
+    background-color: #000;
+    float: right;
+    height: 130px;
+    width: 400px;
+    margin: -132px 20px 0px 0px;
+    border-radius: 10px;
+    -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+    -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+    box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  }
+
+  
+
+
 
