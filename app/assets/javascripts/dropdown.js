@@ -1,10 +1,11 @@
 $(document).ready(function () {
-    $('#navbar li ul').hide().removeClass('fallback');
-    $('#nav li').hover(
-      function() {
-        $('ul', this).stop().slideDown(100);
+  $('#navbar li ul').hide();
+
+  $('#navbar li').hover(
+    function() {
+      $('ul', this).stop().slideDown(200);
   },
   function () {
-    $('ul', this).stop().slideUp(100);
-  }
-);
+    $('ul', this).stop().slideUp(200);
+  })
+});

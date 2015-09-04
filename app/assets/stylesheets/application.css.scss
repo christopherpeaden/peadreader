@@ -48,6 +48,12 @@
     margin-top: -5px;
   }
 
+  .dropdown {
+    position: absolute;
+    z-index: 999;
+    margin: 20px 0px 0px 480px;
+  }
+
   #navbar ul li a {
     text-decoration: none;
     color: white;
@@ -55,6 +61,12 @@
 
   #navbar ul li a:hover {
     color: grey;
+  }
+ 
+  #navbar ul li ul li {
+    background-color: black;
+    display: block;
+    padding: 8px 5px 15px 5px;
   }
 
   body {
@@ -163,5 +175,11 @@
     padding-right: 35px;
   }
 
-
+  .caret {
+    color: white;
+  }
+  
+  .caret:hover {
+    color: grey;
+  }
 
