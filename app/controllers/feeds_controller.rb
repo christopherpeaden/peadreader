@@ -55,7 +55,9 @@ class FeedsController < ApplicationController
   end
 
   def refresh
-    fetch_feed_items(current_user.feeds.where(category_id: params[:category_id]))
+    params[:category_id].nil? ? fetch_feed_items(current_user.feeds)
+                              : fetch_feed_items(current_user.feeds.where(category_id:
+                                                                          params[:category_id]))
                     
     redirect_to(:back)
   end
