@@ -28,9 +28,10 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'faker', '~> 1.4.3'
+  gem 'capybara' 
+  gem 'database_cleaner'
 end
 
 group :test do
-  gem 'capybara' 
 end
 

@@ -3,6 +3,8 @@ FactoryGirl.define do
 
     title Faker::Name.title
     url Faker::Internet.url
+    user
+    category
   end
 
 end
