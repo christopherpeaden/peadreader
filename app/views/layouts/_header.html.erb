@@ -5,7 +5,7 @@
 
       <li><%= link_to "Feed Reader", root_path, class: 'logo' %></li>
 
-      <li><%= link_to image_tag("refresh.jpeg"), refresh_path(category_id: params[:category_id]), title: "Refresh current feeds" %></li>
+      <li><%= link_to image_tag("refresh.jpeg"), refresh_path(category_id: params[:category_id], id: params[:id]), title: "Refresh current feeds" %></li>
           <li><%= link_to image_tag("subscribe.jpeg"), new_feed_path, title: "Add a new feed" %></li>
           <li><%= link_to "Manage Feeds", feeds_path %></li>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" }%></li>
