@@ -96,25 +96,23 @@
 
   .pagination {
     list-style: none;
-    padding-top: 10px;
+    padding-top: 30px;
+    margin-left: 50px;
   }
 
-  .pagination ul li {
+  .pagination a {
     display: inline;
     background-color: #000000;
     border: 3px solid #D3FFCE;
     border-radius: 3px;
-    padding: 10px 6px 6px 6px;
-  }
-
-  .pagination ul li a {
+    padding: 2px 6px 2px 6px;
     color: white;
     font-size: 25px;
     font-weight: bold;
     text-decoration: none;
   }
 
-  .pagination ul li a:hover {
+  .pagination a:hover {
     color: grey;
     text-decoration: underline;
   }
