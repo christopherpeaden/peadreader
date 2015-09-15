@@ -13,4 +13,20 @@ module FeedsHelper
     end
   end
 
+  def file_param_exists? 
+    !params[:feed][:file].nil?
+  end
+
+  def setup_file_for_parsing
+    file = params[:feed][:file].read
+    Nokogiri::XML(file)
+  end
+
+  def save_outlines_from_opml(opml_doc)
+    doc.xpath("//outline").each_with_index do |outline, index|
+      @feed = current_user.feeds.build(title: outline[:title], url: outline[:xmlUrl]) if index != 0
+      @feed.save
+    end
+  end
+
 end

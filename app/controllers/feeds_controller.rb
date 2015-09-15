@@ -6,23 +6,13 @@ class FeedsController < ApplicationController
   end
 
   def create
-
-    if !params[:feed][:file].nil?
-      file = params[:feed][:file].read
-      doc = Nokogiri::XML(file)
-      doc.xpath("//outline").each_with_index do |outline, index|
-        if index != 0
-          doc_title = doc.xpath("//outline")[index][:title]
-          doc_url   = doc.xpath("//outline")[index][:xmlUrl]
-          @feed = current_user.feeds.build(title: doc_title, url: doc_url)
-          @feed.save
-        end
-      end
+    if file_param_exists?
+      opml_doc = setup_file_for_parsing
+      save_outlines_from_opml(opml_doc)
       flash[:notice] = "Successfully imported OPML file"
       redirect_to feeds_path
     else
       @feed = current_user.feeds.build(feed_params)
-      
       @feed.save ? redirect_to(@feed) : render('new')
     end
   end
@@ -56,8 +46,7 @@ class FeedsController < ApplicationController
 
   def refresh
     if params[:category_id]
-      fetch_feed_items current_user.feeds.where(category_id: params[:category_id])
-    elsif params[:id]
+      fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) elsif params[:id]
       fetch_feed_items current_user.feeds.where(id: params[:id])
     else
       fetch_feed_items current_user.feeds
