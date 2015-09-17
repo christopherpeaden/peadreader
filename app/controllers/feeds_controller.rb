@@ -7,7 +7,7 @@ class FeedsController < ApplicationController
 
   def create
     if file_param_exists?
-      opml_doc = setup_file_for_parsing
+      opml_doc = setup_file_for_searching
       save_outlines_from_opml(opml_doc)
       flash[:notice] = "Successfully imported OPML file"
       redirect_to feeds_path
