@@ -10,7 +10,7 @@ module FeedsHelper
 
   def store_items(parsed_feed, latest_item, feed)
     parsed_feed.entries.each do |item|
-      break if item.title == latest_item.title
+      break if latest_item && item.title == latest_item.title
       Item.create(title: item.title, url: item.url,
                   published: item.published, feed_id: feed.id)
     end
