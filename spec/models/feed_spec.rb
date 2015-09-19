@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Feed, type: :model do
 
   let(:feed) { build(:feed) }
-  let(:user) { feed.user }
-  let(:category) { feed.category }
   
   describe "feed attributes" do
 
@@ -26,12 +24,15 @@ RSpec.describe Feed, type: :model do
   describe "associations" do
 
     it "belongs to user" do
-      expect(feed.user).to_not be_nil
+      expect(feed).to respond_to(:user) 
     end
 
     it "belongs to category" do
-      expect(feed.category).to_not be_nil
+      expect(feed).to respond_to(:category)
     end
 
+    it "has many items" do
+      expect(feed).to respond_to(:items)
+    end
   end
 end
