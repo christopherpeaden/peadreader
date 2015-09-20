@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :find_category, only: [:show, :edit, :update, :destroy]
   before_action :get_categories, only: [:show, :new, :edit]
+  before_action :authenticate_user!
 
   def new
     @category = Category.new
