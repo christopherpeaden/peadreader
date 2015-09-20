@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'categories/new'
-
   devise_for :users
 
   authenticated :user do
@@ -12,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :feeds
+  resources :categories
   resources :categories, only: [:new, :create, :destroy]
   get "refresh" => "feeds#refresh"
 end

@@ -3,7 +3,7 @@
     <ul>
       <% if user_signed_in? %>
 
-        <li><%= link_to "Feed Reader", root_path, class: 'logo' %></li>
+        <li><%= link_to "Dashboard", root_path, class: 'logo' %></li>
         <li><%= link_to "Refresh", refresh_path(category_id: params[:category_id], id: params[:id]), title: "Refresh current feeds" %></li>
         <li><%= link_to "Subscribe", new_feed_path, title: "Add a new feed" %></li>
         <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" }%></li>
@@ -15,9 +15,12 @@
   </nav>
 
   <div id="sidebar-header">
-    <li><%= link_to "All Categories", root_path, class: "btn" %></li>
-    </br>
-    <li><%= link_to "New Category", new_category_path, class: "btn" %></li>
+    <ul>
+      <li>
+        <%= link_to "Categories", categories_path, class: "btn" %>
+        <%= link_to "Add Category", new_category_path, class: "btn" %>
+      </li>
+    </ul>
   </div>
 
 </header>
