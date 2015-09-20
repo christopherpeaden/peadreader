@@ -2,7 +2,13 @@
   <h1><%= @feed.title %></h1>
     <%= link_to "Edit", edit_feed_path(@feed), class: "btn" %>
     <%= link_to "Delete", @feed, method: :delete, data: { confirm: "Delete this feed?" }, class: "btn" %>
-    <%= link_to "Back", root_path, class: "btn" %>
+
+    <% if session[:referer] %>
+      <%= link_to "Back", session.delete(:referer), class: "btn" %>
+    <% else %>
+      <%= link_to "Back", root_url, class:"btn" %>
+    <% end %>
+
 </div>
 
 <div id="items">

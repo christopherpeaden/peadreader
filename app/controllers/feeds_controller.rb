@@ -10,7 +10,7 @@ class FeedsController < ApplicationController
       opml_doc = setup_file_for_searching
       save_outlines_from_opml(opml_doc)
       flash[:notice] = "Successfully imported OPML file"
-      redirect_to feeds_path
+      redirect_to root_path
     else
       @feed = current_user.feeds.build(feed_params)
       @feed.save ? redirect_to(@feed) : render('new')
@@ -57,6 +57,7 @@ class FeedsController < ApplicationController
 
 
   def dashboard
+    session[:referer] = request.original_url
     !params[:category_id].nil? ? @feeds = current_user.feeds.where(category_id: params[:category_id]) : @feeds = current_user.feeds
     arr = []
     @feeds.each {|feed| feed.items.each { |item| arr << item } }

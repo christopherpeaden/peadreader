@@ -2,7 +2,6 @@
 
 <p><%= link_to "Add a category", new_category_path, class: "btn" %></p>
 
-
 <% @categories.each do |category| %>
   <%= link_to category.title, category %></br>
 <% end %>
