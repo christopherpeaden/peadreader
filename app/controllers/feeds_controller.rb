@@ -1,5 +1,6 @@
 class FeedsController < ApplicationController
   before_action :find_feed, only: [:show, :edit, :update, :destroy]
+  before_action :get_categories, only: [:show, :new, :edit, :dashboard]
 
   def new
     @feed = Feed.new
@@ -18,6 +19,7 @@ class FeedsController < ApplicationController
   end
 
   def show
+    @categories = current_user.categories
     arr = []
     @feed.items.each { |item| arr << item }
     @items = arr.sort! { |x,y| y.published <=> x.published }
@@ -57,6 +59,7 @@ class FeedsController < ApplicationController
 
 
   def dashboard
+    @categories = current_user.categories
     session[:referer] = request.original_url
     !params[:category_id].nil? ? @feeds = current_user.feeds.where(category_id: params[:category_id]) : @feeds = current_user.feeds
     arr = []
@@ -75,4 +78,7 @@ class FeedsController < ApplicationController
       params.require(:feed).permit(:title, :url, :category_id)
     end
 
+    def get_categories
+      @categories = current_user.categories
+    end
 end

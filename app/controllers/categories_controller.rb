@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :find_category, only: [:show, :edit, :update, :destroy]
+  before_action :get_categories, only: [:show, :new, :edit]
 
   def new
     @category = Category.new
@@ -19,7 +20,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @categories = Category.all
+    @categories = current_user.categories
   end
 
   def edit
@@ -47,5 +48,9 @@ class CategoriesController < ApplicationController
 
     def category_params
       params.require(:category).permit(:title)
+    end
+
+    def get_categories
+      @categories = current_user.categories
     end
 end
