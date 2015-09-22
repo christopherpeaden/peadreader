@@ -1,0 +1,46 @@
+#navbar {
+  width: 75%;
+  margin-left: 439px;
+  height: 80px;
+  border: 1px solid black;
+  border-radius: 6px 6px 0 0;
+  background: #000000;
+  -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+}
+
+#navbar ul {
+  list-style: none;
+  padding: 21px 0 0 0;
+  margin-left: 65px;
+}
+
+#navbar ul li {
+  display: inline;
+  line-height: 4px;
+  padding: 10px 20px 14px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: -5px;
+}
+
+#navbar ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+#navbar ul li a:hover {
+  color: #fff0ee;
+}
+
+#navbar ul li ul li {
+  background-color: black;
+  display: block;
+  padding: 8px 5px 15px 5px;
+}
+
+#sign-out {
+  float: right;
+  margin: 0px 65px;
+}

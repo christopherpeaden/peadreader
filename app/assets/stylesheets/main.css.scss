@@ -1,0 +1,76 @@
+html {
+  width: 100%;
+  margin: auto;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+  background-color: #f1caca; 
+}
+
+h1 {
+  padding-bottom: 25px;
+}
+
+#items {
+  margin-top: -20px;
+}
+
+.list-group {
+  list-style: none;
+}
+
+.list-group li {
+  padding: 15px;
+  border-bottom: 2px solid #000;
+  border-radius: 3px;
+}
+
+.list-group li a {
+}
+
+.container {
+  width: 75%;
+  margin: -3515px 0 0 440px;
+  background-color: white;
+  border-radius: 0px 0px 2px 2px;
+  -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+}
+
+.heading {
+  width: 80%;
+  height: 150px;
+  text-align: center;
+  margin: 0 0 0 110px;
+  margin-top: -20px;
+  padding-top: 35px;
+  text-transform: uppercase;
+}
+
+.heading .btn {
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  border: 3px solid #ffcdcd;
+  border-radius: 5px;
+  color: white;
+  background-color: #000000;
+  padding: 5px;
+}
+
+.btn {
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  border: 3px solid #ffcdcd;
+  border-radius: 5px;
+  color: white;
+  background-color: #000000;
+  padding: 5px;
+}
+
+.feed-item {
+  padding-right: 35px;
+}

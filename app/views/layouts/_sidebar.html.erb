@@ -1,3 +1,15 @@
+<div id="sidebar-header">
+  <ul>
+    <li>
+      <% if user_signed_in? %>
+        <%= link_to "Categories", categories_path %>
+        <%= link_to "Add Category", new_category_path %>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+
 <div id="sidebar" class="fixed">
   <ul class="list-group">
     
@@ -16,3 +28,4 @@
 
   </ul>
 </div>
+
