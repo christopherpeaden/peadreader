@@ -7,9 +7,9 @@
 .pagination a {
   display: inline;
   background-color: #000000;
-  border: 3px solid #ffcdcd;
+  border: 1px solid #FEF0C9;
   border-radius: 3px;
-  padding: 2px 6px 2px 6px;
+  padding: 2px 8px 2px 8px;
   color: white;
   font-size: 25px;
   font-weight: bold;
@@ -18,13 +18,14 @@
 
 .pagination a:hover {
   text-decoration: underline;
+  color: #FEF0C9;
 }
 
 .current {
   color: #000;
   font-weight: bold;
-  background: #ffcdcd;
+  background: #FEF0C9;
   border: 3px solid black;
   border-radius: 3px;
-  padding: 1px 4px 1px 1px;
+  padding: 1px 6px 1px 3px;
 }

@@ -27,7 +27,12 @@
 #sidebar-header ul li a {
   color: white;
   text-decoration: none;
-  font-size: 25px;
+  margin-left: 70px;
+  font-size: 30px;
   padding: 12px;
   font-weight: bold;
+}
+
+#sidebar-header ul li a:hover {
+  color: #FEF0C9;
 }

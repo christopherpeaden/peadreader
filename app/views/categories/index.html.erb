@@ -1,9 +1,11 @@
-<h1>Categories</h1>
+<div class="heading">
+  <h1>Categories</h1>
+  <p><%= link_to "Add category", new_category_path, class: "btn" %></p>
+</div>
 
-<p><%= link_to "Add a category", new_category_path, class: "btn" %></p>
-
-<% @categories.each do |category| %>
-  <%= link_to category.title, category %></br>
-<% end %>
-
+  <ul class="list-group">
+    <% @categories.each do |category| %>
+      <li><%= link_to category.title, category %></li>
+    <% end %>
+  </ul>
 

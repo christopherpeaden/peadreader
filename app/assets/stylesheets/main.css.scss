@@ -5,11 +5,11 @@ html {
 }
 
 body {
-  background-color: #f1caca; 
+  background: #FEF0C9;
 }
 
 h1 {
-  padding-bottom: 25px;
+  padding: 10px 0 25px 0px;
 }
 
 #items {
@@ -24,9 +24,6 @@ h1 {
   padding: 15px;
   border-bottom: 2px solid #000;
   border-radius: 3px;
-}
-
-.list-group li a {
 }
 
 .container {
@@ -44,8 +41,7 @@ h1 {
   height: 150px;
   text-align: center;
   margin: 0 0 0 110px;
-  margin-top: -20px;
-  padding-top: 35px;
+  padding-top: 25px;
   text-transform: uppercase;
 }
 
@@ -53,7 +49,6 @@ h1 {
   font-size: 25px;
   font-weight: bold;
   text-decoration: none;
-  border: 3px solid #ffcdcd;
   border-radius: 5px;
   color: white;
   background-color: #000000;
@@ -64,11 +59,15 @@ h1 {
   font-size: 20px;
   font-weight: bold;
   text-decoration: none;
-  border: 3px solid #ffcdcd;
+  border: 1px solid #FEF0C9;
   border-radius: 5px;
   color: white;
   background-color: #000000;
   padding: 5px;
+}
+
+.btn:hover {
+  color: #FEF0C9;
 }
 
 .feed-item {
