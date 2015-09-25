@@ -1,14 +1,45 @@
-$(document).ready(function () {
-  $('#sidebar li ul').hide();
+window.onload = function() {
 
-  $('#sidebar li .caret').click(function(e) {
-    $('ul', this).slideToggle(300);
-    e.stopPropagation();
-  })
 
-  $('#sidebar').click(function() {
-    if ($('#sidebar li ul').is(':visible')) {
-      $('#sidebar li ul').slideUp();
+  allButtons = document.getElementsByClassName("btn");
+
+  for (var counter = 0; counter < allButtons.length; counter++) {
+    allButtons[counter].addEventListener("mouseover", function() {
+      this.style.margin = "0px 0px -0px -1px";
+    })
+
+    allButtons[counter].addEventListener("mouseout", function() {
+      this.style.margin = "0px 0px 0px 1px";
+    })
+  }
+
+  var dropdownListItems = document.getElementById("sidebar").getElementsByClassName("invisible");
+
+  for(var x = 0; x < dropdownListItems.length; x++) {
+    dropdownListItems[x].style.display = "none";
+    var dropdownLinks = dropdownListItems[x].getElementsByTagName("a");
+    for(var i = 0; i < dropdownLinks.length; i++) {
+      if (window.location.href == dropdownLinks[i].href) {
+        dropdownLinks[i].style.color = "black";
+        dropdownLinks[i].style.fontWeight = "bold";
+        dropdownListItems[x].style.display = "block";
+      }
     }
-  });
-});
+  }
+
+  var carets = document.getElementsByClassName("caret");
+
+  for(var x = 0; x < carets.length; x++) {
+    carets[x].addEventListener("click", function() {
+      var dropdownListItems = this.getElementsByClassName("invisible");
+
+      for(var x = 0; x < dropdownListItems.length; x++) {
+        if (dropdownListItems[x].style.display == "none") {
+          dropdownListItems[x].style.display = "block";
+        }  else  {
+          dropdownListItems[x].style.display = "none";
+        }
+      }
+    })
+  }
+}
