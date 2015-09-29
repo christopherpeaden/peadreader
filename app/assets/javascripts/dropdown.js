@@ -13,6 +13,7 @@ window.onload = function() {
     })
   }
 
+  var dropdownLists = document.getElementById("sidebar").getElementsByClassName("dropdown-list");
   var dropdownListItems = document.getElementById("sidebar").getElementsByClassName("invisible");
 
   for(var x = 0; x < dropdownListItems.length; x++) {
@@ -26,6 +27,15 @@ window.onload = function() {
       }
     }
   }
+
+  for (var n = 0; n < dropdownLists.length; n++) {
+    categoryLinks = dropdownLists[n].getElementsByTagName("a");
+    if (window.location.href == categoryLinks[0].href) {
+      categoryDropdown = dropdownLists[n].getElementsByClassName("invisible");
+      categoryDropdown[0].style.display = "block";
+    }
+  }
+
 
   var carets = document.getElementsByClassName("caret");
 
