@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
+require 'support/request_spec_helper'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -31,9 +32,10 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   # Include FactoryGirl methods
   config.include FactoryGirl::Syntax::Methods
-
   # Include Capybara DSL
   config.include Capybara::DSL
+  # Include request spec support methods
+  config.include RequestHelpers
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

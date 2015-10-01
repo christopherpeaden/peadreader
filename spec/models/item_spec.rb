@@ -1,21 +1,27 @@
 require 'rails_helper'
 
-RSpec.describe Item, type: :model do
+RSpec.describe Item do
 
-  let(:item) { build(:item) }
+  describe "validation" do
 
-  describe "validations" do
+    subject { build(:item) }
+    let(:item) { subject }
 
-    it "is valid" do
-      expect(item).to be_valid
+    it { should be_valid }
+
+    it "rejects blank title" do
+      item.title = ""
+      expect(item).to_not be_valid
+    end
+
+    it "rejects blank url" do
+      item.url = ""
+      expect(item).to_not be_valid
     end
   end
 
   describe "associations" do
-
-    it "belongs to feed" do
-      expect(item).to respond_to(:feed)
-    end
+    it { should respond_to(:feed) }
   end
 
 end

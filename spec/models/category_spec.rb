@@ -1,14 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Category, type: :model do
+RSpec.describe Category do
 
-  let(:category) { build(:category) }
+  describe "validation" do
 
-  describe "attributes" do
+    subject { build(:category) }
+    let(:category) { subject }
 
-    it "has valid attributes" do
-      expect(category).to be_valid
-    end
+    it { should be_valid }
 
     it "rejects blank title" do
       category.title = ""
@@ -17,8 +16,7 @@ RSpec.describe Category, type: :model do
   end
 
   describe "associations" do
-    it "has many feeds" do
-      expect(category).to respond_to(:feeds)
-    end
+    it { should respond_to(:user) }
+    it { should respond_to(:feeds) }
   end
 end

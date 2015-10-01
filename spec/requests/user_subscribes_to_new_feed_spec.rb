@@ -1,39 +1,30 @@
-RSpec.describe "User subscribes to new feed", type: :request do
+RSpec.describe "User subscribes to new feed" do
 
   let(:feed) { build(:feed) }
 
-  context "successfully" do
+  before(:each) do
+    visit "/users/sign_in"
+    fill_in "Email", with: feed.user.email
+    fill_in "Password", with: feed.user.password
+    click_button "Log in"
+    visit "/feeds/new"
+    expect(Feed.count).to be 0
+  end
+
+  context "successful" do
     
     it "saves feed to database" do
-      visit "/users/sign_in"
-      expect(page).to have_selector("h2", "Log in")
-      fill_in "Email", with: feed.user.email
-      fill_in "Password", with: feed.user.password
-      click_button "Log in"
-      expect(page).to have_content("Signed in successfully")
-
-      expect(Feed.count).to be 0
-      visit "/feeds/new"
       fill_in "Title", with: feed.title
       fill_in "Url", with: feed.url
       click_button "Submit"
-      expect(Feed.count).to be 1
+      expect(Feed.first.title).to eq feed.title
     end
   end
 
   context "failure" do
 
-    it "rejects invalid input" do
-      visit "/users/sign_in"
-      expect(page).to have_selector("h2", "Log in")
-      fill_in "Email", with: feed.user.email
-      fill_in "Password", with: feed.user.password
-      click_button "Log in"
-      expect(page).to have_content("Signed in successfully")
-
-      expect(Feed.count).to be 0
-      visit "/feeds/new"
-      fill_in "Title", with: " "
+    it "rejects blank values" do
+      fill_in "Title", with: ""
       fill_in "Url", with: feed.url
       click_button "Submit"
       expect(Feed.count).to be 0

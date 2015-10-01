@@ -1,47 +1,50 @@
 require 'rails_helper'
 
-RSpec.describe "UserSignIn", type: :request do
+RSpec.describe "User sign in" do
 
   let(:user) { create(:user) }
 
-  describe "sign in" do
+  before(:example) do
+    visit "/users/sign_in"
+    expect(page).to have_selector("h2", text: "Log in")
+  end
 
-    before(:each) do
-      visit "/users/sign_in"
-      expect(page).to have_selector("h2", text: "Log in")
+  context "success" do
+
+    before(:example) do
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
+      click_button "Log in"
     end
 
-    context "successful" do
-
-      it "brings user to dashboard" do
-        fill_in "Email", with: user.email
-        fill_in "Password", with: user.password
-        click_button "Log in"
-        expect(page).to have_content("Signed in successfully")
-      end
-
-      describe "followed by signout" do
-
-        it "brings user to home page" do
-          fill_in "Email", with: user.email
-          fill_in "Password", with: user.password
-          click_button "Log in"
-          expect(page).to have_content("Signed in successfully")
-          click_link "Sign Out"
-          expect(page).to have_content("Signed out")
-        end
-      end
-
+    it "allows access to dashboard" do
+      expect(page).to have_content("Signed in successfully")
     end
 
-    context "failure" do
+    describe "followed by signout" do
 
-      it "rejects invalid password" do
-        fill_in "Email", with: user.email
-        fill_in "Password", with: "zippydoodah"
-        click_button "Log in"
-        expect(page).to have_content("Invalid email or password")
+      it "directs user to home page" do
+        click_link "Sign Out"
+        expect(page).to have_content("Signed out")
       end
+    end
+
+  end
+
+  context "failure" do
+
+    it "rejects blank values" do
+      fill_in "Email", with: ""
+      fill_in "Password", with: ""
+      click_button "Log in"
+      expect(page).to have_content("Invalid email or password")
+    end
+
+    it "rejects invalid password" do
+      fill_in "Email", with: user.email
+      fill_in "Password", with: "zippydeedoodah"
+      click_button "Log in"
+      expect(page).to have_content("Invalid email or password")
     end
   end
 end

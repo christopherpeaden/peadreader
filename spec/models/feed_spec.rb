@@ -1,38 +1,35 @@
 require 'rails_helper'
 
-RSpec.describe Feed, type: :model do
+RSpec.describe Feed do
 
-  let(:feed) { build(:feed) }
-  
-  describe "feed attributes" do
+  describe "validation" do
 
-    it "has valid attributes" do
-      expect(feed).to be_valid
-    end
+    subject { build(:feed) }
+    let(:feed) { subject }
+    
+    it { should be_valid }
 
-    it "rejects blank feed titles" do
+    it "rejects blank title" do
       feed.title = ""
       expect(feed).to_not be_valid
     end
 
-    it "rejects blank feed url" do
+    it "rejects blank url" do
       feed.url = ""
       expect(feed).to_not be_valid
+    end
+
+    it "rejects another feed with same title" do
+      feed.save
+      second_feed = build(:feed)
+      second_feed.title = feed.title
+      expect(second_feed).to_not be_valid
     end
   end
 
   describe "associations" do
-
-    it "belongs to user" do
-      expect(feed).to respond_to(:user) 
-    end
-
-    it "belongs to category" do
-      expect(feed).to respond_to(:category)
-    end
-
-    it "has many items" do
-      expect(feed).to respond_to(:items)
-    end
+    it { should respond_to(:user) }
+    it { should respond_to(:category) }
+    it { should respond_to(:items) }
   end
 end

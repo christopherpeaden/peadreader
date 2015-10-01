@@ -1,29 +1,25 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
 
-    let(:user) { build(:user) }
+  describe "validation" do
 
-  describe "attributes" do
+    subject { build(:user) }
+    let(:user) { subject }
 
-    it "has valid attributes" do
-      expect(user).to be_valid
-    end
+    it { should be_valid }
 
-    it "rejects blank user email" do
+    it "rejects blank email" do
       user.email = ""
       expect(user).to_not be_valid
     end
-  end
 
-  describe "user passwords" do
-
-    it "rejects blank passwords" do
+    it "rejects blank password" do
       user.password = ""
       expect(user).to_not be_valid
     end
 
-    it "rejects blank password_confirmation" do
+    it "rejects blank password confirmation" do
       user.password_confirmation = ""
       expect(user).to_not be_valid
     end
@@ -34,7 +30,7 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
 
-    it "rejects password if not the same as password_confirmation" do
+    it "rejects password if not equal to password_confirmation" do
       user.password = "12345678"
       user.password_confirmation = "1234567890"
       expect(user).to_not be_valid
@@ -42,10 +38,6 @@ RSpec.describe User, type: :model do
   end
 
   describe "associations" do
-
-    it "has many feeds" do
-      expect(user).to respond_to(:feeds)
-    end
+    it { should respond_to(:feeds) }
   end
-
 end
