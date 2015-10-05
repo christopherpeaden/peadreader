@@ -1,4 +1,4 @@
-RSpec.describe 'Site link' do
+RSpec.describe 'Site layout' do
   
   let(:user) { create(:user) }
 
@@ -6,7 +6,7 @@ RSpec.describe 'Site link' do
     sign_in_valid_user(user)
   end
 
-  it 'navigates to respective page' do
+  it 'has header links for navigation' do
     click_link 'Dashboard'
     expect(page).to have_selector('div#items')
     click_link 'Refresh'
@@ -19,7 +19,9 @@ RSpec.describe 'Site link' do
     expect(page).to have_selector('p', text: 'Signed out successfully')
   end
 
-  describe "creates additional links if neccesary" do
+  describe "link if required" do
+    
+    let(:feed) { create(:feed, user: user) }
 
     it "navigates to respective category page" do
       category = create(:category, user: user)
@@ -29,8 +31,25 @@ RSpec.describe 'Site link' do
     end
 
     it "navigates to respective feed page" do
-      feed = Feedjira::Feed.parse("/home/peady/Development/rails/projects/feed_reader/spec/support/sample_xml")
-      expect(feed).to be_truthy
+      3.times { create(:item, feed: feed) }
+      visit '/'
+      expect(page).to have_selector('a', text: Item.first.title)
+      expect(page).to have_selector('a', text: Item.second.title)
+      expect(page).to have_selector('a', text: Item.third.title)
+      expect(page).to have_selector('a', text: "More")
+    end
+
+    it "uses pagination" do
+      31.times { create(:item, feed: feed) }
+      visit '/'
+      expect(page).to_not have_selector('a', text: Item.first.title)
+      expect(page).to have_selector('a', text: Item.second.title)
+      expect(page).to have_selector('a', text: Item.third.title)
+      expect(page).to have_selector('div.pagination')
+      click_link("2", match: :first)
+      expect(page).to have_selector('a', text: Item.first.title)
+      expect(page).to_not have_selector('a', text: Item.second.title)
+      expect(page).to_not have_selector('a', text: Item.third.title)
     end
   end
 end
