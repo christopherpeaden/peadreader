@@ -2,6 +2,25 @@ require 'rails_helper'
 
 RSpec.describe User do
 
+  describe "messages" do
+    it { should respond_to(:id) }
+    it { should respond_to(:email) }
+    it { should respond_to(:password) }
+    it { should respond_to(:password_confirmation) }
+    it { should respond_to(:encrypted_password) }
+    it { should respond_to(:current_sign_in_ip) }
+    it { should respond_to(:current_sign_in_at) }
+    it { should respond_to(:last_sign_in_ip) }
+    it { should respond_to(:last_sign_in_at) }
+    it { should respond_to(:reset_password_token) }
+    it { should respond_to(:reset_password_sent_at) }
+    it { should respond_to(:sign_in_count) }
+    it { should respond_to(:remember_created_at) }
+    it { should respond_to(:password_confirmation) }
+    it { should respond_to(:created_at) }
+    it { should respond_to(:updated_at) }
+  end
+
   describe "validation" do
 
     subject { build(:user) }
@@ -12,6 +31,12 @@ RSpec.describe User do
     it "rejects blank email" do
       user.email = ""
       expect(user).to_not be_valid
+    end
+
+    it "rejects duplicate email" do
+      user.save
+      duplicate_user = build(:user, email: user.email)
+      expect(duplicate_user.save).to be false
     end
 
     it "rejects blank password" do
@@ -39,5 +64,6 @@ RSpec.describe User do
 
   describe "associations" do
     it { should respond_to(:feeds) }
+    it { should respond_to(:categories) }
   end
 end

@@ -1,14 +1,11 @@
 RSpec.describe "User subscribes to new feed" do
 
   let(:feed) { build(:feed) }
+  let(:user) { create(:user) }
 
   before(:each) do
-    visit "/users/sign_in"
-    fill_in "Email", with: feed.user.email
-    fill_in "Password", with: feed.user.password
-    click_button "Log in"
-    visit "/feeds/new"
-    expect(Feed.count).to be 0
+    sign_in_valid_user(user)
+    visit '/feeds/new'
   end
 
   context "successful" do

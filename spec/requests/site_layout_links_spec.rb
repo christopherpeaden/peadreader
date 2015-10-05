@@ -1,4 +1,4 @@
-RSpec.describe 'Site layout link' do
+RSpec.describe 'Site link' do
   
   let(:user) { create(:user) }
 
@@ -19,4 +19,18 @@ RSpec.describe 'Site layout link' do
     expect(page).to have_selector('p', text: 'Signed out successfully')
   end
 
+  describe "creates additional links if neccesary" do
+
+    it "navigates to respective category page" do
+      category = create(:category, user: user)
+      visit '/'
+      click_link category.title
+      expect(page).to have_selector('div#items')
+    end
+
+    it "navigates to respective feed page" do
+      feed = Feedjira::Feed.parse("/home/peady/Development/rails/projects/feed_reader/spec/support/sample_xml")
+      expect(feed).to be_truthy
+    end
+  end
 end
