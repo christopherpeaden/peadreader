@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'Site layout' do
   
   let(:user) { create(:user) }

@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
 require 'support/request_spec_helper'
+require 'devise'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -34,11 +35,15 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   # Include Capybara DSL
   config.include Capybara::DSL
+  # Devise Helpers
+  config.include Devise::TestHelpers, type: :controller
   # Include request spec support methods
   config.include RequestHelpers
+  # Include feed helpers
+  config.include FeedsHelper
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
