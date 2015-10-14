@@ -64,7 +64,7 @@ class FeedsController < ApplicationController
     session[:referer] = request.original_url
     !params[:category_id].nil? ? @feeds = current_user.feeds.where(category_id: params[:category_id]) : @feeds = current_user.feeds
     arr = []
-    @feeds.each {|feed| feed.items.each { |item| arr << item } }
+    !params[:q].nil? ? @feeds.each {|feed| feed.items.each { |item| arr << item if item.title.downcase =~ /#{params[:q].downcase}/ } } : @feeds.each {|feed| feed.items.each { |item| arr << item } }
     @items = arr.sort! { |x,y| y.published <=> x.published }
     @items = @items.paginate(page: params[:page])
   end
