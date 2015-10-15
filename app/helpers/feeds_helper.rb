@@ -11,8 +11,12 @@ module FeedsHelper
   def store_items(parsed_feed, latest_item, feed)
     parsed_feed.entries.each do |item|
       break if latest_item && item.title == latest_item.title
-      Item.create(title: item.title, url: item.url,
-                  published: item.published, feed_id: feed.id)
+      if item.url =~ /youtube/
+        video_code = item.url.split('=')[1]
+        Item.create(title: item.title, url: item.url, image_thumbnail_url: "http://img.youtube.com/vi/#{video_code}/hqdefault.jpg", published: item.published, feed_id: feed.id)
+      else
+        Item.create(title: item.title, url: item.url, published: item.published, feed_id: feed.id)
+      end
     end
   end
 
@@ -31,5 +35,4 @@ module FeedsHelper
       @feed.save
     end
   end
-
 end
