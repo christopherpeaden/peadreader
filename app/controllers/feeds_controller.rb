@@ -49,12 +49,13 @@ class FeedsController < ApplicationController
 
   def refresh
     if params[:category_id]
-      fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) 
+      feed_errors = fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) 
     elsif params[:id]
-      fetch_feed_items current_user.feeds.where(id: params[:id])
+      feed_errors = fetch_feed_items current_user.feeds.where(id: params[:id])
     else
-      fetch_feed_items current_user.feeds
+      feed_errors = fetch_feed_items current_user.feeds
     end
+    flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" if !feed_errors.empty?
     redirect_to(:back)
   end
 

@@ -1,11 +1,18 @@
 module FeedsHelper
 
   def fetch_feed_items(feeds)
+    feed_errors = []
     feeds.each do |feed|
-      latest_item = feed.items.find_by(published: feed.items.maximum(:published)) 
-      parsed_feed = Feedjira::Feed.fetch_and_parse(feed.url)
-      store_items(parsed_feed, latest_item, feed)
+      begin
+        latest_item = feed.items.find_by(published: feed.items.maximum(:published)) 
+        parsed_feed = Feedjira::Feed.fetch_and_parse(feed.url)
+        store_items(parsed_feed, latest_item, feed)
+      rescue
+        feed_errors << feed.url
+        next 
+      end
     end
+    feed_errors
   end
 
   def store_items(parsed_feed, latest_item, feed)
