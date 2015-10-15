@@ -14,10 +14,20 @@
     <p><%= f.label :category %></p>
     <p><%= f.collection_select :category_id, Category.all, :id, :title, { prompt: "Choose a category" }, input_html: { class: "dropdown-toggle" } %></p>
   </div>
+  <%= f.submit "Submit" %>
+<% end %>
+</br>
+
+<%= form_for @feed, html: { multipart:  true } do |f| %>
 
   <div class="form-group">
     <p><%= f.label :file, "Import Opml File" %></p>
     <p><%= f.file_field :file %></p>
+  </div>
+
+  <div class="form-group">
+    <p><%= f.label :category %></p>
+    <p><%= f.collection_select :category_id, Category.all, :id, :title, { prompt: "Choose a category" }, input_html: { class: "dropdown-toggle" } %></p>
   </div>
 
   <%= f.submit "Submit" %>

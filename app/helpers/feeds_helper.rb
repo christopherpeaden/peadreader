@@ -8,7 +8,7 @@ module FeedsHelper
         parsed_feed = Feedjira::Feed.fetch_and_parse(feed.url)
         store_items(parsed_feed, latest_item, feed)
       rescue
-        feed_errors << feed.url
+        feed_errors << feed.title
         next 
       end
     end
@@ -36,9 +36,9 @@ module FeedsHelper
     Nokogiri::XML(file)
   end
 
-  def save_outlines_from_opml(opml_doc)
+  def save_outlines_from_opml(opml_doc, category_id)
     opml_doc.xpath("/opml/body/outline/outline").each do |outline|
-      @feed = current_user.feeds.build(title: outline[:title], url: outline[:xmlUrl])
+      @feed = current_user.feeds.build(title: outline[:title], url: outline[:xmlUrl], category_id: category_id)
       @feed.save
     end
   end
