@@ -1,7 +1,8 @@
 #navbar {
-  width: 75%;
-  margin-left: 439px;
-  height: 80px;
+  width: 1415px;
+  margin: -8px 0 0 440px;
+  position: fixed;
+  height: 67px;
   border: 1px solid black;
   border-radius: 6px 6px 0 0;
   background: #000000;
@@ -22,7 +23,6 @@
   padding: 10px 20px 14px;
   font-size: 30px;
   font-weight: bold;
-  margin-top: -5px;
 }
 
 #navbar ul li a {
@@ -42,10 +42,10 @@
 
 #sign-out {
   float: right;
-  margin: -10px 65px;
+  margin: -53px 0 0 65px;
 }
 
 .search-elements{
-  margin: -10px 0 0 550px;
+  margin: 0px 0px 0px 550px;
   color: white;
 }

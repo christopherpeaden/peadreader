@@ -5,15 +5,11 @@ html {
 }
 
 body {
-  background: #FEF0C9;
+  background: #DCDCDC;
 }
 
 h1 {
   padding: 10px 0 25px 0px;
-}
-
-#items {
-  margin-top: -20px;
 }
 
 .list-group {
@@ -28,8 +24,9 @@ h1 {
 
 .container {
   width: 75%;
-  margin: -3515px 0 0 440px;
-  background-color: white;
+  padding-top: 50px;
+  margin: 0px 0 0 440px;
+  background-color: #FFFAFA;
   border-radius: 0px 0px 2px 2px;
   -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
   -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);

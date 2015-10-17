@@ -1,9 +1,11 @@
 #sidebar {
-  height: 3500px;
+  height: 920px;
   width: 400px;
-  background-color: white;
-  margin-left: 33px;
+  position: fixed;
+  background-color: #FFFAFA;
+  margin: 61px 0 0 33px;
   border-radius: 0px 0px 2px 2px;
+  overflow-y: auto;
   -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
   -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
   box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
@@ -11,17 +13,18 @@
 
 #sidebar-header {
   background-color: #000;
-  height: 80px;
+  height: 75px;
   width: 400px;
-  margin: -97px 0px -15px 33px;
+  margin: -7px 0px 0px 33px;
   border-radius: 6px 6px 0 0;
+  position: fixed;
   -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
   -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
   box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
 }
 
 #sidebar-header ul li {
-  line-height: 80px;
+  line-height: 55px;
 }
 
 #sidebar-header ul li a {
