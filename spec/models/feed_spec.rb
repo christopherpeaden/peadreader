@@ -2,24 +2,17 @@ require 'rails_helper'
 
 RSpec.describe Feed do
 
-  describe "messages" do
-    it { should respond_to(:id) }
-    it { should respond_to(:title) }
-    it { should respond_to(:url) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
-  end
-
   describe "validation" do
 
-    subject { build(:feed) }
-    let(:feed) { subject }
+    let(:feed) { build(:feed) }
     
-    it { should be_valid }
+    it "has a valid factory" do
+      expect(feed).to be_valid
+    end
 
     it "rejects blank title" do
       feed.title = ""
-      expect(feed).to_not be_valid
+      expect(feed).to be_invalid
     end
 
     it "rejects duplicate title" do

@@ -18,7 +18,7 @@ RSpec.describe CategoriesController do
   end
     
   describe "POST #create" do
-    context "with valid attributes" do
+    context "valid" do
       it "creates a category" do
         post :create, category: attributes_for(:category)
         expect(Category.count).to eq(1)

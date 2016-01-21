@@ -2,19 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Item do
 
-  describe "messages" do
-    it { should respond_to(:id) }
-    it { should respond_to(:title) }
-    it { should respond_to(:url) }
-    it { should respond_to(:published) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
-  end
-
   describe "validation" do
 
-    subject { build(:item) }
-    let(:item) { subject }
+    let(:item) { build(:item) }
 
     it { should be_valid }
 
