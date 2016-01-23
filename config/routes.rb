@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks", registrations: "registrations" }
 
   authenticated :user do
     root 'feeds#dashboard', :as => 'authenticated_root'
@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :categories
   resources :categories, only: [:new, :create, :destroy]
   get "refresh" => "feeds#refresh"
+  get "subscriptions" => "youtube#subscriptions"
 end

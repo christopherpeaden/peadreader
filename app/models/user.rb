@@ -10,11 +10,27 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth_hash)
     data = auth_hash.info
-    user = User.where(email: data["email"]).first
-
-    unless user
-      user = User.create(name: data["name"], email: data["email"])
-    end
+    user = User.where(provider: auth_hash["provider"], uid: auth_hash["uid"]).first_or_create
+    user.update(name: data["name"], 
+                email: data["email"], 
+                first_name: data["first_name"], 
+                last_name: data["last_name"], 
+                image: data["image"])
     user
+  end
+
+  def self.new_with_session(params, session)
+    if session["devise.google_data"]
+      new(session["devise.google_data"], without_protection: true) do |user|
+        user.attributes = params
+        user.valid?
+      end
+    else
+      super
+    end
+  end
+
+  def password_required?
+    super && provider.blank?
   end
 end

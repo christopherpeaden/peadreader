@@ -20,7 +20,6 @@ class FeedsController < ApplicationController
   end
 
   def show
-    @categories = current_user.categories
     arr = []
     @feed.items.each { |item| arr << item }
     @items = arr.sort! { |x,y| y.published <=> x.published }

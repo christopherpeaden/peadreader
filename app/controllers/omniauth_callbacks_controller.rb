@@ -6,7 +6,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:notice] = "Signed in successfully."
       sign_in_and_redirect @user, event: "authentication"
     else
-      session["devise.google_data"] = request.env["omniauth.auth"]
+      session["devise.google_data"] = @user.attributes
       redirect_to new_user_registration_url
     end
   end
