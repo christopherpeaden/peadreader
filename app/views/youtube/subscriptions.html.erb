@@ -1,1 +1,7 @@
-<p>Test page</p
+<% @response["items"].each do |item| %>
+  <p><%= item["snippet"]["title"] %></p>
+  <p><%= image_tag(item["snippet"]["thumbnails"]["high"]["url"], size: "175x110") %></p>
+  <p><%= item["snippet"]["resourceId"]["channelId"] %></p>
+  <p> Videos: <%= item["contentDetails"]["totalItemCount"] %></p>
+  </br>
+<% end %>

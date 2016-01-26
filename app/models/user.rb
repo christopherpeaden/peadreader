@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
                 email: data["email"], 
                 first_name: data["first_name"], 
                 last_name: data["last_name"], 
-                image: data["image"])
+                image: data["image"],
+                access_token: auth_hash["credentials"]["token"],
+                refresh_token: auth_hash["credentials"]["refresh_token"])
     user
   end
 
