@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124014859) do
+ActiveRecord::Schema.define(version: 20160204195941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,8 +75,33 @@ ActiveRecord::Schema.define(version: 20160124014859) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "youtube_channels", force: :cascade do |t|
+    t.string   "title"
+    t.string   "channel_id"
+    t.string   "url"
+    t.string   "video_count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "image"
+  end
+
+  create_table "youtube_videos", force: :cascade do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "playlist_id"
+    t.string   "video_id"
+    t.string   "image"
+    t.integer  "youtube_channel_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.datetime "published_at"
+  end
+
+  add_index "youtube_videos", ["youtube_channel_id"], name: "index_youtube_videos_on_youtube_channel_id", using: :btree
+
   add_foreign_key "categories", "users"
   add_foreign_key "feeds", "categories"
   add_foreign_key "feeds", "users"
   add_foreign_key "items", "feeds"
+  add_foreign_key "youtube_videos", "youtube_channels"
 end
