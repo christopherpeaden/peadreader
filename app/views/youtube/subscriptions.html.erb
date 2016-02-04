@@ -1,6 +1,20 @@
-<% @response["items"].each do |item| %>
+<% @uploads.each do |playlist| %>
+
+  <p>
+    <%= link_to image_tag(playlist["snippet"]["thumbnails"]["high"]["url"], size: "300x200"),
+    "http://www.youtube.com/watch?v=#{playlist["contentDetails"]["videoId"]}" %>
+  </p>
+
+  <p>
+    <%= link_to playlist["snippet"]["title"],
+    "http://www.youtube.com/watch?v=#{playlist["contentDetails"]["videoId"}" %>
+  </p>
+
+<% end %>
+
+<% @sub_info["items"].each do |item| %>
   <p><%= item["snippet"]["title"] %></p>
-  <p><%= image_tag(item["snippet"]["thumbnails"]["high"]["url"], size: "175x110") %></p>
+  <p><%= image_tag(item["snippet"]["thumbnails"]["high"]["url"], size: "300x200") %></p>
   <p><%= item["snippet"]["resourceId"]["channelId"] %></p>
   <p> Videos: <%= item["contentDetails"]["totalItemCount"] %></p>
   </br>

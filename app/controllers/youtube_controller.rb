@@ -1,16 +1,9 @@
 class YoutubeController < ApplicationController
   def subscriptions 
     @categories = current_user.categories
-    url = "https://www.googleapis.com/youtube/v3/subscriptions/"
+    @sub_info = YoutubeClient.get_subscription_channels(current_user)
 
-    options = {
-      access_token: current_user.access_token,
-      mine: "true",
-      key: Rails.application.secrets.google_api_key,
-      part: "snippet, contentDetails",
-      maxResults: "50"
-    }
-
-    @response = HTTParty.get(url, query: options)
+    @uploads = YoutubeClient.get_all_uploads_from_channel(@sub_info["items"][0]["snippet"]["resourceId"]["channelId"]
+)
   end
 end
