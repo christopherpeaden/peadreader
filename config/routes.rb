@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :categories
   resources :categories, only: [:new, :create, :destroy]
   get "refresh" => "feeds#refresh"
+  get "refresh_access_token" => "youtube#refresh_access_token"
   get "refresh_youtube" => "youtube#refresh"
   get "subscriptions" => "youtube#subscriptions"
+  get "sync_subscribed_channels" => "youtube#sync_subscribed_channels"
 end

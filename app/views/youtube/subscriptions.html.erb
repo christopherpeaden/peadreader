@@ -1,4 +1,16 @@
 <%= link_to "Refresh", refresh_youtube_path %>
+<%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path %>
+</br>
+</br>
+</br>
+<%= link_to "Refresh Access Token", refresh_access_token_path %>
+<%= @new_token_info %>
+
+<% @channels.each do |channel| %>
+  <p><%= link_to image_tag(channel.image), channel.url %></p>
+  <p><%= link_to channel.title, channel.url %></p>
+<% end %>
+  
 
 <% @videos.each do |video| %>
   <p><%= link_to image_tag(video.image), video.url %></p>
