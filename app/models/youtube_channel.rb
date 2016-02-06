@@ -5,7 +5,6 @@ class YoutubeChannel < ActiveRecord::Base
   validates :title, uniqueness: true
 
   def self.save_channels(current_user, channels)
-
     channels["items"].each do |channel|
       channel_info = YoutubeClient.get_channel_info(channel["snippet"]["resourceId"]["channelId"])
 

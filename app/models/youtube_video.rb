@@ -1,15 +1,15 @@
 class YoutubeVideo < ActiveRecord::Base
   belongs_to :youtube_channel
 
-  def self.save_videos(videos)
+  def self.save_videos(channel, videos)
     videos.each do |video|
-      YoutubeVideo.create(
+      channel.youtube_videos.create(
         title: video["snippet"]["title"],
         url: "http://www.youtube.com/watch?v=#{video["contentDetails"]["videoId"]}",
         image: video["snippet"]["thumbnails"]["high"]["url"],
-        playlist_id: video["snippet"]["playlist_id"],
+        playlist_id: video["snippet"]["playlistId"],
         video_id: video["contentDetails"]["videoId"],
-        channel_id: "",
+        channel_id: video["snippet"]["channelId"],
         published_at: video["snippet"]["publishedAt"]
       )
     end

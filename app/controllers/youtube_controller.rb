@@ -1,33 +1,28 @@
 class YoutubeController < ApplicationController
 
   def sync_subscribed_channels
-    @sub_info = YoutubeClient.get_subscribed_channels(current_user)
-    YoutubeChannel.save_channels(current_user, @sub_info)
+    YoutubeClient.refresh_access_token(current_user) if current_user.access_token_expiration - Time.now.to_i < 600
+    @subscriptions = YoutubeClient.get_subscribed_channels(current_user)
 
+    YoutubeChannel.save_channels(current_user, @subscriptions)
     redirect_to "/subscriptions"
   end
 
   def refresh
     @categories = current_user.categories
 
-    @sub_info["items"].each do |channel|
-      @uploads = YoutubeClient.get_all_uploads_from_channel(channel["snippet"]["resourceId"]["channelId"]
-)
-      YoutubeVideo.save_videos(@uploads)
+    current_user.youtube_channels.each do |channel|
+      @uploads = YoutubeClient.get_upload_playlist_items(channel, channel.upload_playlist_id)
+      YoutubeVideo.save_videos(channel, @uploads)
     end
     
     redirect_to "/subscriptions"
   end
 
   def subscriptions 
-    @sub_info = YoutubeClient.get_subscribed_channels(current_user)
     @categories = current_user.categories
     @videos = YoutubeVideo.all.sort { |x,y| y.published_at <=> x.published_at }
+    @videos = @videos.paginate(page: params[:page])
     @channels = current_user.youtube_channels 
-  end
-
-  def refresh_access_token
-    @categories = current_user.categories
-    @new_token_info = YoutubeClient.refresh_access_token(current_user)
   end
 end
