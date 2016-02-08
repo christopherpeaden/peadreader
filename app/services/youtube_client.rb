@@ -64,13 +64,21 @@ class YoutubeClient
     upload_items = []
     upload_info = get_upload_info_from_channel(playlist_id, options)
 
-    existing_video = channel.youtube_videos.find_by(title: upload_info["items"][0]["snippet"]["title"])
-      
-    until existing_video
-
-      upload_info["items"].each do |item|
-        upload_items << item
+    loop do
+      if previously_synced?(channel)
+        item_counter = 0
+        upload_info["items"].each do |item|
+          break if channel.youtube_videos.find_by(title: upload_info["items"][item_counter]["snippet"]["title"])
+          upload_items << item
+          item_counter+= 1
+        end
+        break if channel.youtube_videos.find_by(title: upload_info["items"][item_counter]["snippet"]["title"])
+      else
+        upload_info["items"].each do |item|
+          upload_items << item
+        end
       end
+
 
       break if !upload_info["nextPageToken"]
 
@@ -86,4 +94,10 @@ class YoutubeClient
     end
     upload_items
   end
+
+  private
+    
+    def self.previously_synced?(channel)
+      channel.youtube_videos.count > 0 
+    end
 end

@@ -1,6 +1,8 @@
 class YoutubeVideo < ActiveRecord::Base
   belongs_to :youtube_channel
 
+  validates :title, uniqueness: true
+
   def self.save_videos(channel, videos)
     videos.each do |video|
       channel.youtube_videos.create(
