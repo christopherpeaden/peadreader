@@ -1,13 +1,13 @@
 <%= will_paginate @videos %>
 <%= link_to "Refresh", refresh_youtube_path, class: "btn" %>
-</br>
-</br>
-<%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path, class: "btn" %>
+<p><%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path, class: "btn" %><p>
 
 <% @videos.each do |video| %>
-  <p><%= link_to image_tag(video.image), video.url %></p>
-  <p><%= link_to video.title, video.url %></p>
-  <p><%= video.published_at.strftime("%B %d, %Y %l:%M %p") %></p>
+  <p>
+  <iframe width="600" height="400" src="http://www.youtube.com/embed/<%= video.video_id %>?controls=1" allowfullscreen="allowfullscreen"></iframe></br>
+    <%= link_to video.title, video.url %></br>
+    <%= video.published_at.strftime("%B %d, %Y %l:%M %p") %>
+  </p>
 <% end %>
 
 <%= will_paginate @videos %>

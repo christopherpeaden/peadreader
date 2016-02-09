@@ -22,7 +22,7 @@ class YoutubeController < ApplicationController
   def subscriptions 
     @categories = current_user.categories
     @videos = YoutubeVideo.all.sort { |x,y| y.published_at <=> x.published_at }
-    @videos = @videos.paginate(page: params[:page])
+    @videos = @videos.paginate(page: params[:page], per_page: 10)
     @channels = current_user.youtube_channels 
   end
 end
