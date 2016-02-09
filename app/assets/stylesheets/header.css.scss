@@ -2,7 +2,7 @@
   width: 1415px;
   margin: -8px 0 0 440px;
   position: fixed;
-  height: 67px;
+  height: 80px;
   border: 1px solid black;
   border-radius: 6px 6px 0 0;
   background: #000000;
@@ -20,9 +20,8 @@
 #navbar ul li {
   display: inline;
   line-height: 4px;
-  padding: 10px 20px 14px;
-  font-size: 30px;
-  font-weight: bold;
+  padding: 10px 14px 14px;
+  font-size: 24px;
 }
 
 #navbar ul li a {
@@ -31,7 +30,7 @@
 }
 
 #navbar ul li a:hover {
-  color: #FEF0C9;
+  color: #0088D9;
 }
 
 #navbar ul li ul li {
@@ -40,12 +39,10 @@
   padding: 8px 5px 15px 5px;
 }
 
-#sign-out {
-  float: right;
-  margin: -53px 0 0 65px;
+.inline-form {
+  display: inline;
 }
 
 .search-elements{
-  margin: 0px 0px 0px 550px;
   color: white;
 }

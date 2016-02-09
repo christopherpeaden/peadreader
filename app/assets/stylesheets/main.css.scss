@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  background: #A40000;
+  background: #0088D9;
 }
 
 h1 {
@@ -43,7 +43,7 @@ h1 {
 }
 
 .heading .btn {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
   text-decoration: none;
   border-radius: 5px;
@@ -53,10 +53,9 @@ h1 {
 }
 
 .btn {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 16px;
   text-decoration: none;
-  border: 1px solid #FEF0C9;
+  border: 1px solid #0088D9;
   border-radius: 5px;
   color: white;
   background-color: #000000;
@@ -64,9 +63,24 @@ h1 {
 }
 
 .btn:hover {
-  color: #FEF0C9;
+  color: #0088D9;
 }
 
 .feed-item {
   padding-right: 35px;
+}
+
+#refresh-btn {
+  font-size: 16px;
+  text-decoration: none;
+  border: 1px solid #0088D9;
+  border-radius: 5px;
+  color: white;
+  background-color: #000000;
+  padding: 5px;
+  margin-left: 50px;
+}
+
+#refresh-btn:hover {
+  color: #0088D9;
 }

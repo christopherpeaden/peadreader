@@ -4,20 +4,19 @@
       <% if user_signed_in? %>
 
         <li><%= link_to "Dashboard", root_path, class: 'logo' %></li>
-        <li><%= link_to "Refresh", refresh_path(category_id: params[:category_id], id: params[:id]), title: "Refresh current feeds" %></li>
         <li><%= link_to "Subscribe", new_feed_path, title: "Add a new feed" %></li>
+        <li><%= link_to "Edit Profile", edit_user_registration_path(current_user) %></li>
+        <li><%= link_to "Youtube", subscriptions_path %></li>
 
-        <li id="search-form">
-          <%= form_tag("/", method: "get") do %>
-            <%= label_tag(:q, "Search:", class: "search-elements") %>
-            <%= text_field_tag(:q) %>
-            <%= submit_tag("Search") %>
+        <li>
+          <%= form_tag("/", method: "get", class: "inline-form") do %>
+          <%= label_tag(:q, "Search:", class: "search-elements") %>
+          <%= text_field_tag(:q) %>
+          <%= submit_tag("Search") %>
           <% end %>
         </li>
 
-        <li><%= link_to "Edit Profile", edit_user_registration_path(current_user) %></li>
-        <li><%= link_to "Youtube", subscriptions_path %></li>
-        <li id="sign-out"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" } %></li>
+        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" } %></li>
           
       <% else %>
         <li><%= link_to "Sign In", new_user_session_path %></li>

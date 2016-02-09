@@ -3,7 +3,7 @@
   width: 400px;
   position: fixed;
   background-color: #FFFAFA;
-  margin: 61px 0 0 33px;
+  margin: 74px 0 0 33px;
   border-radius: 0px 0px 2px 2px;
   overflow-y: auto;
   -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
@@ -13,7 +13,7 @@
 
 #sidebar-header {
   background-color: #000;
-  height: 75px;
+  height: 82px;
   width: 400px;
   margin: -7px 0px 0px 33px;
   border-radius: 6px 6px 0 0;
@@ -31,11 +31,10 @@
   color: white;
   text-decoration: none;
   margin-left: 70px;
-  font-size: 30px;
+  font-size: 24px;
   padding: 12px;
-  font-weight: bold;
 }
 
 #sidebar-header ul li a:hover {
-  color: #FEF0C9;
+  color: #0088D9;
 }

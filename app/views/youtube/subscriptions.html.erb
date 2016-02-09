@@ -1,7 +1,9 @@
-<%= link_to "Refresh", refresh_youtube_path %>
 </br>
 </br>
-<%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path %>
+<%= link_to "Refresh", refresh_youtube_path, class: "btn" %>
+</br>
+</br>
+<%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path, class: "btn" %>
 
 <% @videos.each do |video| %>
   <p><%= link_to image_tag(video.image), video.url %></p>

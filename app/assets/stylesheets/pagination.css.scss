@@ -1,30 +1,29 @@
 .pagination {
   list-style: none;
-  padding-top: 30px;
-  margin-left: 50px;
+  padding-top: 25px;
+  margin: 0 0 25px 50px;
 }
 
 .pagination a {
   display: inline;
   background-color: #000000;
-  border: 1px solid #FEF0C9;
+  border: 1px solid #0088D9;
   border-radius: 3px;
   padding: 2px 8px 2px 8px;
   color: white;
-  font-size: 25px;
-  font-weight: bold;
+  font-size: 20px;
   text-decoration: none;
 }
 
 .pagination a:hover {
   text-decoration: underline;
-  color: #FEF0C9;
+  color: #0088D9;
 }
 
 .current {
   color: #000;
   font-weight: bold;
-  background: #FEF0C9;
+  background: #0088D9;
   border: 3px solid black;
   border-radius: 3px;
   padding: 1px 6px 1px 3px;
