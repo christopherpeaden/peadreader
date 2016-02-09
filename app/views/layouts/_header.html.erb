@@ -3,9 +3,14 @@
     <ul>
       <% if user_signed_in? %>
 
-        <li><%= link_to "Dashboard", root_path, class: 'logo' %></li>
-        <li><%= link_to "Subscribe", new_feed_path, title: "Add a new feed" %></li>
-        <li><%= link_to "Edit Profile", edit_user_registration_path(current_user) %></li>
+        <li><%= link_to "Home", root_path, class: 'logo' %></li>
+        <li>
+          <%= link_to "Feeds", feeds_path %>
+          <ul>
+            <li><%= link_to "Add Feed", new_feed_path, title: "Add a new feed" %></li>
+          </ul>
+        </li>
+
         <li><%= link_to "Youtube", subscriptions_path %></li>
 
         <li>
@@ -16,8 +21,15 @@
           <% end %>
         </li>
 
-        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" } %></li>
-          
+        <li>
+          <%= link_to "Profile", "#" %>
+          <ul>
+            <li><%= link_to "Edit", edit_user_registration_path(current_user) %></li>
+            <li><%= link_to "Identities", "#" %></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" } %></li>
+          </ul>
+        </li>
+
       <% else %>
         <li><%= link_to "Sign In", new_user_session_path %></li>
         <li><%= link_to "Sign In With Google+", user_omniauth_authorize_path(:google_oauth2) %></li>

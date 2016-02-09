@@ -1,6 +1,5 @@
 window.onload = function() {
 
-
   allButtons = document.getElementsByClassName("btn");
 
   for (var counter = 0; counter < allButtons.length; counter++) {

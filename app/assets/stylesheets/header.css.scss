@@ -17,15 +17,22 @@
   margin-left: 65px;
 }
 
+#navbar li ul {
+  display: none;
+}
+
 #navbar ul li {
-  display: inline;
+  display: block;
   line-height: 4px;
-  padding: 10px 14px 14px;
+  padding: 10px 17px 14px;
+  position: relative;
+  float: left;
   font-size: 24px;
 }
 
 #navbar ul li a {
   text-decoration: none;
+  display: block;
   color: white;
 }
 
@@ -36,7 +43,18 @@
 #navbar ul li ul li {
   background-color: black;
   display: block;
+  font-size: 14px;
   padding: 8px 5px 15px 5px;
+}
+
+#navbar li:hover ul {
+  display: block;
+  position: absolute;
+  margin: 0 11px 0 0;
+}
+
+#navbar li:hover li {
+  float: none;
 }
 
 .inline-form {

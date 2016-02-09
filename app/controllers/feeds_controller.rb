@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_feed, only: [:show, :edit, :update, :destroy]
-  before_action :get_categories, only: [:show, :new, :edit, :dashboard]
+  before_action :get_categories, only: [:show, :index, :new, :edit, :dashboard]
 
   def new
     @feed = Feed.new
