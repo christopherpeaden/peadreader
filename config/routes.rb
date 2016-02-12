@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :user do
-    root 'pages#home'
+    root 'pages#landing'
   end
 
   resources :feeds
@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   get "refresh_youtube" => "youtube#refresh"
   get "subscriptions" => "youtube#subscriptions"
   get "sync_subscribed_channels" => "youtube#sync_subscribed_channels"
+  get "youtube_channels/:id" => "youtube_channels#show", as: "youtube_channel"
 end

@@ -1,4 +1,5 @@
 <%= will_paginate @videos %>
+
 <%= link_to "Refresh", refresh_youtube_path, class: "btn" %>
 <p><%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path, class: "btn" %><p>
 
@@ -6,7 +7,7 @@
   <p>
   <iframe width="600" height="400" src="http://www.youtube.com/embed/<%= video.video_id %>?controls=1" allowfullscreen="allowfullscreen"></iframe></br>
     <%= link_to video.title, video.url %></br>
-    <%= video.published_at.strftime("%B %d, %Y %l:%M %p") %>
+    <%= "#{video.published_at.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(video.published_at)} ago" %>
   </p>
 <% end %>
 

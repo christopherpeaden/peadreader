@@ -1,5 +1,19 @@
 class YoutubeClient
 
+  def self.get_activities(current_user)
+    url = "https://www.googleapis.com/youtube/v3/activities/"
+
+    options = {
+      part: "contentDetails",
+      key: Rails.application.secrets.google_api_key,
+      access_token: current_user.access_token,
+      home: "true",
+      maxResults: 50
+    }
+
+    HTTParty.get(url, query: options)
+  end
+
   def self.refresh_access_token(current_user)
       url = "https://accounts.google.com/o/oauth2/token"
 

@@ -3,15 +3,14 @@
   <head>
     <title>Pead Reader</title>
       <%= javascript_include_tag 'application' %>
-      <%= stylesheet_link_tag    'normal/application', media: 'all' %>
+      <%= stylesheet_link_tag    'youtube/application', media: 'all' %>
       <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
       <%= csrf_meta_tags %>
   </head>
 
   <body>
-
     <%= render "layouts/header" %>
-    <%= render "layouts/sidebar"%>
+    <%= render "layouts/youtube_sidebar"%>
 
     <div class="container">
       <%= render "layouts/messages"%>

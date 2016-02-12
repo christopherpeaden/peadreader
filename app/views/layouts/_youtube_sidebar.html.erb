@@ -1,0 +1,20 @@
+<div id="sidebar-header">
+  <ul>
+    <li>
+      <%= link_to "Subscriptions", "#"%>
+    </li>
+  </ul>
+</div>
+
+
+<div id="sidebar" class="fixed">
+  <ul class="list-group">
+    <% if user_signed_in? %>
+      <% @youtube_channels.each do |channel| %>
+        <p><%= image_tag(channel.image, size: "35x35") %> <%= link_to channel.title, channel %></p>
+      <% end %>
+    <% end %>
+  </ul>
+  </br>
+  </br>
+</div>
