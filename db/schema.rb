@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20160206210629) do
     t.string   "image"
     t.string   "access_token"
     t.string   "refresh_token"
-    t.integer  "access_token_expiration"
+    t.integer  "access_token_expiration", default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
