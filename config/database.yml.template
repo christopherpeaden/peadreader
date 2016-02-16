@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql 
+  encoding: utf8
+  hostname: localhost
+  pool: 5
+  username:
+  password: <%= ENV[""] %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: pead_reader_development 
+
+test:
+  <<: *default
+  database: pead_reader_test 
+
+production:
+  <<: *default
+  database: pead_reader_production

@@ -11,11 +11,11 @@ module YoutubeApiClient
       url = "https://www.googleapis.com/youtube/v3/playlistItems/"
 
       options[:part]       ||= "contentDetails, snippet"
-      options[:key]        ||=  Rails.application.secrets.google_api_key
+      options[:key]        ||= Rails.application.secrets.google_api_key
       options[:playlistId] ||= playlist_id
       options[:maxResults] ||= "50"
     
-      HTTParty.get(url, query: options)
+      new(HTTParty.get(url, query: options))
     end
   end
 end
