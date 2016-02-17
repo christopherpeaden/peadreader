@@ -15,7 +15,7 @@ module YoutubeApiClient
       options[:playlistId] ||= playlist_id
       options[:maxResults] ||= "50"
     
-      new(HTTParty.get(url, query: options))
+      HTTParty.get(url, query: options)
     end
   end
 end

@@ -55,7 +55,11 @@ class FeedsController < ApplicationController
       feed_errors = fetch_feed_items current_user.feeds
     end
     flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" if !feed_errors.empty?
-    redirect_to(:back)
+    arr = []
+    @feeds = current_user.feeds
+    @feeds.each {|feed| feed.items.each { |item| arr << item } }
+    @items = arr.sort! { |x,y| y.published <=> x.published }
+    render json: @items
   end
 
 

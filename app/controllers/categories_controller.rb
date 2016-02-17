@@ -22,6 +22,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = current_user.categories
+    render json: @categories
   end
 
   def edit
