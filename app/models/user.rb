@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
       access_token: token_info["access_token"],
       access_token_expiration: (Time.now.to_i + token_info["expires_in"].to_i)
     )
+    token_info
   end
 
   def get_subscriptions

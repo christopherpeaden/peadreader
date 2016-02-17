@@ -47,6 +47,8 @@ class FeedsController < ApplicationController
   end
 
   def refresh
+    @categories = current_user.categories
+=begin
     if params[:category_id]
       feed_errors = fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) 
     elsif params[:id]
@@ -55,11 +57,12 @@ class FeedsController < ApplicationController
       feed_errors = fetch_feed_items current_user.feeds
     end
     flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" if !feed_errors.empty?
+=end
     arr = []
     @feeds = current_user.feeds
     @feeds.each {|feed| feed.items.each { |item| arr << item } }
     @items = arr.sort! { |x,y| y.published <=> x.published }
-    render json: @items
+    @items = @items.paginate(page: params[:page])
   end
 
 
@@ -71,6 +74,14 @@ class FeedsController < ApplicationController
     !params[:q].nil? ? @feeds.each {|feed| feed.items.each { |item| arr << item if item.title.downcase =~ /#{params[:q].downcase}/ } } : @feeds.each {|feed| feed.items.each { |item| arr << item } }
     @items = arr.sort! { |x,y| y.published <=> x.published }
     @items = @items.paginate(page: params[:page])
+  end
+
+  def test_xml
+    arr = []
+    @feeds = current_user.feeds
+    @feeds.each {|feed| arr << feed.items.first}
+    @items = arr.sort! { |x,y| y.published <=> x.published }
+    render json: @items
   end
 
   private

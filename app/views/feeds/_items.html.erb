@@ -1,9 +1,4 @@
-<%= will_paginate items %>
-
-<%= link_to "Refresh", "#", title: "Refresh current feeds", id: "refresh-btn" %>
-  <%# refresh_path(category_id: params[:category_id], id: params[:id]) %>
-
-<ul id="so">
+<ul class="list-group">
   <% items.each do |item| %>
     <li>
     <% if item.image_thumbnail_url %>
