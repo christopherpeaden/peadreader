@@ -4,18 +4,21 @@ class YoutubeChannel < ActiveRecord::Base
 
   validates :title, uniqueness: true
 
-  def self.save_channels(current_user, channels)
+  def self.save_channels(channels, user_id)
     channels["items"].each do |channel|
       channels_response = YoutubeApiClient::ChannelsResponse.fetch(channel["snippet"]["resourceId"]["channelId"])
-
-      current_user.youtube_channels.create(
+      
+      new_channel = YoutubeChannel.new(
         title: channel["snippet"]["title"],
         channel_id: channel["snippet"]["resourceId"]["channelId"],
         url: "http://www.youtube.com/channel/#{channel["snippet"]["resourceId"]["channelId"]}",
         image: channel["snippet"]["thumbnails"]["high"]["url"],
         video_count: channel["contentDetails"]["totalItemCount"],
-        upload_playlist_id: channels_response.upload_playlist_id
+        upload_playlist_id: channels_response.upload_playlist_id,
+        user_id: user_id.to_i
       )
+
+      new_channel.save if new_channel.valid?
     end
   end
 

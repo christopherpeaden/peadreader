@@ -5,7 +5,7 @@ class YoutubeVideo < ActiveRecord::Base
 
   def self.save_videos(channel, videos)
     videos.each do |video|
-      channel.youtube_videos.create(
+      new_video = channel.youtube_videos.build(
         title: video["snippet"]["title"],
         url: "http://www.youtube.com/watch?v=#{video["contentDetails"]["videoId"]}",
         image: video["snippet"]["thumbnails"]["high"]["url"],
@@ -15,5 +15,6 @@ class YoutubeVideo < ActiveRecord::Base
         published_at: video["snippet"]["publishedAt"]
       )
     end
+    new_video.save if new_video.valid?
   end
 end

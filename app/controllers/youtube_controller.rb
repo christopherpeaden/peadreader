@@ -2,18 +2,16 @@ class YoutubeController < ApplicationController
 
   def sync_subscribed_channels
     current_user.refresh_access_token if current_user.access_token_expiration - Time.now.to_i < 600
-    @subscriptions = current_user.get_subscriptions
-    YoutubeChannel.save_channels(current_user, @subscriptions)
-    redirect_to "/subscriptions"
+    subscriptions = current_user.get_subscriptions
+    YoutubeChannel.save_channels(subscriptions, current_user.id)
+    @youtube_channels = current_user.youtube_channels
   end
 
   def refresh_youtube
-=begin
     current_user.youtube_channels.each do |channel|
       @uploads = YoutubeChannel.get_uploads(channel, channel.upload_playlist_id)
       YoutubeVideo.save_videos(channel, @uploads)
     end
-=end
 
     arr = []
     @youtube_channels = current_user.youtube_channels

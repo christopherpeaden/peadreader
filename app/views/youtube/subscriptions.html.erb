@@ -1,7 +1,7 @@
 <%= will_paginate @videos %>
 
 <%= link_to "Refresh", refresh_youtube_path, remote: true, class: "btn" %>
-<p><%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path, class: "btn" %><p>
+<p><%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path, remote: true, class: "btn" %><p>
 
 <%= render 'all_videos', videos: @videos %> 
 <%= will_paginate @videos %>
