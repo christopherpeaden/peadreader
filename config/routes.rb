@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :categories, only: [:new, :create, :destroy]
   get "refresh" => "feeds#refresh"
-  get "refresh_youtube" => "youtube#refresh"
+  get "refresh_youtube" => "youtube#refresh_youtube"
   get "subscriptions" => "youtube#subscriptions"
   get "sync_subscribed_channels" => "youtube#sync_subscribed_channels"
   get "youtube_channels/:id" => "youtube_channels#show", as: "youtube_channel"

@@ -48,7 +48,6 @@ class FeedsController < ApplicationController
 
   def refresh
     @categories = current_user.categories
-=begin
     if params[:category_id]
       feed_errors = fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) 
     elsif params[:id]
@@ -57,7 +56,6 @@ class FeedsController < ApplicationController
       feed_errors = fetch_feed_items current_user.feeds
     end
     flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" if !feed_errors.empty?
-=end
     arr = []
     @feeds = current_user.feeds
     @feeds.each {|feed| feed.items.each { |item| arr << item } }

@@ -7,15 +7,23 @@ class YoutubeController < ApplicationController
     redirect_to "/subscriptions"
   end
 
-  def refresh
-    @categories = current_user.categories
-
+  def refresh_youtube
+=begin
     current_user.youtube_channels.each do |channel|
       @uploads = YoutubeChannel.get_uploads(channel, channel.upload_playlist_id)
       YoutubeVideo.save_videos(channel, @uploads)
     end
-    
-    redirect_to "/subscriptions"
+=end
+
+    arr = []
+    @youtube_channels = current_user.youtube_channels
+    @youtube_channels.each do |channel|
+      channel.youtube_videos.each do |video|
+        arr << video
+      end
+    end
+    @videos = arr.sort! { |x,y| y.published_at <=> x.published_at }
+    @videos = @videos.paginate(page: params[:page], per_page: 10)
   end
 
   def subscriptions 
