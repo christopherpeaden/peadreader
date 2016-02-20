@@ -1,12 +1,7 @@
 html {
   width: 100%;
   margin: auto;
-  font-family: 'Ubuntu', sans-serif;
-}
-
-
-body {
-  background: #0088D9;
+  font-family: 'Alegreya', sans-serif;
 }
 
 h1 {
@@ -18,24 +13,30 @@ h1 {
 }
 
 .list-group li {
-  padding: 15px;
+  padding: 12px;
+  border-bottom: 2px solid #000;
+  border-radius: 3px;
+}
+
+#category-list-group {
+  list-style: none;
+}
+
+#category-list-group li {
+  padding: 12px;
   border-bottom: 2px solid #000;
   border-radius: 3px;
 }
 
 .container {
-  width: 75%;
-  padding-top: 57px;
-  margin: 0px 0 0 440px;
   background-color: #FFFAFA;
-  border-radius: 0px 0px 2px 2px;
-  -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
-  -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
-  box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  top: 80px;
+  left: 300px;
+  right: 0;
+  position: absolute;
 }
 
 .heading {
-  width: 80%;
   height: 150px;
   text-align: center;
   margin: 0 0 0 110px;
@@ -55,7 +56,7 @@ h1 {
 .btn {
   font-size: 16px;
   text-decoration: none;
-  border: 1px solid #0088D9;
+  border: 1px solid #4E2970;
   border-radius: 5px;
   color: white;
   background-color: #000000;
@@ -63,7 +64,7 @@ h1 {
 }
 
 .btn:hover {
-  color: #0088D9;
+  color: #C8C8C8;
 }
 
 .feed-item {
@@ -82,5 +83,5 @@ h1 {
 }
 
 #refresh-btn:hover {
-  color: #0088D9;
+  color: #C8C8C8;
 }

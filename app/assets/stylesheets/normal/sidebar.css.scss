@@ -1,43 +1,49 @@
   #sidebar {
-    height: 920px;
-    width: 400px;
-    position: fixed;
     background-color: #FFFAFA;
-    margin: 74px 0 0 33px;
+    width: 300px;
+    left: 0;
+    bottom: 0;
+    top: 78px;
+    position: fixed;
     border-radius: 0px 0px 2px 2px;
     overflow-y: auto;
-    -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
-    -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
-    box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+    z-index: 1;
+    -webkit-box-shadow: -1px 0px 6px 1px rgba(0,0,0,0.46);
+    -moz-box-shadow: -1px 0px 6px 1px rgba(0,0,0,0.46);
+    box-shadow: -1px 0px 6px 1px rgba(0,0,0,0.46);
   }
 
 #sidebar-header {
-  background-color: #000;
-  height: 82px;
-  width: 400px;
-  margin: -7px 0px 0px 33px;
-  border-radius: 6px 6px 0 0;
+  background: #3E2059;
+  height: 78px;
   position: fixed;
-  -webkit-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
-  -moz-box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
-  box-shadow: -1px 4px 23px 1px rgba(0,0,0,0.46);
+  left: 0;
+  width: 300px;
+  z-index: 2;
+  -webkit-box-shadow: -1px 0px 6px 1px rgba(0,0,0,0.46);
+  -moz-box-shadow: -1px 0px 6px 1px rgba(0,0,0,0.46);
+  box-shadow: -1px 0px 6px 1px rgba(0,0,0,0.46);
 }
 
 #sidebar-header ul {
   list-style: none;
 }
 #sidebar-header ul li {
-  line-height: 55px;
+  line-height: 50px;
 }
 
 #sidebar-header ul li a {
   color: white;
   text-decoration: none;
-  margin-left: 70px;
+  margin-left: 35px;
   font-size: 24px;
   padding: 12px;
 }
 
 #sidebar-header ul li a:hover {
-  color: #0088D9;
+  color: #C8C8C8;
+}
+
+#category-dropdown-item {
+  font-size: 14px;
 }

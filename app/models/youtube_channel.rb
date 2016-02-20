@@ -22,9 +22,9 @@ class YoutubeChannel < ActiveRecord::Base
     end
   end
 
-  def self.get_uploads(channel, playlist_id, options={})
+  def self.get_uploads(channel, options={})
     uploads = []
-    playlist_items_response = YoutubeApiClient::PlaylistItemsResponse.fetch(playlist_id, options)
+    playlist_items_response = YoutubeApiClient::PlaylistItemsResponse.fetch(channel.upload_playlist_id, options)
 
     loop do
       if previously_synced?(channel)
@@ -43,7 +43,7 @@ class YoutubeChannel < ActiveRecord::Base
 
       break if !playlist_items_response["nextPageToken"]
 
-      playlist_items_response = YoutubeApiClient::PlaylistItemsResponse.fetch(playlist_id, pageToken: playlist_items_response["nextPageToken"])
+      playlist_items_response = YoutubeApiClient::PlaylistItemsResponse.fetch(channel.upload_playlist_id, pageToken: playlist_items_response["nextPageToken"])
     end
     uploads
   end

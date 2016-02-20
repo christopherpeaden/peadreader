@@ -9,8 +9,8 @@ class YoutubeController < ApplicationController
 
   def refresh_youtube
     current_user.youtube_channels.each do |channel|
-      @uploads = YoutubeChannel.get_uploads(channel, channel.upload_playlist_id)
-      YoutubeVideo.save_videos(channel, @uploads)
+      @uploads = YoutubeChannel.get_uploads(channel)
+      YoutubeVideo.save_videos(channel, @uploads) if !@uploads.empty?
     end
 
     arr = []

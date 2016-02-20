@@ -7,15 +7,15 @@
 </div>
 
 
-<div id="sidebar" class="fixed">
-  <ul class="list-group">
+<div id="sidebar">
+  <ul id="category-list-group">
     
     <% if user_signed_in? %>
       <% @categories.each do |category| %>
         <li class="dropdown-list"><%= link_to category.title, root_path(category_id: category.id), class: "btn" %><span class="caret">
           <ul class="invisible">
             <% category.feeds.each do |feed| %>
-              <li><%= link_to feed.title, feed %></li>
+              <li id="category-dropdown-item"><%= link_to feed.title, feed %></li>
             <% end %>
           </ul>
         </span>
