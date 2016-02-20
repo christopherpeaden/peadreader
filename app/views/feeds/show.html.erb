@@ -1,4 +1,4 @@
-<div class="heading">
+<div class="banner">
   <h1><%= @feed.title %></h1>
     <%= link_to "Edit", edit_feed_path(@feed), class: "btn" %>
     <%= link_to "Delete", @feed, method: :delete,
@@ -10,6 +10,8 @@
       <%= link_to "Back", root_url, class:"btn" %>
     <% end %>
 </div>
+
+<%= link_to "Refresh", refresh_path(category_id: params[:category_id], id: params[:id]), remote: true, title: "Refresh current feeds", id: "refresh-btn" %>
 
 <div id="items">
   <%= render "items", items: @items %>

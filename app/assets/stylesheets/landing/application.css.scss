@@ -11,12 +11,12 @@
  * file per style scope.                                                                              
  *                                                                                                    
  *= require normalize-rails
- *= require_tree .
  *= require_self                                                                                      
  */                                                                                                   
 
-@media(min-width: 900px) {
-  h1 {
-    padding-top: 150px;
-  }
-}
+  @import '../dashboard/mixins.css.scss';
+  @import '../dashboard/buttons.css.scss';
+  @import '../dashboard/flash.css.scss';
+  @import 'main.css.scss';
+  @import 'header.css.scss';
+

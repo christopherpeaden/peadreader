@@ -5,6 +5,7 @@ class YoutubeController < ApplicationController
     subscriptions = current_user.get_subscriptions
     YoutubeChannel.save_channels(subscriptions, current_user.id)
     @youtube_channels = current_user.youtube_channels
+    flash[:notice] = "Subscriptions updated successfully."
   end
 
   def refresh_youtube
@@ -22,6 +23,8 @@ class YoutubeController < ApplicationController
     end
     @videos = arr.sort! { |x,y| y.published_at <=> x.published_at }
     @videos = @videos.paginate(page: params[:page], per_page: 10)
+
+    flash[:notice] = "Videos updated successfully."
   end
 
   def subscriptions 

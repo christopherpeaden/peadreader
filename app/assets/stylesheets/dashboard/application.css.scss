@@ -10,7 +10,18 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require normalize-rails
  *= require_self
  */
+
+  @import 'mixins.css.scss';
+  @import 'buttons.css.scss';
+  @import 'dropdown.css.scss';
+  @import 'flash.css.scss';
+  @import 'header.css.scss';
+  @import 'main.css.scss';
+  @import 'lists.css.scss';
+  @import 'sidebar.css.scss';
+  @import 'pagination.css.scss';
+  @import 'tablet.css.scss';
 

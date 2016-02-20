@@ -1,0 +1,19 @@
+html {
+  font-family: 'Alegreya', sans-serif;
+}
+
+.container {
+  background-color: $snow-white;
+  top: 80px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+.banner {
+  height: 150px;
+  text-align: center;
+  text-transform: uppercase;
+}
+

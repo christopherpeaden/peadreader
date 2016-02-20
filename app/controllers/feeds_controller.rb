@@ -55,7 +55,13 @@ class FeedsController < ApplicationController
     else
       feed_errors = fetch_feed_items current_user.feeds
     end
-    flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" if !feed_errors.empty?
+
+    if !feed_errors.empty?
+      flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" 
+    else
+      flash[:notice] = "Feeds updated successfully."
+    end
+
     arr = []
     @feeds = current_user.feeds
     @feeds.each {|feed| feed.items.each { |item| arr << item } }
