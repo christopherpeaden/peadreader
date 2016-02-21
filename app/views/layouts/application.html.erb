@@ -12,10 +12,10 @@
 
     <%= render "layouts/header" %>
 
-    <% if controller_name == "feeds" %>
-      <%= render "layouts/sidebar"%>
-    <% else %>
+    <% if controller_name == "youtube" %>
       <%= render "youtube/youtube_sidebar"%>
+    <% else %>
+      <%= render "layouts/sidebar"%>
     <% end %>
 
     <div class="container">
