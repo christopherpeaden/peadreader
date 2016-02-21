@@ -10,8 +10,10 @@ class User < ActiveRecord::Base
   has_many :youtube_channels, dependent: :destroy
 
   def self.from_omniauth(auth_hash)
+    require 'pry-byebug'
     data = auth_hash.info
-    if user = User.where(provider: auth_hash["provider"], uid: auth_hash["uid"])
+    if user = User.find_by(provider: auth_hash["provider"], uid: auth_hash["uid"])
+      binding.pry
       user.update(name: data["name"], 
                   email: data["email"], 
                   first_name: data["first_name"], 
@@ -20,7 +22,7 @@ class User < ActiveRecord::Base
                   access_token: auth_hash["credentials"]["token"])
 
       user.update(refresh_token: auth_hash["credentials"]["refresh_token"]) if auth_hash["credentials"]["refresh_token"]
-    elsif user = User.where(email: data["email"])
+    elsif user = User.find_by(email: data["email"])
       user.update(name: data["name"], 
                   email: data["email"], 
                   first_name: data["first_name"], 
