@@ -23,5 +23,11 @@ module FeedReader
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.autoload_paths += %W(#{config.root}/app)
+
+    config.generators do |g|
+      g.assets false
+    end
+    config.assets.paths << "#{Rails.root}/app//assets/stylesheets/landing"
+    config.assets.paths << "#{Rails.root}/app//assets/stylesheets/dashboard"
   end
 end

@@ -33,5 +33,4 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'guard-rspec'
   gem 'guard-livereload'
-  gem 'normalize-rails'
 end

@@ -10,10 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new      
  * file per style scope.                                                                              
  *                                                                                                    
- *= require normalize-rails
  *= require_self                                                                                      
  */                                                                                                   
 
+  @import 'normalize.css'
   @import '../dashboard/mixins.css.scss';
   @import '../dashboard/buttons.css.scss';
   @import '../dashboard/flash.css.scss';
