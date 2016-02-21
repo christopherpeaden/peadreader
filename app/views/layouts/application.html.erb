@@ -12,7 +12,7 @@
 
     <%= render "layouts/header" %>
 
-    <% if controller_name == "youtube" %>
+    <% if controller_name == "youtube" || controller_name == "youtube_channels" %>
       <%= render "youtube/youtube_sidebar"%>
     <% else %>
       <%= render "layouts/sidebar"%>

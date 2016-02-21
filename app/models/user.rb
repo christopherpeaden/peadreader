@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
     if user = User.find_by(provider: auth_hash["provider"], uid: auth_hash["uid"])
       user.update(name: data["name"], 
                   email: data["email"], 
-                  provider: auth_hash["provider"],
-                  uid: auth_hash["uid"],
                   first_name: data["first_name"], 
                   last_name: data["last_name"], 
                   image: data["image"],
