@@ -10,10 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new      
  * file per style scope.                                                                              
  *                                                                                                    
+ *= require normalize
  *= require_self                                                                                      
  */                                                                                                   
 
-  @import 'normalize.css';
   @import 'mixins.css.scss';
   @import 'buttons.css.scss';
   @import 'flash.css.scss';
