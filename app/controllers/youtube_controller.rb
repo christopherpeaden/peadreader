@@ -1,7 +1,7 @@
 class YoutubeController < ApplicationController
 
   def sync_subscribed_channels
-    current_user.refresh_access_token if current_user.access_token_expiration - Time.now.to_i < 600
+    current_user.refresh_access_token if current_user.access_token_expiration - Time.now.to_i < 600 || !current_user.access_token
     subscriptions = current_user.get_subscriptions
     YoutubeChannel.save_channels(subscriptions, current_user.id)
     @youtube_channels = current_user.youtube_channels
