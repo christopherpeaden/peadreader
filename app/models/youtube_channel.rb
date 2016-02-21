@@ -1,6 +1,6 @@
 class YoutubeChannel < ActiveRecord::Base
   belongs_to :user
-  has_many :youtube_videos
+  has_many :youtube_videos, dependent: :destroy
 
   validates :title, uniqueness: true
 

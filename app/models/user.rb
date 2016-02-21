@@ -11,15 +11,34 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth_hash)
     data = auth_hash.info
-    user = User.where(provider: auth_hash["provider"], uid: auth_hash["uid"]).first_or_create
-    user.update(name: data["name"], 
-                email: data["email"], 
-                first_name: data["first_name"], 
-                last_name: data["last_name"], 
-                image: data["image"],
-                access_token: auth_hash["credentials"]["token"])
+    if user = User.where(provider: auth_hash["provider"], uid: auth_hash["uid"])
+      user.update(name: data["name"], 
+                  email: data["email"], 
+                  first_name: data["first_name"], 
+                  last_name: data["last_name"], 
+                  image: data["image"],
+                  access_token: auth_hash["credentials"]["token"])
 
-    user.update(refresh_token: auth_hash["credentials"]["refresh_token"]) if auth_hash["credentials"]["refresh_token"]
+      user.update(refresh_token: auth_hash["credentials"]["refresh_token"]) if auth_hash["credentials"]["refresh_token"]
+    elsif user = User.where(email: data["email"])
+      user.update(name: data["name"], 
+                  email: data["email"], 
+                  first_name: data["first_name"], 
+                  last_name: data["last_name"], 
+                  image: data["image"],
+                  access_token: auth_hash["credentials"]["token"])
+
+      user.update(refresh_token: auth_hash["credentials"]["refresh_token"]) if auth_hash["credentials"]["refresh_token"]
+    else user = User.new
+      user.update(name: data["name"], 
+                  email: data["email"], 
+                  first_name: data["first_name"], 
+                  last_name: data["last_name"], 
+                  image: data["image"],
+                  access_token: auth_hash["credentials"]["token"])
+
+      user.update(refresh_token: auth_hash["credentials"]["refresh_token"]) if auth_hash["credentials"]["refresh_token"]
+    end
 
     user
   end
