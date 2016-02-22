@@ -48,19 +48,23 @@ class FeedsController < ApplicationController
 
   def refresh
     @categories = current_user.categories
-    if params[:category_id]
-      feed_errors = fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) 
-    elsif params[:id]
-      feed_errors = fetch_feed_items current_user.feeds.where(id: params[:id])
-    else
-      feed_errors = fetch_feed_items current_user.feeds
+    Thread.new do
+      if params[:category_id]
+        feed_errors = fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) 
+      elsif params[:id]
+        feed_errors = fetch_feed_items current_user.feeds.where(id: params[:id])
+      else
+        feed_errors = fetch_feed_items current_user.feeds
+      end
+      ActiveRecord::Base.connection.close
     end
-
+=begin
     if !feed_errors.empty?
       flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" 
     else
       flash[:notice] = "Feeds updated successfully."
     end
+=end
 
     arr = []
     @feeds = current_user.feeds
