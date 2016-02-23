@@ -71,6 +71,11 @@ class FeedsController < ApplicationController
     @items = arr.sort! { |x,y| y.published <=> x.published }
     @items = @items.paginate(page: params[:page])
 =end
+    arr = []
+    @feeds = current_user.feeds
+    @feeds.each {|feed| arr << feed.items.first }
+    @items = arr.sort! { |x,y| y.published <=> x.published }
+    render json: @items.to_json
   end
 
 
@@ -89,6 +94,14 @@ class FeedsController < ApplicationController
     @feeds = current_user.feeds
     @feeds.each {|feed| arr << feed.items.first}
     @items = arr.sort! { |x,y| y.published <=> x.published }
+  end
+
+  def test_ajax2
+    arr = []
+    @feeds = current_user.feeds
+    @feeds.each {|feed| arr << feed.items.first}
+    @items = arr.sort! { |x,y| y.published <=> x.published }
+    render json: @items
   end
 
   private
