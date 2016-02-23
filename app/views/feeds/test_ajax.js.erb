@@ -1,4 +1,3 @@
-
 var xhr; 
 if (window.XMLHttpRequest) 
   xhr = new XMLHttpRequest(); 
@@ -37,7 +36,7 @@ xhr.onreadystatechange = function () {
 
         if(response[x]["image_thumbnail_url"]) {
           var thumbnailUrl = document.createElement("img");
-          //thumbnailUrl.setAttribute('src', response[x]["image_thumbnail_url"];
+          thumbnailUrl.setAttribute('src', response[x]["image_thumbnail_url"]);
           thumbnailUrl.setAttribute('height', '250px');
           thumbnailUrl.setAttribute('width', '400px');
           li.appendChild(thumbnailUrl);
@@ -47,18 +46,22 @@ xhr.onreadystatechange = function () {
 
         li.appendChild(a);
         li.appendChild(publishedAt);
-        list = document.getElementsByClassName("list-group")[0];
-        list.insertBefore(li, list.childNodes[x]);
-        x++;
+        li.setAttribute('data-published', response[x]["published"]);
+        var list = document.getElementsByClassName("list-group")[0];
+        list.insertBefore(li, list.children[0]);
       }
     }
   }
 }
 
 function sendXhrRequest() {
-  xhr.open('GET', 'http://localhost:3000/refresh')
+  var list = document.getElementsByClassName("list-group")[0];
+  var latestItem = list.children[0];
+  var after = latestItem.getAttribute("data-published");
+
+  xhr.open('GET', 'http://localhost:3000/test_ajax2?after=' + after)
   xhr.send(null);
 }
 
-setInterval(sendXhrRequest, 4000);
+setTimeout(sendXhrRequest, 3000);
 
