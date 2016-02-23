@@ -2,6 +2,8 @@
 
 <%= link_to "Refresh", refresh_path(category_id: params[:category_id], id: params[:id]), remote: true, title: "Refresh current feeds", id: "refresh-btn" %>
 
+<%= link_to "Test Ajax", test_ajax_path, remote: true, title: "Refresh current feeds", id: "ajax-btn" %>
+
 <div id="items">
   <%= render "items", items: @items %>
 </div>

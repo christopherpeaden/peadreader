@@ -18,10 +18,12 @@
 function GetData() {
 }); */
 
+/*
     // 1. Instantiate XHR - Start 
 $(function() {
 
-  var btn = document.getElementById("test-btn");
+
+  var btn = document.getElementById("ajax-btn");
   btn.addEventListener("click", function() {
     var xhr; 
     if (window.XMLHttpRequest) 
@@ -30,6 +32,11 @@ $(function() {
       xhr = new ActiveXObject("Msxml2.XMLHTTP");
     else 
       throw new Error("Ajax is not supported by your browser");
+
+    function sendXhrRequest() {
+      xhr.open('GET', 'http://localhost:3000/test_ajax')
+      xhr.send(null);
+    }
       // 1. Instantiate XHR - End
       
       // 2. Handle Response from Server - Start
@@ -53,18 +60,19 @@ $(function() {
 
           li.appendChild(itemTitle);
           li.appendChild(publishedAt);
-          list = document.getElementsByClassName("list-group")[1];
+          list = document.getElementsByClassName("list-group")[0];
           list.insertBefore(li, list.childNodes[x]);
 
         }
       }
     }
   }
+
     // 2. Handle Response from Server - End
 
     // 3. Specify your action, location and Send to the server - Start   
-    xhr.open('GET', 'http://localhost:3000/test_xml');
-    xhr.send(null);
+    setInterval(sendXhrRequest, 4000);
     // 3. Specify your action, location and Send to the server - End
   })
 })
+*/

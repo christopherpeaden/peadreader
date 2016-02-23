@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   get "subscriptions" => "youtube#subscriptions"
   get "sync_subscribed_channels" => "youtube#sync_subscribed_channels"
   get "youtube_channels/:id" => "youtube_channels#show", as: "youtube_channel"
-  get "test_xml" => "feeds#test_xml"
+  get "test_ajax" => "feeds#test_ajax"
 end
