@@ -20,7 +20,7 @@ module FeedsHelper
       break if latest_item && item.title == latest_item.title
       if item.url =~ /youtube/
         video_code = item.url.split('=')[1]
-        new_item = feed.items.build(title: item.title, url: item.url, image_thumbnail_url: "http://img.youtube.com/vi/#{video_code}/hqdefault.jpg", published: item.published)
+        new_item = feed.items.build(title: item.title, url: item.url, image_thumbnail_url: "http://img.youtube.com/vi/#{video_code}/hqdefault.jpg", published: item.published, feed_title: feed.title)
         new_item.save if new_item.valid?
       else
         new_item = feed.items.build(title: item.title, url: item.url, published: item.published)

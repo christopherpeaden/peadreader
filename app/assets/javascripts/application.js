@@ -11,5 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require strftime
+//= require time_since
 //= require jquery_ujs
 //= require_tree .

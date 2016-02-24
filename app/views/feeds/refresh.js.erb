@@ -36,9 +36,9 @@ xhr.onreadystatechange = function () {
           }
 
           var li = document.createElement("li");
-          var itemTitle = document.createTextNode(response[x]["title"]);
-          var channel = document.createTextNode("channel");
-          var publishedAt = document.createTextNode(response[x]["published"]);
+          var itemTitle = document.createTextNode(response[x]["title"] + " ");
+          var channel = document.createTextNode(response[x]["feed_title"] + ": ");
+          var publishedAt = document.createTextNode(strftime("%B %d, %Y %l:%M %p", new Date(response[x]["published"])) + ", " + timeSince(new Date(response[x]["published"])));
           var url = document.createTextNode(response[x]["url"]);
           var br = document.createElement('br');
           var br2 = document.createElement('br');
@@ -47,9 +47,10 @@ xhr.onreadystatechange = function () {
           var buttonText = document.createTextNode("More");
           btn.appendChild(buttonText);
           btn.className = "btn";
-          btn.href = "/feeds";
+          btn.href = "/feeds/" + response[x]["feed_id"];
 
           var a = document.createElement("a");
+          a.style.textDecoration = "none";
           a.appendChild(channel);
           a.appendChild(itemTitle);
           a.appendChild(btn);
