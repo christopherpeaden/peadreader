@@ -48,7 +48,6 @@ class FeedsController < ApplicationController
 
   def refresh
     @categories = current_user.categories
-=begin
     Thread.new do
       if params[:category_id]
         feed_errors = fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) 
@@ -59,6 +58,8 @@ class FeedsController < ApplicationController
       end
       ActiveRecord::Base.connection.close
     end
+
+=begin
     if !feed_errors.empty?
       flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" 
     else
@@ -70,12 +71,12 @@ class FeedsController < ApplicationController
     @feeds.each {|feed| feed.items.each { |item| arr << item } }
     @items = arr.sort! { |x,y| y.published <=> x.published }
     @items = @items.paginate(page: params[:page])
-=end
     arr = []
     @feeds = current_user.feeds
     @feeds.each {|feed| arr << feed.items.first }
     @items = arr.sort! { |x,y| y.published <=> x.published }
     render json: @items
+=end
   end
 
 

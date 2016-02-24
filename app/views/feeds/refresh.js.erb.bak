@@ -1,0 +1,41 @@
+var x = 0;
+<% @items.count.times do |i| %>
+  var li = document.createElement("li");
+  var itemTitle = document.createTextNode("<%= @items[i]['title'] %>");
+  var channel = document.createTextNode("<%= Feed.find(@items[i].feed_id).title %>: ");
+  var publishedAt = document.createTextNode("<%= @items[i]['published'].strftime("%B %d, %Y %l:%M %p") %>");
+  var url = document.createTextNode("<%= @items[i]['url'] %>");
+  var br = document.createElement('br');
+  var br2 = document.createElement('br');
+
+  var btn = document.createElement("a");
+  var buttonText = document.createTextNode("More");
+  btn.appendChild(buttonText);
+  btn.className = "btn";
+  btn.href = "/feeds/<%= @items[i]["feed_id"] %>"
+
+  var a = document.createElement("a");
+  a.appendChild(channel);
+  a.appendChild(itemTitle);
+  a.appendChild(btn);
+  a.href = "<%= @items[i]['url'] %>";
+  a.appendChild(br2);
+
+  <% if @items[i]["image_thumbnail_url"] %>
+    var thumbnailUrl = document.createElement("img")
+    thumbnailUrl.setAttribute('src', "<%= @items[i]["image_thumbnail_url"] %>");
+    thumbnailUrl.setAttribute('src', "<%= @items[i]["image_thumbnail_url"] %>");
+    thumbnailUrl.setAttribute('height', '250px');
+    thumbnailUrl.setAttribute('width', '400px');
+    li.appendChild(thumbnailUrl);
+    a.insertBefore(br, a.childNodes[0]);
+  <% end %>
+
+
+  li.appendChild(a);
+  li.appendChild(publishedAt);
+  list = document.getElementsByClassName("list-group")[0];
+  list.insertBefore(li, list.childNodes[x]);
+  x++;
+<% end %>
+}
