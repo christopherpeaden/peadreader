@@ -3,7 +3,7 @@
     <li <%="data-published=#{item.published.to_json} id=latest" if item == items.first %>>
     <% if item.image_thumbnail_url %>
       <% video_code = item.url.split('=')[1] %>
-      <iframe width="440" height="250" src="http://www.youtube.com/embed/<%= video_code %>?controls=1" allowfullscreen="allowfullscreen"></iframe></br>
+      <%= link_to(image_tag(item.image_thumbnail_url, size: '400x300'), "http://www.youtube.com/watch?v=#{video_code}") %></br>
       <%= link_to "#{item.feed.title}: #{truncate(item.title, length: 115, omission: "...", escape: false) }", item.url, class: "feed-item" %> <%= link_to "More", feed_path(item.feed), class: "btn" if params[:id].nil? %></br>
       <%= "#{item.published.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(item.published)} ago" %>
     <% else %> 
