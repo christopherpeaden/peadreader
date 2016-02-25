@@ -2,6 +2,7 @@ class FeedsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_feed, only: [:show, :edit, :update, :destroy]
   before_action :get_categories, only: [:show, :index, :new, :edit, :dashboard]
+  after_action :set_access_control_headers
 
   def new
     @feed = Feed.new
@@ -122,5 +123,10 @@ class FeedsController < ApplicationController
 
     def get_categories
       @categories = current_user.categories
+    end
+
+    def set_access_control_headers 
+     headers['Access-Control-Allow-Origin'] = "*"
+     headers['Access-Control-Request-Method'] = %w{GET POST OPTIONS}.join(",")
     end
 end
