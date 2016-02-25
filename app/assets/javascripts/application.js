@@ -13,5 +13,6 @@
 //= require jquery
 //= require strftime
 //= require time_since
+//= require underscore 
 //= require jquery_ujs
 //= require_tree .
