@@ -115,7 +115,7 @@ function sendXhrRequest() {
     var after = JSON.stringify(new Date(0));
   }
   
-  if (15 < noReturn) {
+  if (25 < noReturn) {
     clearInterval(checker);
   } else {
     xhr.open('GET', 'http://localhost:3000/test_ajax2?after=' + after)
