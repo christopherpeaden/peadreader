@@ -29,5 +29,6 @@ module FeedReader
     end
     config.assets.paths << "#{Rails.root}/app//assets/stylesheets/landing"
     config.assets.paths << "#{Rails.root}/app//assets/stylesheets/dashboard"
+    config.assets.paths << Rails.root.join('vendor', 'assets')
   end
 end
