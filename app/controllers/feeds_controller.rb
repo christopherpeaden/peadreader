@@ -22,7 +22,7 @@ class FeedsController < ApplicationController
   def show
     arr = []
     @feed.items.each { |item| arr << item }
-    @items = arr.sort! { |x,y| y.published <=> x.published }
+    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
     @items = @items.paginate(page: params[:page])
   end
 
@@ -86,7 +86,7 @@ class FeedsController < ApplicationController
     !params[:category_id].nil? ? @feeds = current_user.feeds.where(category_id: params[:category_id]) : @feeds = current_user.feeds
     arr = []
     !params[:q].nil? ? @feeds.each {|feed| feed.items.each { |item| arr << item if item.title.downcase =~ /#{params[:q].downcase}/ } } : @feeds.each {|feed| feed.items.each { |item| arr << item } }
-    @items = arr.sort! { |x,y| y.published <=> x.published }
+    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
     @items = @items.paginate(page: params[:page])
   end
 
@@ -94,19 +94,19 @@ class FeedsController < ApplicationController
     arr = []
     @feeds = current_user.feeds
     @feeds.each {|feed| arr << feed.items.first}
-    @items = arr.sort! { |x,y| y.published <=> x.published }
+    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
   end
 
   def test_ajax2
     arr = []
     @feeds = current_user.feeds
     @feeds.each do |feed|
-      items_arr = feed.items.where("published > ?", params[:after])
+      items_arr = feed.items.where("published_at > ?", params[:after])
       items_arr.each do |item|
         arr << item
       end
     end
-    @items = arr.sort! { |x,y| x.published <=> y.published }
+    @items = arr.sort! { |x,y| x.published_at <=> y.published_at }
     render json: @items
   end
 
