@@ -29,7 +29,7 @@ xhr.onreadystatechange = function () {
 
           for(var n = 0; n < newestElements.length; n++) {
             var elementPublishedAt = newestElements[n].getAttribute('data-published');
-            if (response[x]['published'] == elementPublishedAt) {
+            if (response[x]['published_at'] == elementPublishedAt) {
               alreadyPlaced = true;
               break;
             }
@@ -41,8 +41,8 @@ xhr.onreadystatechange = function () {
 
         var li = document.createElement("li");
         var itemTitle = document.createTextNode(response[x]["title"] + " ");
-        var channel = document.createTextNode(response[x]["feed_title"] + ": ");
-        var publishedAt = document.createTextNode(strftime("%B %d, %Y %l:%M %p", new Date(response[x]["published"])) + ", " + timeSince(new Date(response[x]["published"])));
+        var feedTitle = document.createTextNode(response[x]["feed_title"] + ": ");
+        var publishedAt = document.createTextNode(strftime("%B %d, %Y %l:%M %p", new Date(response[x]["published_at"])) + ", " + timeSince(new Date(response[x]["published_at"])));
         var url = document.createTextNode(response[x]["url"]);
         var br = document.createElement('br');
         var br2 = document.createElement('br');
@@ -54,7 +54,7 @@ xhr.onreadystatechange = function () {
         btn.href = "/feeds/" + response[x]["feed_id"];
 
         var a = document.createElement("a");
-        a.appendChild(channel);
+        a.appendChild(feedTitle);
         a.appendChild(itemTitle);
         a.appendChild(btn);
         a.href = response[x]['url'];
@@ -72,7 +72,7 @@ xhr.onreadystatechange = function () {
 
         li.appendChild(a);
         li.appendChild(publishedAt);
-        li.setAttribute('data-published', response[x]["published"]);
+        li.setAttribute('data-published', response[x]["published_at"]);
         var list = document.getElementsByClassName("list-group")[0];
         list.insertBefore(li, list.children[0]);
       }

@@ -4,7 +4,7 @@ module FeedsHelper
     feed_errors = []
     feeds.each do |feed|
       begin
-        latest_item = feed.items.find_by(published: feed.items.maximum(:published)) 
+        latest_item = feed.items.find_by(published_at: feed.items.maximum(:published_at)) 
         parsed_feed = Feedjira::Feed.fetch_and_parse(feed.url)
         store_items(parsed_feed, latest_item, feed)
       rescue
@@ -20,10 +20,10 @@ module FeedsHelper
       break if latest_item && item.title == latest_item.title
       if item.url =~ /youtube/
         video_code = item.url.split('=')[1]
-        new_item = feed.items.build(title: item.title, url: item.url, image_thumbnail_url: "http://img.youtube.com/vi/#{video_code}/hqdefault.jpg", published: item.published, feed_title: feed.title)
+        new_item = feed.items.build(title: item.title, url: item.url, image_thumbnail_url: "http://img.youtube.com/vi/#{video_code}/hqdefault.jpg", published_at: item.published, feed_title: feed.title)
         new_item.save if new_item.valid?
       else
-        new_item = feed.items.build(title: item.title, url: item.url, published: item.published)
+        new_item = feed.items.build(title: item.title, url: item.url, published_at: item.published)
         new_item.save if new_item.valid?
       end
     end
