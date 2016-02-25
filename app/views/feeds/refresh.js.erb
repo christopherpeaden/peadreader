@@ -39,6 +39,8 @@ xhr.onreadystatechange = function () {
           continue;
         }
 
+        noReturn = 0;
+
         var li = document.createElement("li");
         var itemTitle = document.createTextNode(response[x]["title"] + " ");
         var feedTitle = document.createTextNode(response[x]["feed_title"] + ": ");
@@ -113,7 +115,7 @@ function sendXhrRequest() {
     var after = JSON.stringify(new Date(0));
   }
   
-  if (3 < noReturn) {
+  if (15 < noReturn) {
     clearInterval(checker);
   } else {
     xhr.open('GET', 'http://localhost:3000/test_ajax2?after=' + after)
@@ -121,5 +123,5 @@ function sendXhrRequest() {
   }
 }
 
-var checker = setInterval(sendXhrRequest, 2000);
+var checker = setInterval(sendXhrRequest, 3000);
 
