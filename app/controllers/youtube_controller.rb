@@ -19,17 +19,6 @@ class YoutubeController < ApplicationController
         ActiveRecord::Base.connection.close
       end
     end
-
-    arr = []
-    @youtube_channels = current_user.youtube_channels
-    @youtube_channels.each do |channel|
-      channel.youtube_videos.each do |video|
-        arr << video
-      end
-    end
-    @videos = arr.sort! { |x,y| y.published_at <=> x.published_at }
-    @videos = @videos.paginate(page: params[:page], per_page: 10)
-
     flash[:notice] = "Videos updated successfully."
   end
 
@@ -37,5 +26,17 @@ class YoutubeController < ApplicationController
     @youtube_channels = current_user.youtube_channels
     @videos = YoutubeVideo.all.sort { |x,y| y.published_at <=> x.published_at }
     @videos = @videos.paginate(page: params[:page], per_page: 10)
+  end
+
+  def check_for_newest_videos
+    arr = []
+    @youtube_channels = current_user.youtube_channels
+    @youtube_channels.each do |youtube_channel|
+      youtube_videos_arr = youtube_channel.youtube_videos.where("published_at > ?", params[:after])
+      youtube_videos_arr.each { |youtube_video| arr << youtube_video }
+    end
+
+    @youtube_videos = arr.sort! { |x,y| y.published_at <=> x.published_at }
+    render json: @youtube_videos
   end
 end

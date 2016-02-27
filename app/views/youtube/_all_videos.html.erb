@@ -1,9 +1,11 @@
 <div id="youtube-videos">
-  <% videos.each do |video| %>
-    <p>
-    <%= link_to(image_tag(video.image, size: '400x300'), "http://www.youtube.com/watch?v=#{video.video_id}") %></br>
-      <%= link_to video.title, video.url %></br>
-      <%= "#{video.published_at.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(video.published_at)} ago" %>
-    </p>
+  <ul class="list-group">
+    <% videos.each do |video| %>
+      <li <%="data-published=#{video.published_at.to_json} id=latest" if video == videos.first %>>
+      <%= link_to(image_tag(video.image, size: '400x300'), "http://www.youtube.com/watch?v=#{video.video_id}") %></br>
+        <%= link_to video.title, video.url %></br>
+        <%= "#{video.published_at.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(video.published_at)} ago" %>
+      </li>
+  </ul>
   <% end %>
 </div>

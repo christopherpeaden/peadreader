@@ -26,31 +26,7 @@ class YoutubeChannel < ActiveRecord::Base
     uploads = []
     playlist_items_response = YoutubeApiClient::PlaylistItemsResponse.fetch(channel.upload_playlist_id, options)
 
-    loop do
-      if previously_synced?(channel)
-        item_counter = 0
-        playlist_items_response["items"].each do |item|
-          break if channel.youtube_videos.find_by(title: playlist_items_response["items"][item_counter]["snippet"]["title"])
-          uploads << item
-          item_counter+= 1
-        end
-        break if channel.youtube_videos.find_by(title: playlist_items_response["items"][item_counter]["snippet"]["title"])
-      else
-        playlist_items_response["items"].each do |item|
-          uploads << item
-        end
-      end
-
-      break if !playlist_items_response["nextPageToken"]
-
-      playlist_items_response = YoutubeApiClient::PlaylistItemsResponse.fetch(channel.upload_playlist_id, pageToken: playlist_items_response["nextPageToken"])
-    end
+    playlist_items_response["items"].each { |item| uploads << item }
     uploads
   end
-
-  private
-    
-    def self.previously_synced?(channel)
-      channel.youtube_videos.count > 0 
-    end
 end
