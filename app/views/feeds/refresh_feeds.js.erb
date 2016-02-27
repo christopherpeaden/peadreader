@@ -118,10 +118,9 @@ function sendXhrRequest() {
   if (25 < noReturn) {
     clearInterval(checker);
   } else {
-    xhr.open('GET', 'http://localhost:3000/test_ajax2?after=' + after)
+    xhr.open("GET", location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/check_for_newest_items?after='+after)
     xhr.send(null);
   }
 }
 
 var checker = setInterval(sendXhrRequest, 3000);
-

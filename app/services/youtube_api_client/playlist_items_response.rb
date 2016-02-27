@@ -13,7 +13,7 @@ module YoutubeApiClient
       options[:part]       ||= "contentDetails, snippet"
       options[:key]        ||= Rails.application.secrets.google_api_key
       options[:playlistId] ||= playlist_id
-      options[:maxResults] ||= "50"
+      options[:maxResults] ||= "10"
     
       HTTParty.get(url, query: options)
     end

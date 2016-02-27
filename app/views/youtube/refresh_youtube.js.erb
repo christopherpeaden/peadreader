@@ -1,1 +1,124 @@
-$("div#youtube-videos").html("<%= j(render 'all_videos', videos: @videos) %>")
+var xhr; 
+var noReturn = 0;
+var lastResponse;
+if (window.XMLHttpRequest) 
+  xhr = new XMLHttpRequest(); 
+else if (window.ActiveXObject) 
+  xhr = new ActiveXObject("Msxml2.XMLHTTP");
+else 
+  throw new Error("Ajax is not supported by your browser");
+
+xhr.onreadystatechange = function () {
+  if (xhr.readyState < 4) {
+  }
+  else if (xhr.readyState === 4) {
+    if (xhr.status == 200 && xhr.status < 300) {
+      var response = JSON.parse(xhr.responseText);
+
+      if (_.isEqual(response, lastResponse)) {
+        noReturn++;
+      }
+
+      lastResponse = response;
+      var alreadyPlaced;
+
+      for(var x = 0; x < response.length; x++) {
+        alreadyPlaced = false;
+
+        var newestElements = document.querySelectorAll('[data-published]')
+
+          for(var n = 0; n < newestElements.length; n++) {
+            var elementPublishedAt = newestElements[n].getAttribute('data-published');
+            if (response[x]['published_at'] == elementPublishedAt) {
+              alreadyPlaced = true;
+              break;
+            }
+          }
+
+        if(alreadyPlaced == true) {
+          continue;
+        }
+
+        noReturn = 0;
+
+        var li = document.createElement("li");
+        var videoTitle = document.createTextNode(response[x]["title"] + " ");
+        var publishedAt = document.createTextNode(strftime("%B %d, %Y %l:%M %p", new Date(response[x]["published_at"])) + ", " + timeSince(new Date(response[x]["published_at"])));
+        var url = document.createTextNode(response[x]["url"]);
+        var br = document.createElement('br');
+        var br2 = document.createElement('br');
+
+        var btn = document.createElement("a");
+        var buttonText = document.createTextNode("More");
+        btn.appendChild(buttonText);
+        btn.className = "btn";
+        btn.href = "/youtube_channels/" + response[x]["youtube_channel_id"];
+
+        var a = document.createElement("a");
+        a.appendChild(videoTitle);
+        a.appendChild(btn);
+        a.href = response[x]['url'];
+        a.appendChild(br2);
+
+      if(response[x]["image"]) {
+        var thumbnailUrl = document.createElement("img");
+        thumbnailUrl.setAttribute('src', response[x]["image"]);
+        thumbnailUrl.setAttribute('height', '250px');
+        thumbnailUrl.setAttribute('width', '400px');
+        li.appendChild(thumbnailUrl);
+        a.insertBefore(br, a.childNodes[0]);
+      }
+
+
+        li.appendChild(a);
+        li.appendChild(publishedAt);
+        li.setAttribute('data-published', response[x]["published_at"]);
+        var list = document.getElementsByClassName("list-group")[1];
+        list.insertBefore(li, list.children[1]);
+      }
+    }
+  }
+}
+
+var checker;
+
+function sendXhrRequest() {
+  //var list = document.getElementsByClassName("list-group")[0];
+  //var latestItem = list.children[0];
+  /*
+  var publishedElements = document.querySelectorAll('[data-published]');
+  arr = [];
+  for(var i = 0; i < publishedElements.length; i++) {
+    arr.push(publishedElements[i].getAttribute('data-published')); 
+  }
+
+  console.log(arr);
+
+  arr = arr.sort(function(a, b) {
+    return new Date(a) - new Date(b);
+  });
+
+  console.log(arr);
+
+  var after = arr.slice(-1)[0];
+
+  console.log(after);
+  */
+
+  var latestItem = document.getElementById("latest");
+
+  if (latestItem) {
+    var after = latestItem.getAttribute("data-published");
+  } else {
+    var after = JSON.stringify(new Date(0));
+  }
+  
+  if (25 < noReturn) {
+    clearInterval(checker);
+  } else {
+    xhr.open("GET", location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/check_for_newest_videos?after='+after)
+    xhr.send(null);
+  }
+}
+
+var checker = setInterval(sendXhrRequest, 3000);

@@ -47,7 +47,7 @@ class FeedsController < ApplicationController
     redirect_to root_path
   end
 
-  def refresh
+  def refresh_feeds
     @categories = current_user.categories
     Thread.new do
       if params[:category_id]
@@ -66,17 +66,6 @@ class FeedsController < ApplicationController
     else
       flash[:notice] = "Feeds updated successfully."
     end
-
-    arr = []
-    @feeds = current_user.feeds
-    @feeds.each {|feed| feed.items.each { |item| arr << item } }
-    @items = arr.sort! { |x,y| y.published <=> x.published }
-    @items = @items.paginate(page: params[:page])
-    arr = []
-    @feeds = current_user.feeds
-    @feeds.each {|feed| arr << feed.items.first }
-    @items = arr.sort! { |x,y| y.published <=> x.published }
-    render json: @items
 =end
   end
 
@@ -91,22 +80,14 @@ class FeedsController < ApplicationController
     @items = @items.paginate(page: params[:page])
   end
 
-  def test_ajax
-    arr = []
-    @feeds = current_user.feeds
-    @feeds.each {|feed| arr << feed.items.first}
-    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
-  end
-
-  def test_ajax2
+  def check_for_newest_items
     arr = []
     @feeds = current_user.feeds
     @feeds.each do |feed|
       items_arr = feed.items.where("published_at > ?", params[:after])
-      items_arr.each do |item|
-        arr << item
-      end
+      items_arr.each { |item| arr << item }
     end
+
     @items = arr.sort! { |x,y| x.published_at <=> y.published_at }
     render json: @items
   end
