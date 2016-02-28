@@ -1,1 +1,2 @@
-$("#items").html("<%= escape_javascript(render partial: "items", locals: { items: @items}) %>");
+//$("#items").html("<%= escape_javascript(render partial: "items", locals: { items: @items}) %>");
+$("div.container").html("<%= j(render "show") %>");

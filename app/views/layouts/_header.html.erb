@@ -3,15 +3,15 @@
     <ul>
       <% if user_signed_in? %>
 
-        <li><%= link_to "Home", root_path, class: 'logo' %></li>
+        <li><%= link_to "Home", root_path, remote: true, class: 'logo' %></li>
         <li>
-          <%= link_to "Feeds", feeds_path %>
+          <%= link_to "Feeds", feeds_path, remote: true %>
           <ul>
-            <li><%= link_to "Create", new_feed_path, title: "Add a new feed" %></li>
+            <li><%= link_to "New", new_feed_path, remote: true, title: "Add a new feed" %></li>
           </ul>
         </li>
 
-        <li><%= link_to "Youtube", subscriptions_path %></li>
+        <li><%= link_to "Youtube", subscriptions_path, remote: true %></li>
 
         <li>
           <%= form_tag("/", method: "get", class: "inline-form") do %>
@@ -24,9 +24,9 @@
         <li>
           <%= link_to "Profile", "#" %>
           <ul>
-            <li><%= link_to "Edit", edit_user_registration_path(current_user) %></li>
+            <li><%= link_to "Edit", edit_user_registration_path(current_user), remote: true %></li>
             <li><%= link_to "Identities", "#" %></li>
-            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" } %></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, remote: true, method: :delete, data: { confirm: "Are you sure you want to sign out?" } %></li>
           </ul>
         </li>
 
