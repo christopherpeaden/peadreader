@@ -39,4 +39,14 @@ class YoutubeController < ApplicationController
     @youtube_videos = arr.sort! { |x,y| y.published_at <=> x.published_at }
     render json: @youtube_videos
   end
+
+  def check_for_new_subscriptions
+    arr = []
+    youtube_channels_arr = current_user.youtube_channels.where("created_at > ?", params[:after])
+    youtube_channels_arr.each do |youtube_channel|
+      arr << youtube_channel
+    end
+    @youtube_channels = arr.sort! { |x,y| y.published_at <=> x.published_at }
+    render json: @youtube_channels
+  end
 end

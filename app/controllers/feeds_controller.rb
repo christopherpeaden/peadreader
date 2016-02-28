@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_feed, only: [:show, :edit, :update, :destroy]
   before_action :get_categories, only: [:show, :index, :new, :edit, :dashboard]
-  #after_action :set_access_control_headers
+  # after_action :set_access_control_headers
 
   def new
     @feed = Feed.new

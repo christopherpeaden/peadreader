@@ -73,8 +73,8 @@ xhr.onreadystatechange = function () {
         li.appendChild(a);
         li.appendChild(publishedAt);
         li.setAttribute('data-published', response[x]["published_at"]);
-        var list = document.getElementsByClassName("list-group")[1];
-        list.insertBefore(li, list.children[1]);
+        var list = document.getElementsByClassName("list-group")[0];
+        list.insertBefore(li, list.children[0]);
       }
     }
   }

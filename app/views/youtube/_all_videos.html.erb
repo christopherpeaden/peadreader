@@ -6,6 +6,6 @@
         <%= link_to video.title, video.url %></br>
         <%= "#{video.published_at.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(video.published_at)} ago" %>
       </li>
-  </ul>
   <% end %>
+  </ul>
 </div>

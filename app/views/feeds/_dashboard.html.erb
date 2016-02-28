@@ -1,0 +1,9 @@
+<%= will_paginate @items %>
+
+<%= link_to "Refresh", refresh_feeds_path(category_id: params[:category_id], id: params[:id]), remote: true, title: "Refresh current feeds", id: "refresh-btn" %>
+
+<div id="items">
+  <%= render "items", items: @items %>
+</div>
+
+<%= will_paginate @items %>
