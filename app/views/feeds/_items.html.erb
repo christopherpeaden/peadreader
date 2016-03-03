@@ -4,10 +4,10 @@
     <% if item.image_thumbnail_url %>
       <% video_code = item.url.split('=')[1] %>
       <%= link_to(image_tag(item.image_thumbnail_url, size: '400x300'), "http://www.youtube.com/watch?v=#{video_code}") %></br>
-      <%= link_to "#{item.feed.title}: #{truncate(item.title, length: 115, omission: "...", escape: false) }", item.url, class: "feed-item" %> <%= link_to "More", feed_path(item.feed), class: "btn" if params[:id].nil? %></br>
+      <%= link_to "#{item.feed.title}: #{truncate(item.title, length: 115, omission: "...", escape: false) }", item.url, class: "feed-item" %> <%= link_to "More", feed_path(item.feed), remote: true, class: "btn" if params[:id].nil? %></br>
       <%= "#{item.published_at.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(item.published_at)} ago" %>
     <% else %> 
-      <%= link_to "#{item.feed.title}: #{truncate(item.title, length: 115, omission: "...", escape: false) }", item.url, class: "feed-item" %> <%= link_to "More", feed_path(item.feed), class: "btn" if params[:id].nil? %></br>
+      <%= link_to "#{item.feed.title}: #{truncate(item.title, length: 115, omission: "...", escape: false) }", item.url, class: "feed-item" %> <%= link_to "More", feed_path(item.feed), remote: true, class: "btn" if params[:id].nil? %></br>
       <%= "#{item.published_at.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(item.published_at)} ago" %>
     <% end %>
     </li>
