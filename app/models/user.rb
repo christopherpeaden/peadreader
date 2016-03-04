@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :feeds, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :youtube_channels, dependent: :destroy
+  has_many :job_watchers
 
   def self.from_omniauth(auth_hash)
     data = auth_hash.info

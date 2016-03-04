@@ -49,6 +49,9 @@ class FeedsController < ApplicationController
 
   def refresh_feeds
     @categories = current_user.categories
+    current_user.job_watchers.each {|job_watcher| job_watcher.destroy} if !current_user.job_watchers.empty?
+    job_watcher = current_user.job_watchers.create
+
     Thread.new do
       if params[:category_id]
         feed_errors = fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) 
@@ -57,10 +60,11 @@ class FeedsController < ApplicationController
       else
         feed_errors = fetch_feed_items current_user.feeds
       end
+      job_watcher.update(completed: true)
       ActiveRecord::Base.connection.close
     end
-
 =begin
+
     if !feed_errors.empty?
       flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" 
     else
@@ -81,15 +85,23 @@ class FeedsController < ApplicationController
   end
 
   def check_for_newest_items
-    arr = []
-    @feeds = current_user.feeds
-    @feeds.each do |feed|
-      items_arr = feed.items.where("published_at > ?", params[:after])
-      items_arr.each { |item| arr << item }
-    end
+    if job_watcher = current_user.job_watchers.first
+      arr = []
+      @feeds = current_user.feeds
 
-    @items = arr.sort! { |x,y| x.published_at <=> y.published_at }
-    render json: @items
+      @feeds.each do |feed|
+        items_arr = feed.items.where("published_at > ?", params[:after])
+        items_arr.each { |item| arr << item }
+      end
+
+      @items = arr.sort! { |x,y| x.published_at <=> y.published_at }
+      job_watcher.destroy if job_watcher.completed == true
+
+      render json: @items
+    else
+      @items = ["completed"]
+      render json: @items
+    end
   end
 
   private
