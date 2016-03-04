@@ -1,6 +1,7 @@
 var xhr; 
 var noReturn = 0;
-var lastResponse;
+var response2 = [];
+
 if (window.XMLHttpRequest) 
   xhr = new XMLHttpRequest(); 
 else if (window.ActiveXObject) 
@@ -15,11 +16,11 @@ xhr.onreadystatechange = function () {
     if (xhr.status == 200 && xhr.status < 300) {
       var response = JSON.parse(xhr.responseText);
 
-      if (_.isEqual(response, lastResponse)) {
-        noReturn++;
+      if (_.isEqual(response, ["completed"])) {
+        response2 = response;
+        return;
       }
 
-      lastResponse = response;
       var alreadyPlaced;
 
       for(var x = 0; x < response.length; x++) {
@@ -115,7 +116,7 @@ function sendXhrRequest() {
     var after = JSON.stringify(new Date(0));
   }
   
-  if (15 < noReturn) {
+  if (_.isEqual(response2, ["completed"])) {
     clearInterval(checker);
   } else {
     xhr.open("GET", location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/check_for_newest_items?after='+after)
@@ -123,4 +124,5 @@ function sendXhrRequest() {
   }
 }
 
-var checker = setInterval(sendXhrRequest, 5000);
+var checker = setInterval(sendXhrRequest, 2000);
+
