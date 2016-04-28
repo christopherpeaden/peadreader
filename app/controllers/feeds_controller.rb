@@ -9,6 +9,7 @@ class FeedsController < ApplicationController
   end
 
   def create
+    @categories = current_user.categories
     if file_param_exists?
       opml_doc = setup_file_for_searching
       save_outlines_from_opml(opml_doc, params[:feed][:category_id])
@@ -16,7 +17,10 @@ class FeedsController < ApplicationController
       redirect_to root_path
     else
       @feed = current_user.feeds.build(feed_params)
-      @feed.save ? redirect_to(@feed) : render('new')
+      # render("feeds/#{params[:id]}")
+      # else
+      render('new') if !@feed.save
+      #end
     end
   end
 

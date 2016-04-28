@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :find_category, only: [:show, :edit, :update, :destroy]
-  before_action :get_categories, only: [:show, :new, :edit]
+  before_action :get_categories, only: [:show, :create, :update, :new, :edit, :index, :destroy]
   before_action :authenticate_user!
 
   def new
@@ -9,35 +9,37 @@ class CategoriesController < ApplicationController
 
   def create
     @category = current_user.categories.build(category_params)
-
-    if @category.save
-      redirect_to @category
+    @category.save
+=begin
+      render "_show"
     else
-      render 'new'
+      render '_new'
     end
+=end
   end
 
   def show
   end
 
   def index
-    @categories = current_user.categories
   end
 
   def edit
   end
 
   def update
-    if @category.update_attributes(category_params)
-      redirect_to @category
+    @category.update_attributes(category_params)
+=begin
+    if
+      redirect_to "categories/#{params[:id]}"
     else
       render 'edit'
     end
+=end
   end
 
   def destroy
     @category.destroy
-    redirect_to categories_path
   end
 
 
