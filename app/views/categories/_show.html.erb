@@ -1,6 +1,6 @@
 <h1><%= @category.title %></h1>
 
-<%= link_to "Back", categories_path, remote: true, class: "btn" %>
-<%= link_to "Edit", edit_category_path, remote: true, class: "btn" %>
-<%= link_to "Delete", category_path, class: "btn", method: :delete,
+<%= link_to "Back", categories_path(@category), remote: true, class: "btn" %>
+<%= link_to "Edit", edit_category_path(@category), remote: true, class: "btn" %>
+<%= link_to "Delete", category_path(@category), remote: true, class: "btn", method: :delete,
                                      data: { confirm: "Delete this category?" }  %>
