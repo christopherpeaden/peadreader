@@ -13,13 +13,15 @@
     <%= render "layouts/header" %>
 
     <% if controller_name == "youtube" || controller_name == "youtube_channels" %>
-      <%= render "youtube/youtube_sidebar"%>
+      <%= render "youtube/youtube_sidebar" %>
+      <%= render "youtube/youtube_sidebar_header" %>
     <% else %>
-      <%= render "layouts/sidebar"%>
+      <%= render "layouts/sidebar_header" %>
+      <%= render "layouts/sidebar" %>
     <% end %>
 
     <div class="container">
-      <%= render "layouts/messages"%>
+      <%= render "layouts/messages" %>
 
       <%= yield %>
       <%= debug(params) if Rails.env.development? %>

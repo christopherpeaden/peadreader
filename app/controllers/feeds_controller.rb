@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_feed, only: [:show, :edit, :update, :destroy]
-  before_action :get_categories, only: [:show, :index, :new, :edit, :dashboard]
+  before_action :get_categories, only: [:show, :index, :new, :edit, :update, :destroy, :dashboard]
   # after_action :set_access_control_headers
 
   def new
@@ -17,9 +17,12 @@ class FeedsController < ApplicationController
       redirect_to root_path
     else
       @feed = current_user.feeds.build(feed_params)
+      @feed.save
+      @items = []
+      @items = @items.paginate(page: params[:page])
       # render("feeds/#{params[:id]}")
       # else
-      render('new') if !@feed.save
+      # render('new') if !@feed.save
       #end
     end
   end
@@ -39,16 +42,21 @@ class FeedsController < ApplicationController
   end
 
   def update
-    if @feed.update(feed_params)
+    @feed.update(feed_params)
+    @items = []
+    @items = @items.paginate(page: params[:page])
+=begin
+    if
       redirect_to @feed
     else
       render 'edit'
     end
+=end
   end
 
   def destroy
     @feed.destroy
-    redirect_to root_path
+    @feeds = current_user.feeds
   end
 
   def refresh_feeds
@@ -76,7 +84,6 @@ class FeedsController < ApplicationController
     end
 =end
   end
-
 
   def dashboard
     @categories = current_user.categories
