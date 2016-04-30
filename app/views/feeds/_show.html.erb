@@ -1,7 +1,7 @@
 <div class="banner">
-  <h1><%= @feed.title %></h1>
-    <%= link_to "Edit", edit_feed_path(@feed), remote: true, class: "btn" %>
-    <%= link_to "Delete", @feed, method: :delete,
+  <h1><%= feed.title %></h1>
+    <%= link_to "Edit", edit_feed_path(feed), remote: true, class: "btn" %>
+    <%= link_to "Delete", feed, remote: true, method: :delete,
                  data: { confirm: "Delete this feed?" }, class: "btn" %>
 
     <% if session[:referer] %>
@@ -14,7 +14,7 @@
 <%= link_to "Refresh", refresh_feeds_path(category_id: params[:category_id], id: params[:id]), remote: true, title: "Refresh current feeds", id: "refresh-btn" %>
 
 <div id="items">
-  <%= render "items", items: @items %>
+  <%= render "items", items: items %>
 </div>
 
-<%= will_paginate @items %>
+<%= will_paginate items %>
