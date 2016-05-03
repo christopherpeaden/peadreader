@@ -1,6 +1,7 @@
 $("div.container").html("<%= j(render partial: "show", locals: { feed: @feed, items: @items }) %>");
 $("div#sidebar").html("<%= j(render "layouts/sidebar") %>")
 $("div#sidebar-header").html("<%= j(render "layouts/sidebar_header") %>")
+$(window).scrollTop(0);
 
 $(function() {
   allButtons = document.getElementsByClassName("btn");
