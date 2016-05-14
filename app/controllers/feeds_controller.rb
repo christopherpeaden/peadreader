@@ -43,7 +43,7 @@ class FeedsController < ApplicationController
 
   def update
     @feed.update(feed_params)
-    @items = []
+    @items = @feed.items
     @items = @items.paginate(page: params[:page])
 =begin
     if
@@ -122,7 +122,7 @@ class FeedsController < ApplicationController
     end
 
     def feed_params
-      params.require(:feed).permit(:title, :url, :category_id)
+      params.require(:feed).permit(:title, :url, :category_ids => [])
     end
 
     def get_categories
