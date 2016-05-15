@@ -88,7 +88,14 @@ class FeedsController < ApplicationController
   def dashboard
     @categories = current_user.categories
     session[:referer] = request.original_url
-    !params[:category_id].nil? ? @feeds = current_user.feeds.where(category_id: params[:category_id]) : @feeds = current_user.feeds
+
+    if !params[:category_id].nil?
+      category = Category.find(params[:category_id])
+      @feeds = category.feeds
+    else
+      @feeds = current_user.feeds
+    end
+
     arr = []
     !params[:q].nil? ? @feeds.each {|feed| feed.items.each { |item| arr << item if item.title.downcase =~ /#{params[:q].downcase}/ } } : @feeds.each {|feed| feed.items.each { |item| arr << item } }
     @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
