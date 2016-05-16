@@ -3,12 +3,6 @@
     <%= link_to "Edit", edit_feed_path(feed), remote: true, class: "btn" %>
     <%= link_to "Delete", feed, remote: true, method: :delete,
                  data: { confirm: "Delete this feed?" }, class: "btn" %>
-
-    <% if session[:referer] %>
-      <%= link_to "Back", session.delete(:referer), remote: true, class: "btn" %>
-    <% else %>
-      <%= link_to "Back", root_url, remote: true, class:"btn" %>
-    <% end %>
 </div>
 
 <%= link_to "Refresh", refresh_feeds_path(category_id: params[:category_id], id: params[:id]), remote: true, title: "Refresh current feeds", id: "refresh-btn" %>

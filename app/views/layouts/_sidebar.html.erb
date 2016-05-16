@@ -3,7 +3,7 @@
     
     <% if user_signed_in? %>
       <% @categories.each do |category| %>
-        <li class="dropdown-list"><%= link_to category.title, root_path(category_id: category.id), remote: true, class: "btn" %><span class="caret">
+        <li class="dropdown-list"><%= link_to category.title, category, remote: true, class: "btn" %><span class="caret">
           <ul class="invisible">
             <% category.feeds.each do |feed| %>
               <li id="category-dropdown-item"><%= link_to feed.title, feed, remote: true %></li>
