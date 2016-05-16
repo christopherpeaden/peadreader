@@ -121,7 +121,7 @@ class FeedsController < ApplicationController
     end
 
     def feed_params
-      params.require(:feed).permit(:title, :url, :category_ids => [], categories_attributes: [:id, :title, :_destroy])
+      params.require(:feed).permit(:title, :url, :category_ids => [], categories_attributes: [:id, :user_id, :title, :_destroy])
     end
 
     def get_categories

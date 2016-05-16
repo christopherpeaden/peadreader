@@ -15,4 +15,5 @@
 //= require time_since
 //= require underscore 
 //= require jquery_ujs
+//= require cocoon
 //= require_tree .
