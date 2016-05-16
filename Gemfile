@@ -14,6 +14,7 @@ gem 'feedjira', '~> 2.0.0'
 gem 'will_paginate', '~> 3.0.7'
 gem 'omniauth-google-oauth2'
 gem 'httparty'
+gem 'cocoon'
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'
 # gem 'capistrano-rails', group: :development

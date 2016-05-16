@@ -18,6 +18,11 @@
       <%= label_tag dom_id(category), category.title %></br>
     <% end %>
   </div>
+
+  <div>
+    <%= link_to "Add a category", '#' %>
+    <%# text_field_tag(:new_category, "Category title") %>
+  </div>
   <%= f.submit "Submit" %>
 <% end %>
 </br>
