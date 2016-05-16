@@ -23,11 +23,11 @@
     <%= f.fields_for :categories do |category| %>
       <%= render 'category_fields', f: category %>
     <% end %>
+    </br>
     <%= link_to_add_association "Add another category", f, :categories, class: 'btn'%>
   </div>
   </br>
 
   <%= f.submit "Submit" %>
 <% end %>
-</br>
 
