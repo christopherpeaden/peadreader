@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   get "youtube_channels/:id" => "youtube_channels#show", as: "youtube_channel"
   get "check_for_newest_items" => "feeds#check_for_newest_items"
   get "check_for_newest_videos" => "youtube#check_for_newest_videos"
+  get "new_opml_import" => "feeds#new_opml_import"
+  post "create_opml_import" => "feeds#create_opml_import"
 end

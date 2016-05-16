@@ -1,0 +1,14 @@
+<%= form_tag({action: 'create_opml_import'}, {multipart: true}) do |f| %>
+
+  <div class="form-group">
+    <p><%= label_tag :file, "Import Opml File" %></p>
+    <p><%= file_field_tag 'file' %></p>
+  </div>
+
+  <div class="form-group">
+    <p><%= label_tag :category %></p>
+    <p><%= select_tag options_from_collection_for_select(Category.all, :id, :title) %></p>
+  </div>
+
+  <%= submit_tag "Submit" %>
+<% end %></br>
