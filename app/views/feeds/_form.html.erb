@@ -19,10 +19,14 @@
     <% end %>
   </div>
 
-  <div>
-    <%= link_to "Add a category", '#' %>
-    <%# text_field_tag(:new_category, "Category title") %>
+  <div id="categories">
+    <%= f.fields_for :categories do |category| %>
+      <%= render 'category_fields', f: category %>
+    <% end %>
+    <%= link_to_add_association "Add category", f, :categories, class: 'btn'%>
   </div>
+  </br>
+
   <%= f.submit "Submit" %>
 <% end %>
 </br>
