@@ -35,7 +35,7 @@ class FeedsController < ApplicationController
   end
 
   def index
-    @feeds = current_user.feeds
+    @feeds = current_user.feeds.order(:title)
   end
 
   def edit
