@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511002123) do
+ActiveRecord::Schema.define(version: 20160516232857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,14 +34,12 @@ ActiveRecord::Schema.define(version: 20160511002123) do
 
   create_table "feeds", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "url"
     t.integer  "user_id"
-    t.integer  "category_id"
   end
 
-  add_index "feeds", ["category_id"], name: "index_feeds_on_category_id", using: :btree
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
 
   create_table "items", force: :cascade do |t|
@@ -49,13 +47,19 @@ ActiveRecord::Schema.define(version: 20160511002123) do
     t.string   "url"
     t.datetime "published_at"
     t.integer  "feed_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "image_thumbnail_url"
     t.string   "feed_title"
+    t.boolean  "favorite",            default: false
+    t.boolean  "saved_for_later",     default: false
+    t.integer  "user_id"
   end
 
+  add_index "items", ["favorite"], name: "index_items_on_favorite", using: :btree
   add_index "items", ["feed_id"], name: "index_items_on_feed_id", using: :btree
+  add_index "items", ["saved_for_later"], name: "index_items_on_saved_for_later", using: :btree
+  add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
   create_table "job_watchers", force: :cascade do |t|
     t.boolean  "completed",  default: false, null: false
@@ -132,9 +136,9 @@ ActiveRecord::Schema.define(version: 20160511002123) do
   add_index "youtube_videos", ["youtube_channel_id"], name: "index_youtube_videos_on_youtube_channel_id", using: :btree
 
   add_foreign_key "categories", "users"
-  add_foreign_key "feeds", "categories"
   add_foreign_key "feeds", "users"
   add_foreign_key "items", "feeds"
+  add_foreign_key "items", "users"
   add_foreign_key "job_watchers", "users"
   add_foreign_key "youtube_channels", "users"
   add_foreign_key "youtube_videos", "youtube_channels"

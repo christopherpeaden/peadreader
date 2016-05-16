@@ -20,5 +20,11 @@ Rails.application.routes.draw do
   get "check_for_newest_items" => "feeds#check_for_newest_items"
   get "check_for_newest_videos" => "youtube#check_for_newest_videos"
   get "new_opml_import" => "feeds#new_opml_import"
+  get "add_to_favorites" => "items#add_to_favorites"
+  get "save_for_later" => "items#save_for_later"
+  get "favorites" => "items#favorites"
+  get "saved_for_later" => "items#saved_for_later"
+  get "remove_from_saved_for_later" => "items#remove_from_saved_for_later"
+  get "remove_from_favorites" => "items#remove_from_favorites"
   post "create_opml_import" => "feeds#create_opml_import"
 end

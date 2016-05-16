@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          omniauth_providers: [:google_oauth2]
 
   has_many :feeds, dependent: :destroy
+  has_many :items, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :youtube_channels, dependent: :destroy
   has_many :job_watchers
