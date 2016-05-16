@@ -19,6 +19,11 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    arr = []
+    @feeds = @category.feeds
+    @feeds.each {|feed| feed.items.each { |item| arr << item } }
+    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
+    @items = @items.paginate(page: params[:page])
   end
 
   def index
