@@ -59,6 +59,6 @@ class CategoriesController < ApplicationController
     end
 
     def get_categories
-      @categories = current_user.categories
+      @categories = current_user.categories.order(:title)
     end
 end
