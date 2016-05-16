@@ -23,7 +23,7 @@
     <%= f.fields_for :categories do |category| %>
       <%= render 'category_fields', f: category %>
     <% end %>
-    <%= link_to_add_association "Add category", f, :categories, class: 'btn'%>
+    <%= link_to_add_association "Add another category", f, :categories, class: 'btn'%>
   </div>
   </br>
 
@@ -31,17 +31,3 @@
 <% end %>
 </br>
 
-<%= form_for @feed, html: { multipart:  true }, remote: true do |f| %>
-
-  <div class="form-group">
-    <p><%= f.label :file, "Import Opml File" %></p>
-    <p><%= f.file_field :file %></p>
-  </div>
-
-  <div class="form-group">
-    <p><%= f.label :category %></p>
-    <p><%= f.collection_select :category_id, Category.all, :id, :title, { prompt: "Choose a category" }, input_html: { class: "dropdown-toggle" } %></p>
-  </div>
-
-  <%= f.submit "Submit" %>
-<% end %></br>

@@ -1,30 +1,27 @@
 class FeedsController < ApplicationController
   before_action :authenticate_user!
+  before_action :get_categories
   before_action :find_feed, only: [:show, :edit, :update, :destroy]
-  before_action :get_categories, only: [:show, :index, :new, :edit, :update, :destroy, :dashboard]
-  # after_action :set_access_control_headers
 
   def new
     @feed = Feed.new
   end
 
+  def new_opml_import
+  end
+
+  def create_opml_import
+    opml_doc = setup_file_for_searching
+    save_outlines_from_opml(opml_doc, params[:category_id])
+    flash[:notice] = "Successfully imported OPML file"
+    redirect_to root_path
+  end
+
   def create
-    @categories = current_user.categories
-    if file_param_exists?
-      opml_doc = setup_file_for_searching
-      save_outlines_from_opml(opml_doc, params[:feed][:category_id])
-      flash[:notice] = "Successfully imported OPML file"
-      redirect_to root_path
-    else
-      @feed = current_user.feeds.build(feed_params)
-      @feed.save
-      @items = []
-      @items = @items.paginate(page: params[:page])
-      # render("feeds/#{params[:id]}")
-      # else
-      # render('new') if !@feed.save
-      #end
-    end
+    @feed = current_user.feeds.build(feed_params)
+    @feed.save
+    @items = []
+    @items = @items.paginate(page: params[:page])
   end
 
   def show
@@ -45,13 +42,6 @@ class FeedsController < ApplicationController
     @feed.update(feed_params)
     @items = @feed.items
     @items = @items.paginate(page: params[:page])
-=begin
-    if
-      redirect_to @feed
-    else
-      render 'edit'
-    end
-=end
   end
 
   def destroy
@@ -60,7 +50,6 @@ class FeedsController < ApplicationController
   end
 
   def refresh_feeds
-    @categories = current_user.categories
     current_user.job_watchers.each {|job_watcher| job_watcher.destroy} if !current_user.job_watchers.empty?
     job_watcher = current_user.job_watchers.create
 
@@ -86,7 +75,6 @@ class FeedsController < ApplicationController
   end
 
   def dashboard
-    @categories = current_user.categories
     @feeds = current_user.feeds
     arr = []
     !params[:q].nil? ? @feeds.each {|feed| feed.items.each { |item| arr << item if item.title.downcase =~ /#{params[:q].downcase}/ } } : @feeds.each {|feed| feed.items.each { |item| arr << item } }
@@ -125,11 +113,6 @@ class FeedsController < ApplicationController
     end
 
     def get_categories
-      @categories = current_user.categories
-    end
-
-    def set_access_control_headers 
-      headers['Access-Control-Allow-Origin'] = "*"
-      headers['Access-Control-Request-Method'] = %w{GET POST OPTIONS}.join(",")
+      @categories = current_user.categories.order(:title)
     end
 end
