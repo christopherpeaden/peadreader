@@ -10,12 +10,6 @@ class CategoriesController < ApplicationController
   def create
     @category = current_user.categories.build(category_params)
     @category.save
-=begin
-      render "_show"
-    else
-      render '_new'
-    end
-=end
   end
 
   def show
@@ -34,13 +28,6 @@ class CategoriesController < ApplicationController
 
   def update
     @category.update_attributes(category_params)
-=begin
-    if
-      redirect_to "categories/#{params[:id]}"
-    else
-      render 'edit'
-    end
-=end
   end
 
   def destroy

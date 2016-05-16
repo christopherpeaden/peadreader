@@ -2,19 +2,15 @@ module FeedsHelper
 
   def fetch_feed_items(feeds)
     feed_errors = []
-    threads = []
     feeds.each do |feed|
-      threads << Thread.new(feed) do |thread_feed|
-        begin
-          parsed_feed = Feedjira::Feed.fetch_and_parse(thread_feed.url)
-          store_items(parsed_feed, thread_feed)
-        rescue
-          feed_errors << thread_feed.title
-          next 
-        end
+      begin
+        parsed_feed = Feedjira::Feed.fetch_and_parse(feed.url)
+        store_items(parsed_feed, feed)
+      rescue
+        feed_errors << feed.title
+        next 
       end
     end
-    threads.each { |thread| thread.join}
     feed_errors
   end
 
