@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
   before_action :find_item, except: [:favorites, :saved_for_later]
+  before_action :get_categories, only: [:favorites, :saved_for_later]
 
   def add_to_favorites
     @item.update(favorite: true)
   end
 
   def favorites
-    @categories = current_user.categories
   end
 
   def save_for_later
@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
   end
 
   def saved_for_later
-    @categories = current_user.categories
   end
 
   def remove_from_favorites
@@ -29,5 +28,9 @@ class ItemsController < ApplicationController
 
     def find_item
       @item = Item.find(params[:id])
+    end
+
+    def get_categories
+      @categories = current_user.categories.order(:title)
     end
 end
