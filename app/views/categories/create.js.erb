@@ -1,3 +1,4 @@
+$("div.alert").html("<%= j(flash[:notice])%>");
 $("div.container").html("<%= j(render "show") %>");
 $("div#sidebar").html("<%= j(render "layouts/sidebar") %>")
 $("div#sidebar-header").html("<%= j(render "layouts/sidebar_header") %>")

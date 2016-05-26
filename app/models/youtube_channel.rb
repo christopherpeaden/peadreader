@@ -2,7 +2,7 @@ class YoutubeChannel < ActiveRecord::Base
   belongs_to :user
   has_many :youtube_videos, dependent: :destroy
 
-  validates :title, uniqueness: true
+  validates :title, presence: true, uniqueness: true
 
   def self.save_channels(channels, user_id)
     channels["items"].each do |channel|
