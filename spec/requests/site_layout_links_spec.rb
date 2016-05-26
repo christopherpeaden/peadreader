@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Site layout' do
-  
+RSpec.describe 'Site layout links' do
   let(:user) { create(:user) }
 
   before(:each) do
@@ -21,7 +20,7 @@ RSpec.describe 'Site layout' do
     expect(page).to have_selector('p', text: 'Signed out successfully')
   end
 
-  describe "link if required" do
+  describe "conditional site links" do
     
     let(:feed) { create(:feed, user: user) }
 

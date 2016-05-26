@@ -1,15 +1,24 @@
 class CategoriesController < ApplicationController
-  before_action :find_category, only: [:show, :edit, :update, :destroy]
-  before_action :get_categories, only: [:show, :create, :update, :new, :edit, :index, :destroy]
+  before_action :get_categories 
   before_action :authenticate_user!
+  before_action :find_category, except: [:new, :create, :index]
 
   def new
     @category = Category.new
   end
 
   def create
+    arr = []
     @category = current_user.categories.build(category_params)
     @category.save
+    @feeds = @category.feeds
+    @feeds.each {|feed| feed.items.each { |item| arr << item } }
+    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
+    @items = @items.paginate(page: params[:page])
+
+    respond_to do |format|
+      format.js { flash[:notice] = "Successfully created category" }
+    end
   end
 
   def show

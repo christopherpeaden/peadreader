@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User do
 
+  subject { build(:user) }
+  let(:user) { subject}
+
   describe "messages" do
     it { should respond_to(:id) }
     it { should respond_to(:email) }
@@ -17,17 +20,17 @@ RSpec.describe User do
     it { should respond_to(:sign_in_count) }
     it { should respond_to(:remember_created_at) }
     it { should respond_to(:password_confirmation) }
-    it { should respond_to(:created_at) }
-    it { should respond_to(:updated_at) }
   end
 
-  describe "validation" do
+  describe "associations" do
+    it { should respond_to(:feeds) }
+    it { should respond_to(:categories) }
+    it { should respond_to(:items) }
+    it { should respond_to(:job_watchers) }
+  end
 
-    let(:user) { build(:user) }
-
-    it 'has a valid factory' do
-      expect(user).to be_valid
-    end
+  describe "validations" do
+    it { should be_valid }
 
     it "rejects blank email" do
       user.email = ""
@@ -61,10 +64,5 @@ RSpec.describe User do
       user.password_confirmation = "1234567890"
       expect(user).to be_invalid
     end
-  end
-
-  describe "associations" do
-    it { should respond_to(:feeds) }
-    it { should respond_to(:categories) }
   end
 end

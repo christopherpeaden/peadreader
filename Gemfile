@@ -32,7 +32,7 @@ group :development, :test do
   gem 'faker', '~> 1.4.3'
   gem 'capybara' 
   gem 'database_cleaner'
-  gem 'guard-rspec'
+  gem 'guard-rspec', '~> 4.6', '>= 4.6.5'
   gem 'guard-livereload'
 end
 
