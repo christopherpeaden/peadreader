@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   get "remove_from_saved_for_later" => "items#remove_from_saved_for_later"
   get "remove_from_favorites" => "items#remove_from_favorites"
   post "create_opml_import" => "feeds#create_opml_import"
+
+  mount ActionCable.server => '/cable'
 end

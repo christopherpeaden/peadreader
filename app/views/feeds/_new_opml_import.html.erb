@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <p><%= label_tag :category %></p>
-    <p><%= select_tag options_from_collection_for_select(Category.all, :id, :title) %></p>
+    <p><%= select_tag options_from_collection_for_select(current_user.categories, :id, :title) %></p>
   </div>
 
   <%= submit_tag "Submit" %>
