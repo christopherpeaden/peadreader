@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.3'
+gem 'rails', '5.0.0rc1'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -9,9 +9,9 @@ gem 'coffee-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'therubyracer', platforms: :ruby
-gem 'devise', '~> 3.5.1'
+gem 'devise', '~> 4.1.1'
 gem 'feedjira', '~> 2.0.0'
-gem 'will_paginate', '~> 3.0.7'
+gem 'will_paginate', '~> 3.1.0'
 gem 'omniauth-google-oauth2'
 gem 'httparty'
 gem 'cocoon'
@@ -22,7 +22,6 @@ gem 'cocoon'
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'web-console', '~> 2.0'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'spring'
@@ -37,6 +36,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'web-console', '~> 2.0'
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
