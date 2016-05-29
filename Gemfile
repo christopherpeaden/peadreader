@@ -18,7 +18,7 @@ gem 'httparty', '~> 0.13.7'
 gem 'cocoon', '~> 1.2.9'
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.5.0beta3'
   gem 'factory_girl_rails', '~> 4.7.0'
   gem 'pry-byebug', '~> 3.4.0'
   gem 'pry-stack_explorer'
@@ -29,8 +29,8 @@ group :development, :test do
   gem 'faker', '~> 1.4.3'
   gem 'capybara' 
   gem 'database_cleaner'
-  gem 'guard-rspec', '~> 4.6', '>= 4.6.5'
-  gem 'guard-livereload'
+#  gem 'guard-rspec', '~> 4.6', '>= 4.6.5'
+#  gem 'guard-livereload'
 end
 
 group :development do
