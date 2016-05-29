@@ -1,1 +1,0 @@
-This is an Atom and RSS feed reader I am building using Ruby on Rails.
