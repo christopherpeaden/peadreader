@@ -16,6 +16,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'omniauth-google-oauth2'
 gem 'httparty', '~> 0.13.7'
 gem 'cocoon', '~> 1.2.9'
+gem 'redis'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5.0beta3'
