@@ -331,24 +331,24 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv
   capybara
-  cocoon
+  cocoon (~> 1.2.9)
   coffee-rails
   database_cleaner
   devise (~> 4.1.1)
-  factory_girl_rails
+  factory_girl_rails (~> 4.7.0)
   faker (~> 1.4.3)
   feedjira (~> 2.0.0)
   guard-livereload
   guard-rspec (~> 4.6, >= 4.6.5)
-  httparty
+  httparty (~> 0.13.7)
   jbuilder (~> 2.0)
   jquery-rails
   omniauth-google-oauth2
-  pg
-  pry-byebug
+  pg (~> 0.18.4)
+  pry-byebug (~> 3.4.0)
   pry-rails
   pry-stack_explorer
-  puma
+  puma (~> 3.4.0)
   rails (= 5.0.0rc1)
   rspec-rails
   sass-rails (~> 5.0)
