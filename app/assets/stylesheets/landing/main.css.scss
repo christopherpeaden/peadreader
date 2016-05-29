@@ -17,3 +17,21 @@ html {
   text-transform: uppercase;
 }
 
+#landing-page-wrapper {
+  font-size: 25px;
+  text-align: center;
+}
+
+#sign-up-btn {
+  background-color: #000000;
+  color: white;
+  border: 1px solid $dark-purple;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 6px 125px 6px 125px;
+  font-size: 36px;
+  &:hover {
+    color: $light-grey;
+    background-color: #3E2059;
+  }
+}
