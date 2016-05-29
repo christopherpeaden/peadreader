@@ -215,6 +215,7 @@ GEM
     pry-stack_explorer (0.4.9.2)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
+    puma (3.4.0)
     rack (2.0.0.rc1)
       json
     rack-test (0.6.3)
@@ -347,6 +348,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   pry-stack_explorer
+  puma
   rails (= 5.0.0rc1)
   rspec-rails
   sass-rails (~> 5.0)
