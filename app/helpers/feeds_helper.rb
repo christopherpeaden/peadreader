@@ -18,10 +18,16 @@ module FeedsHelper
     parsed_feed.entries.each do |item|
       if item.url =~ /youtube/
         video_code = item.url.split('=')[1]
-        new_item = feed.items.build(title: item.title, url: item.url, image_thumbnail_url: "http://img.youtube.com/vi/#{video_code}/hqdefault.jpg", published_at: item.published, feed_title: feed.title, user_id: current_user.id)
+        new_item = feed.items.build(title: item.title,
+                                    url: item.url,
+                                    image_thumbnail_url: "http://img.youtube.com/vi/#{video_code}/hqdefault.jpg",
+                                    published_at: item.published, feed_title: feed.title, user_id: current_user.id)
         new_item.save if new_item.valid?
       else
-        new_item = feed.items.build(title: item.title, url: item.url, published_at: item.published, feed_title: feed.title, user_id: current_user.id)
+        new_item = feed.items.build(title: item.title,
+                                    url: item.url,
+                                    published_at: item.published,
+                                    feed_title: feed.title, user_id: current_user.id)
         new_item.save if new_item.valid?
       end
     end
