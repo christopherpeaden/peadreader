@@ -49,31 +49,6 @@ class FeedsController < ApplicationController
     @feeds = current_user.feeds
   end
 
-  def refresh_feeds
-    current_user.job_watchers.each {|job_watcher| job_watcher.destroy} if !current_user.job_watchers.empty?
-    job_watcher = current_user.job_watchers.create
-
-    Thread.new do
-      if params[:category_id]
-        feed_errors = fetch_feed_items current_user.feeds.where(category_id: params[:category_id]) 
-      elsif params[:id]
-        feed_errors = fetch_feed_items current_user.feeds.where(id: params[:id])
-      else
-        feed_errors = fetch_feed_items current_user.feeds
-      end
-      job_watcher.update(completed: true)
-      ActiveRecord::Base.connection.close
-    end
-=begin
-
-    if !feed_errors.empty?
-      flash[:error] = "There was a problem with the following feeds: #{feed_errors.join(', ')}" 
-    else
-      flash[:notice] = "Feeds updated successfully."
-    end
-=end
-  end
-
   def dashboard
     @feeds = current_user.feeds
     arr = []

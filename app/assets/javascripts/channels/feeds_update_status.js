@@ -3,7 +3,11 @@
     connected: function() {},
     disconnected: function() {},
     received: function(data) {
-      $('#update-status').html(data);
+      if (typeof data != "object") {
+        $('#update-status').html(data);
+      } else {
+        $('#items').prepend(data['item']); 
+      }
     },
     update: function() {
       return this.perform('update');
