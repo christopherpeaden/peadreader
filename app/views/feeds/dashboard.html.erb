@@ -1,7 +1,7 @@
 <%= will_paginate @items %>
 
-<div class='refresh'>
-  <%= link_to "Refresh", "#", remote: true, title: "Refresh current feeds", id: "refresh-btn" %>
+<div id="refresh">
+  <%= link_to "Refresh", "#", title: "Refresh feeds", id: "refresh-btn" %>
 </div>
 
 <div id="update-status"></div>

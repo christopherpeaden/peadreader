@@ -3,8 +3,20 @@
     connected: function() {},
     disconnected: function() {},
     received: function(data) {
+      refreshButton = document.getElementById("refresh-btn");
+      refreshDiv = document.getElementById("refresh"); 
+
       if (typeof data != "object") {
-        $('#update-status').html(data);
+        if (refreshButton != null) {
+          textData = document.createTextNode(data);
+          refreshDiv.replaceChild(textData, refreshButton);
+        } else {
+          textData = document.createTextNode(data);
+          refreshDiv.replaceChild(textData, refreshDiv.childNodes[1]);
+          if (data == "Feeds have been successfully updated.") {
+            refreshDiv.id = "completed";
+          }
+        }
       } else {
         $('#items').prepend(data['item']); 
       }
