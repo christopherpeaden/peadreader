@@ -14,7 +14,7 @@
           textData = document.createTextNode(data);
           refreshDiv.replaceChild(textData, refreshDiv.childNodes[1]);
           if (data == "Feeds have been successfully updated.") {
-            refreshDiv.id = "completed";
+            refreshDiv.className = "alert alert-success";
           }
         }
       } else {
