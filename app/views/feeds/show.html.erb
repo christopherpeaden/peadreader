@@ -1,0 +1,12 @@
+  <h1><%= @feed.title %></h1>
+    <%= link_to "Edit", edit_feed_path(@feed), class: "btn btn-default" %>
+    <%= link_to "Delete", @feed, method: :delete,
+                 data: { confirm: "Delete this feed?" }, class: "btn btn-default" %>
+
+<p class="btn btn-lg btn-primary">Refresh</p>
+
+<div id="items">
+  <%= render @items %>
+</div>
+
+<%= will_paginate @items %>

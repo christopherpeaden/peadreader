@@ -9,14 +9,12 @@
   </head>
 
   <body>
-
     <%= render "layouts/header" %>
 
     <% if controller_name == "youtube" || controller_name == "youtube_channels" %>
       <%= render "youtube/youtube_sidebar" %>
       <%= render "youtube/youtube_sidebar_header" %>
     <% else %>
-      <%= render "layouts/sidebar_header" %>
       <%= render "layouts/sidebar" %>
     <% end %>
 
