@@ -17,6 +17,7 @@ gem 'omniauth-google-oauth2'
 gem 'httparty', '~> 0.13.7'
 gem 'cocoon', '~> 1.2.9'
 gem 'redis'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5.0beta3'

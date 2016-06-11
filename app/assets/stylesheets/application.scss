@@ -14,18 +14,5 @@
  *= require_self                                                                                      
  */                                                                                                   
 
-  @import 'mixins.css.scss';
-  @import 'buttons.css.scss';
-  @import 'flash.css.scss';
-  @import 'main.css.scss';
-  @import 'header.css.scss';
-  @import 'dropdown.css.scss';
-  @import 'pagination.css.scss';
-  @import 'sidebar.css.scss';
-  @import 'tablet.css.scss';
-  @import 'lists.css.scss';
-  @import 'header.css.scss';
-
-#update-status {
-  margin-left: 550px;
-}
+  @import "bootstrap-sprockets";
+  @import "bootstrap";
