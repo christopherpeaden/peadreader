@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
   end
 
   def favorites
+    @items = current_user.items.where(favorite: true)
   end
 
   def save_for_later
@@ -14,6 +15,7 @@ class ItemsController < ApplicationController
   end
 
   def saved_for_later
+    @items = current_user.items.where(saved_for_later: true)
   end
 
   def remove_from_favorites

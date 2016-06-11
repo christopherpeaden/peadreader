@@ -1,11 +1,11 @@
 <div class="heading">
   <h1>Categories</h1>
-  <p><%= link_to "Add category", new_category_path, remote: true, class: "btn" %></p>
+  <p><%= link_to "Add category", new_category_path, class: "btn btn-default" %></p>
 </div>
 
   <ul class="list-group">
     <% @categories.each do |category| %>
-      <li><%= link_to category.title, category, remote: true %></li>
+      <li class="list-group-item"><%= link_to category.title, category %></li>
     <% end %>
   </ul>
 
