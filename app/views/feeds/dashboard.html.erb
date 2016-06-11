@@ -1,8 +1,6 @@
-<%= will_paginate @items %>
+<%= will_paginate @items, renderer: BootstrapPagination::Rails %>
 
-<div id="refresh">
-  <%= link_to "Refresh", "#", title: "Refresh feeds", id: "refresh-btn" %>
-</div>
+<p id="refresh-btn" class="btn btn-lg btn-primary">Refresh</p>
 
 <div id="update-status"></div>
 
@@ -10,4 +8,4 @@
   <%= render @items %>
 </div>
 
-<%= will_paginate @items %>
+<%= will_paginate @items, renderer: BootstrapPagination::Rails %>

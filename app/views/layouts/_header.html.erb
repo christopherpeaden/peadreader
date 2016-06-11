@@ -1,33 +1,34 @@
 <header>
-  <nav id="navbar">
-    <ul>
+  <nav class="navbar navbar-inverse">
+    <ul class="nav nav-pills">
       <% if user_signed_in? %>
 
-        <li><%= link_to "Home", root_path, remote: true, class: 'logo' %></li>
-        <li>
-          <%= link_to "Feeds", feeds_path, remote: true %>
-          <ul>
-            <li><%= link_to "New", new_feed_path, remote: true, title: "Add a new feed" %></li>
-            <li><%= link_to "Import", new_opml_import_path, remote: true %></li>
+        <li><%= link_to "Home", root_path, class: 'logo' %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Feeds<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Show all feeds", feeds_path %></li>
+            <li><%= link_to "Create new feed", new_feed_path %></li>
+            <li><%= link_to "Import OPML File", new_opml_import_path %></li>
           </ul>
         </li>
 
-        <li><%= link_to "Favorites", favorites_path, remote: true %></li>
-        <li><%= link_to "Saved for later", saved_for_later_path, remote: true %></li>
-        <li><%= link_to "Youtube", subscriptions_path, remote: true %></li>
+        <li><%= link_to "Favorites", favorites_path %></li>
+        <li><%= link_to "Saved for later", saved_for_later_path %></li>
+        <li><%= link_to "Youtube", subscriptions_path %></li>
 
         <li>
-          <%= form_tag("/", method: "get", class: "inline-form", remote: true) do %>
+          <%= form_tag("/", method: "get", class: "inline-form") do %>
           <%= label_tag(:q, "Search:", class: "search-elements") %>
           <%= text_field_tag(:q) %>
           <%= submit_tag("Search") %>
           <% end %>
         </li>
 
-        <li>
-          <%= link_to "Profile", "#" %>
-          <ul>
-            <li><%= link_to "Edit", edit_user_registration_path(current_user), remote: true %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Edit", edit_user_registration_path(current_user) %></li>
             <li><%= link_to "Identities", "#" %></li>
             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to sign out?" } %></li>
           </ul>

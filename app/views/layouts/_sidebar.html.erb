@@ -1,18 +1,19 @@
-<div id="sidebar">
-  <ul id="category-list-group">
-    
-    <% if user_signed_in? %>
-      <% @categories.each do |category| %>
-        <li class="dropdown-list"><%= link_to category.title, category, remote: true, class: "btn" %><span class="caret">
-          <ul class="invisible">
-            <% category.feeds.order(:title).each do |feed| %>
-              <li id="category-dropdown-item"><%= link_to feed.title, feed, remote: true %></li>
-            <% end %>
-          </ul>
-        </span>
-        </li>
+<div class="col-xs-2">
+  <div class="panel panel-default">
+    <h2>Categories</h2>
+    <ul class="list-group">
+      
+      <% if user_signed_in? %>
+        <% @categories.each do |category| %>
+          <li class="list-group-item"><%= link_to category.title, category, class: "btn" %>
+            <ul>
+              <% category.feeds.order(:title).each do |feed| %>
+                <li id="category-dropdown-item"><%= link_to feed.title, feed %></li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
       <% end %>
-    <% end %>
-
-  </ul>
+    </ul>
+  </div>
 </div>

@@ -25,9 +25,8 @@ class FeedsController < ApplicationController
   end
 
   def show
-    arr = []
-    @feed.items.each { |item| arr << item }
-    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
+    @items = @feed.items
+    @items = @items.order(published_at: :desc)
     @items = @items.paginate(page: params[:page])
   end
 
@@ -50,10 +49,8 @@ class FeedsController < ApplicationController
   end
 
   def dashboard
-    @feeds = current_user.feeds
-    arr = []
-    !params[:q].nil? ? @feeds.each {|feed| feed.items.each { |item| arr << item if item.title.downcase =~ /#{params[:q].downcase}/ } } : @feeds.each {|feed| feed.items.each { |item| arr << item } }
-    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
+    !params[:q].nil? ? @items = current_user.items.where("item.title ~* /#{params[:q].downcase}/") : @items = current_user.items
+    @items = @items.order(:published_at => :desc)
     @items = @items.paginate(page: params[:page])
   end
 
