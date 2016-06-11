@@ -10,14 +10,12 @@ class CategoriesController < ApplicationController
   def create
     arr = []
     @category = current_user.categories.build(category_params)
-    @category.save
-    @feeds = @category.feeds
-    @feeds.each {|feed| feed.items.each { |item| arr << item } }
-    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
-    @items = @items.paginate(page: params[:page])
-
-    respond_to do |format|
-      format.js { flash[:notice] = "Successfully created category" }
+    if @category.save
+      flash[:success] = "Category saved successfully."
+      redirect_to @category
+    else
+      flash.now[:danger] = "There was a problem saving your category."
+      render 'new'
     end
   end
 
@@ -36,11 +34,19 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    @category.update_attributes(category_params)
+    if @category.update_attributes(category_params)
+      flash[:success] = "Category updated successfully."
+      redirect_to @category
+    else
+      flash.now[:danger] = "There was a problem saving your category"
+      render 'edit'
+    end
   end
 
   def destroy
+    flash[:success] = "Category deleted successfully"
     @category.destroy
+    redirect_to categories_path
   end
 
 

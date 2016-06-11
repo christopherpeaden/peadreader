@@ -1,13 +1,11 @@
-<div class="banner">
-  <h1><%= @category.title %></h1>
-  <%= link_to "Edit", edit_category_path(@category), remote: true, class: "btn btn-default" %>
-  <%= link_to "Delete", category_path(@category), remote: true, class: "btn btn-default", method: :delete,
-                                       data: { confirm: "Delete this category?" }  %>
-</div>
+<h1><%= @category.title %></h1>
+<%= link_to "Edit", edit_category_path(@category), class: "btn btn-default" %>
+<%= link_to "Delete", category_path(@category), class: "btn btn-default", method: :delete,
+                      data: { confirm: "Delete this category?" }  %>
 
 <p><%= will_paginate @items, renderer: BootstrapPagination::Rails %></p>
 
-<p class="btn btn-primary">Refresh</p>
+<p class="btn btn-lg btn-primary">Refresh</p>
 
 <div id="items">
   <%= render @items %>
