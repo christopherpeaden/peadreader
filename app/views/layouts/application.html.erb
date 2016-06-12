@@ -15,9 +15,15 @@
       <%= render "layouts/messages" %>
       <div class="row">
 
-        <div class="col-xs-12 col-md-8">
-          <%= yield %>
-        </div>
+        <% if controller_name == "pages" || devise_controller? %>
+          <div class="col-xs-12">
+            <%= yield %>
+          </div>
+        <% else %>
+          <div class="col-xs-12 col-md-8">
+            <%= yield %>
+          </div>
+        <% end %>
 
         <div class="col-xs-12 col-md-4">
           <% if controller_name == "youtube" || controller_name == "youtube_channels" %>
