@@ -19,9 +19,12 @@ class FeedsController < ApplicationController
 
   def create
     @feed = current_user.feeds.build(feed_params)
-    @feed.save
-    @items = []
-    @items = @items.paginate(page: params[:page])
+
+    if @feed.save
+      redirect_to @feed
+    else
+      render 'new'
+    end
   end
 
   def show
@@ -38,14 +41,20 @@ class FeedsController < ApplicationController
   end
 
   def update
-    @feed.update(feed_params)
-    @items = @feed.items
-    @items = @items.paginate(page: params[:page])
+    if @feed.update(feed_params)
+      @items = @feed.items
+      @items = @items.paginate(page: params[:page])
+      redirect_to @feed
+    else
+      flash[:danger] = "There was a problem updating this feed."
+      render 'edit'
+    end
   end
 
   def destroy
     @feed.destroy
     @feeds = current_user.feeds
+    redirect_to feeds_path
   end
 
   def dashboard

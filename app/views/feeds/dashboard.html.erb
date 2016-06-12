@@ -1,4 +1,6 @@
-<%= will_paginate @items, renderer: BootstrapPagination::Rails %>
+<div class="pagination">
+  <%= will_paginate @items, renderer: BootstrapPagination::Rails %>
+</div>
 
 <div id="refresh">
   <p id="refresh-btn" class="btn btn-lg btn-primary">Refresh</p>

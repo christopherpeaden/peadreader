@@ -1,7 +1,8 @@
-<%= will_paginate @videos %>
+<%= will_paginate @videos, renderer: BootstrapPagination::Rails %>
 
-<%= link_to "Refresh", refresh_youtube_path, remote: true, class: "btn" %>
-<p><%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path, remote: true, class: "btn" %><p>
+<%= link_to "Refresh", refresh_youtube_path, class: "btn btn-primary" %>
+<p><%= link_to "Sync Subscribed Channels", sync_subscribed_channels_path, class: "btn btn-default" %><p>
 
 <%= render 'all_videos', videos: @videos %> 
-<%= will_paginate @videos %>
+
+<%= will_paginate @videos, renderer: BootstrapPagination::Rails %>

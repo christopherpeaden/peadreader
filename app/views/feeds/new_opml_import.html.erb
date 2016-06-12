@@ -10,5 +10,5 @@
     <p><%= select_tag options_from_collection_for_select(current_user.categories, :id, :title) %></p>
   </div>
 
-  <%= submit_tag "Submit" %>
+  <%= submit_tag "Submit", class: "btn btn-primary" %>
 <% end %></br>
