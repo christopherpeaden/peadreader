@@ -1,14 +1,22 @@
-<h1><%= @category.title %></h1>
-<%= link_to "Edit", edit_category_path(@category), class: "btn btn-default" %>
-<%= link_to "Delete", category_path(@category), class: "btn btn-default", method: :delete,
-                      data: { confirm: "Delete this category?" }  %>
+<div class="text-center">
+  <h1><%= @category.title %></h1>
 
-<p><%= will_paginate @items, renderer: BootstrapPagination::Rails %></p>
+  <p>
+    <%= link_to "Edit", edit_category_path(@category), class: "btn btn-default" %>
+    <%= link_to "Delete", category_path(@category), class: "btn btn-default", method: :delete,
+                          data: { confirm: "Delete this category?" }  %>
+  </p>
 
-<p class="btn btn-lg btn-primary">Refresh</p>
+  <p><%= will_paginate @items, renderer: BootstrapPagination::Rails %></p>
+
+  <p class="btn btn-lg btn-primary">Refresh</p>
+</div>
+</br>
 
 <div id="items">
   <%= render @items %>
 </div>
 
-<p><%= will_paginate @items, renderer: BootstrapPagination::Rails %></p>
+<div class="text-center">
+  <p><%= will_paginate @items, renderer: BootstrapPagination::Rails %></p>
+</div>

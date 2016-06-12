@@ -1,4 +1,6 @@
-<h1>Sign up</h1>
+<div class="text-center">
+  <h1>Sign up</h1>
+</div>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -28,9 +30,16 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-lg btn-primary" %>
-  </div>
+  <div class="text-center">
+    <div class="actions">
+      <%= f.submit "Sign up", class: "btn btn-lg btn-primary" %>
+    </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+    <h2>or</h2>
+    </br>
+
+    <p><%= link_to "Sign in with email", new_user_session_path, class: "btn btn-lg btn-primary" %></p>
+
+    <%= render "devise/shared/links" %>
+  </div>

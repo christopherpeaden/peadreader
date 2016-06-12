@@ -17,6 +17,10 @@
   @import "bootstrap-sprockets";
   @import "bootstrap";
 
+body {
+  background-color: #FFFAFA;
+}
+
 .navbar {
   background-color: #3E2059;
   height: 4.5em;
@@ -40,9 +44,10 @@
 
 a {
   color: #3E2059;
-  &:hover {
-    color: #ddd;
-  }
+}
+
+.website-link {
+  color: blue;
 }
 
 .pagination li a {
@@ -51,11 +56,24 @@ a {
     color: #3E2059;
   }
 }
+
 .pagination .active span {
   color: white;
   background-color: #3E2059;
   &:hover {
     color: #3E2059;
     background-color: #ddd;
+  }
+}
+
+.text-center {
+  float: none;
+  margin: auto;
+}
+
+.panel-default .panel-heading {
+  background-color: #3E2059;
+  a {
+    color: white;
   }
 }

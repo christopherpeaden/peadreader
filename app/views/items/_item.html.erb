@@ -2,10 +2,10 @@
     <li class="list-group-item">            
     <% if item.image_thumbnail_url %>                                                                    
       <% video_code = item.url.split('=')[1] %>                                                          
-      <%= link_to(image_tag(item.image_thumbnail_url, size: '450x300'), "http://www.youtube.com/watch?v=#
+      <%= link_to(image_tag(item.image_thumbnail_url, class: "img-responsive", size: '450x300'), "http://www.youtube.com/watch?v=#
 {video_code}") %></br>                                                                                   
       <%= link_to "#{item.feed.title}: #{truncate(item.title, length: 115, omission: "...", escape: false
-) }", item.url, class: "feed-item" %></br>
+) }", item.url, class: "website-link" %></br>
       <%= "#{item.published_at.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(item.published_at)} 
 ago" %>                                                                                                  
       </br>
@@ -14,7 +14,7 @@ ago" %>
       <%= link_to "Save for later", save_for_later_path(id: item.id), remote: true, class: "btn btn-default" %></br> 
     <% else %>                                                                                           
       <%= link_to "#{item.feed.title}: #{truncate(item.title, length: 115, omission: "...", escape: false
-) }", item.url, class: "feed-item" %></br>
+) }", item.url, class: "website-link" %></br>
       <%= "#{item.published_at.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(item.published_at)} 
 ago" %></br>                                                                              
       <%= link_to "More", feed_path(item.feed), class: "btn btn-default" if params[:id].nil? %>
