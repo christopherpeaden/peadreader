@@ -1,3 +1,5 @@
+<%= will_paginate @items, renderer: BootstrapPagination::Rails %>
+
 <h1><%= @feed.title %></h1>
 
   <%= link_to "Edit", edit_feed_path(@feed), class: "btn btn-default" %>

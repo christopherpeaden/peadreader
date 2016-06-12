@@ -1,19 +1,16 @@
-<div class="col-xs-2">
+<% if user_signed_in? %>
   <div class="panel panel-default">
     <h2><%= link_to "Categories", categories_path %></h2>
     <ul class="list-group">
-      
-      <% if user_signed_in? %>
-        <% @categories.each do |category| %>
-          <li class="list-group-item"><%= link_to category.title, category, class: "btn" %>
-            <ul>
-              <% category.feeds.order(:title).each do |feed| %>
+      <% @categories.each do |category| %>
+        <li class="list-group-item"><%= link_to category.title, category, class: "btn" %>
+          <ul>
+            <% category.feeds.order(:title).each do |feed| %>
                 <li id="category-dropdown-item"><%= link_to feed.title, feed %></li>
-              <% end %>
-            </ul>
-          </li>
-        <% end %>
+            <% end %>
+          </ul>
+        </li>
       <% end %>
     </ul>
   </div>
-</div>
+<% end %>

@@ -38,13 +38,13 @@ class CategoriesController < ApplicationController
       flash[:success] = "Category updated successfully."
       redirect_to @category
     else
-      flash.now[:danger] = "There was a problem saving your category"
+      flash.now[:danger] = "There was a problem saving your category."
       render 'edit'
     end
   end
 
   def destroy
-    flash[:success] = "Category deleted successfully"
+    flash[:success] = "Category deleted successfully."
     @category.destroy
     redirect_to categories_path
   end

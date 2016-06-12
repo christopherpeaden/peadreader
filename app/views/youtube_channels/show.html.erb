@@ -1,5 +1,5 @@
-<h1 style="text-align: center;"> <%= @youtube_channel.title %></h1>
-<p style="text-align: center;"> <%= image_tag(@youtube_channel.image, size: "380x300") %></p>
+<h1><%= @youtube_channel.title %></h1>
+<p><%= image_tag(@youtube_channel.image, size: "380x300") %></p>
 
 <% @youtube_channel.youtube_videos.each do |youtube_video| %>
   <p><%= image_tag(youtube_video.image, size: "300x200")  %></p>

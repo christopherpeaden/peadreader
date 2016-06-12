@@ -16,3 +16,46 @@
 
   @import "bootstrap-sprockets";
   @import "bootstrap";
+
+.navbar {
+  background-color: #3E2059;
+  height: 4.5em;
+  a {
+    font-size: 1.3em;
+    color: white;
+    line-height: 2em;
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.btn-primary {
+  background-color: #3E2059;
+  &:hover {
+    background-color: #ddd;
+    color: black;
+  }
+}
+
+a {
+  color: #3E2059;
+  &:hover {
+    color: #ddd;
+  }
+}
+
+.pagination li a {
+  color: #3E2059;
+  &:hover {
+    color: #3E2059;
+  }
+}
+.pagination .active span {
+  color: white;
+  background-color: #3E2059;
+  &:hover {
+    color: #3E2059;
+    background-color: #ddd;
+  }
+}
