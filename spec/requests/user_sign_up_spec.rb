@@ -1,16 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "User sign up" do
-
   let(:user) { build(:user) }
 
   before(:example)  do
     visit "/users/sign_up"
-    expect(page).to have_selector("h2", text: "Sign up")
+    expect(page).to have_selector("h1", text: "Sign Up")
   end
 
   context "success" do
-  
     it "allows access to dashboard" do
       fill_in "Email", with: user.email
       fill_in "Password", with: user.password

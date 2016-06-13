@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "User sign in" do
-
   let(:user) { create(:user) }
 
   before(:example) do
     visit "/users/sign_in"
-    expect(page).to have_selector("h2", text: "Log in")
+    expect(page).to have_selector("h1", text: "Sign In")
   end
 
   context "success" do
@@ -14,7 +13,7 @@ RSpec.describe "User sign in" do
     before(:example) do
       fill_in "Email", with: user.email
       fill_in "Password", with: user.password
-      click_button "Log in"
+      click_button "Sign In"
     end
 
     it "allows access to dashboard" do
@@ -28,23 +27,21 @@ RSpec.describe "User sign in" do
         expect(page).to have_content("Signed out")
       end
     end
-
   end
 
   context "failure" do
-
     it "rejects blank values" do
       fill_in "Email", with: ""
       fill_in "Password", with: ""
-      click_button "Log in"
-      expect(page).to have_content("Invalid email or password")
+      click_button "Sign In"
+      expect(page).to have_content("Invalid Email or password.")
     end
 
     it "rejects invalid password" do
       fill_in "Email", with: user.email
       fill_in "Password", with: "zippydeedoodah"
-      click_button "Log in"
-      expect(page).to have_content("Invalid email or password")
+      click_button "Sign In"
+      expect(page).to have_content("Invalid Email or password.")
     end
   end
 end

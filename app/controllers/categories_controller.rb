@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @ items = @category.items.order(published_at: :desc)
+    @items = @category.items.order(published_at: :desc)
     @items = @items.paginate(page: params[:page])
   end
 

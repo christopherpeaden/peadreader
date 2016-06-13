@@ -11,7 +11,7 @@ class FeedsController < ApplicationController
   end
 
   def create_opml_import
-    opml_doc = setup_file_for_searching
+    opml_doc = Nokogiri::XML(params[:file])
     save_outlines_from_opml(opml_doc, params[:category_id])
     flash[:notice] = "Successfully imported OPML file"
     redirect_to root_path

@@ -1,11 +1,13 @@
 <% if user_signed_in? %>
   <div class="panel panel-default">
 
-    <div class="panel-heading">
       <div class="text-center">
-        <h4><%= link_to "Categories", categories_path %></h4>
+      <div class="panel-heading">
+        <ul class="nav nav-pills" id="categories-link">
+          <li><%= link_to "Categories", categories_path %></li>
+        </ul>
       </div>
-    </div>
+      </div>
 
     <ul class="list-group">
       <% @categories.each do |category| %>

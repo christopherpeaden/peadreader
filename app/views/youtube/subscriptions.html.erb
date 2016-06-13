@@ -1,4 +1,5 @@
 <div class="text-center">
+  <h1>Youtube</h1>
   <p><%= will_paginate @videos, renderer: BootstrapPagination::Rails %></p>
 
   <p id="refresh-btn"><%= link_to "Refresh", refresh_youtube_path, class: "btn btn-lg btn-primary" %></p>
