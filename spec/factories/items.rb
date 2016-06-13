@@ -4,6 +4,7 @@ FactoryGirl.define do
     url   { Faker::Internet.url }
     published_at { Time.now }
     feed
+    user
   end
   
 end

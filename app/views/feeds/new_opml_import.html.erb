@@ -1,7 +1,7 @@
 <%= form_tag({action: 'create_opml_import'}, {multipart: true}) do |f| %>
 
   <div class="form-group">
-    <p><%= label_tag :file, "Import Opml File" %></p>
+    <p><%= label_tag :file, "Import OPML File" %></p>
     <p><%= file_field_tag 'file' %></p>
   </div>
 

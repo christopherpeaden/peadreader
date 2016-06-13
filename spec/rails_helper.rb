@@ -31,6 +31,7 @@ require 'devise'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include Rails.application.routes.url_helpers
   # Include FactoryGirl methods
   config.include FactoryGirl::Syntax::Methods
   # Include Capybara DSL
