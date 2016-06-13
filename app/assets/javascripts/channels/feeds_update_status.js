@@ -2,6 +2,8 @@
   App.feedsUpdateStatus = App.cable.subscriptions.create("FeedsUpdateStatusChannel", {
     connected: function() {},
     disconnected: function() {},
+
+
     received: function(data) {
       refreshButton = document.getElementById("refresh-btn");
       refreshDiv = document.getElementById("refresh"); 
@@ -21,6 +23,8 @@
         $('#items').prepend(data['item']); 
       }
     },
+
+
     update: function() {
       return this.perform('update');
     }
