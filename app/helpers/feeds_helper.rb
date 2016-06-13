@@ -1,34 +1,32 @@
 module FeedsHelper
 
-  def fetch_feed_items(feeds)
-    feeds.each do |feed|
-      parsed_feed = Feedjira::Feed.fetch_and_parse(feed.url)
-      store_items(parsed_feed, feed)
+  def fetch_feed_items(feed)
+    parsed_feed = Feedjira::Feed.fetch_and_parse(feed.url)
+    parsed_feed.entries.each do |entry|
+      item = build_item(parsed_feed, entry)
+      item.category_ids = feed.category_ids
+      feed.items.create(item.attributes)
     end
   end
 
-  def store_items(parsed_feed, feed)
-    parsed_feed.entries.each do |item|
-      if item.url =~ /youtube/
-        video_code = item.url.split('=')[1]
-        new_item = feed.items.build(title: item.title,
-                                    url: item.url,
-                                    image_thumbnail_url: "http://img.youtube.com/vi/#{video_code}/hqdefault.jpg",
-                                    published_at: item.published, feed_title: parsed_feed.title, user_id: current_user.id)
-        new_item.save if new_item.valid?
-      else
-        new_item = feed.items.build(title: item.title,
-                                    url: item.url,
-                                    published_at: item.published,
-                                    feed_title: parsed_feed.title, user_id: current_user.id)
-        new_item.save if new_item.valid?
-      end
-    end
+  def build_item(parsed_feed, entry)
+    Item.new(
+      title: entry.title,
+      url: entry.url,
+      image_thumbnail_url: ("http://img.youtube.com/vi/#{entry.url.split('=')[1]}/hqdefault.jpg" if entry.url =~ /youtube/),
+      published_at: entry.published,
+      feed_title: parsed_feed.title,
+      user_id: current_user.id
+    )
   end
 
   def save_outlines_from_opml(opml_doc, category_id)
     opml_doc.xpath("/opml/body/outline/outline").each do |outline|
-      @feed = current_user.feeds.build(title: outline[:title], url: outline[:xmlUrl], category_ids: params["<option value="])
+      @feed = current_user.feeds.build(
+        title: outline[:title],
+        url: outline[:xmlUrl],
+        category_ids: params["<option value="]
+      )
       @feed.save
     end
   end

@@ -1,6 +1,11 @@
 class ItemsController < ApplicationController
-  before_action :find_item, except: [:favorites, :saved_for_later]
-  before_action :get_categories, only: [:favorites, :saved_for_later]
+  before_action :find_item, except: [:index, :favorites, :saved_for_later]
+  before_action :get_categories, only: [:index, :favorites, :saved_for_later]
+
+  def index
+    @items = current_user.items.order(published_at: :desc)
+    @items = @items.paginate(page: params[:page])
+  end
 
   def add_to_favorites
     @item.update(favorite: true)

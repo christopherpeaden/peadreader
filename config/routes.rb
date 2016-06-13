@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks", registrations: "registrations" }
 
   authenticated :user do
-    root 'feeds#dashboard', :as => 'authenticated_root'
+    root 'items#index', :as => 'authenticated_root'
   end
 
   devise_scope :user do
