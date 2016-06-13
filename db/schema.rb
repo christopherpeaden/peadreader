@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516232857) do
+ActiveRecord::Schema.define(version: 20160613010029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,8 @@ ActiveRecord::Schema.define(version: 20160516232857) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.index ["user_id"], name: "index_categories_on_user_id", using: :btree
   end
-
-  add_index "categories", ["user_id"], name: "index_categories_on_user_id", using: :btree
 
   create_table "categorizations", force: :cascade do |t|
     t.integer  "category_id"
@@ -38,9 +37,15 @@ ActiveRecord::Schema.define(version: 20160516232857) do
     t.datetime "updated_at", null: false
     t.string   "url"
     t.integer  "user_id"
+    t.index ["user_id"], name: "index_feeds_on_user_id", using: :btree
   end
 
-  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
+  create_table "itemizations", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "item_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "items", force: :cascade do |t|
     t.string   "title"
@@ -54,21 +59,19 @@ ActiveRecord::Schema.define(version: 20160516232857) do
     t.boolean  "favorite",            default: false
     t.boolean  "saved_for_later",     default: false
     t.integer  "user_id"
+    t.index ["favorite"], name: "index_items_on_favorite", using: :btree
+    t.index ["feed_id"], name: "index_items_on_feed_id", using: :btree
+    t.index ["saved_for_later"], name: "index_items_on_saved_for_later", using: :btree
+    t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
-
-  add_index "items", ["favorite"], name: "index_items_on_favorite", using: :btree
-  add_index "items", ["feed_id"], name: "index_items_on_feed_id", using: :btree
-  add_index "items", ["saved_for_later"], name: "index_items_on_saved_for_later", using: :btree
-  add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
   create_table "job_watchers", force: :cascade do |t|
     t.boolean  "completed",  default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "user_id"
+    t.index ["user_id"], name: "index_job_watchers_on_user_id", using: :btree
   end
-
-  add_index "job_watchers", ["user_id"], name: "index_job_watchers_on_user_id", using: :btree
 
   create_table "jobwatchers", force: :cascade do |t|
     t.boolean  "completed",  default: false
@@ -98,10 +101,9 @@ ActiveRecord::Schema.define(version: 20160516232857) do
     t.string   "access_token"
     t.string   "refresh_token"
     t.integer  "access_token_expiration"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "youtube_channels", force: :cascade do |t|
     t.string   "title"
@@ -113,9 +115,8 @@ ActiveRecord::Schema.define(version: 20160516232857) do
     t.string   "image"
     t.integer  "user_id"
     t.string   "upload_playlist_id"
+    t.index ["user_id"], name: "index_youtube_channels_on_user_id", using: :btree
   end
-
-  add_index "youtube_channels", ["user_id"], name: "index_youtube_channels_on_user_id", using: :btree
 
   create_table "youtube_videos", force: :cascade do |t|
     t.string   "title"
@@ -128,12 +129,11 @@ ActiveRecord::Schema.define(version: 20160516232857) do
     t.datetime "updated_at",         null: false
     t.datetime "published_at"
     t.string   "channel_id"
+    t.index ["playlist_id"], name: "index_youtube_videos_on_playlist_id", using: :btree
+    t.index ["published_at"], name: "index_youtube_videos_on_published_at", using: :btree
+    t.index ["title"], name: "index_youtube_videos_on_title", using: :btree
+    t.index ["youtube_channel_id"], name: "index_youtube_videos_on_youtube_channel_id", using: :btree
   end
-
-  add_index "youtube_videos", ["playlist_id"], name: "index_youtube_videos_on_playlist_id", using: :btree
-  add_index "youtube_videos", ["published_at"], name: "index_youtube_videos_on_published_at", using: :btree
-  add_index "youtube_videos", ["title"], name: "index_youtube_videos_on_title", using: :btree
-  add_index "youtube_videos", ["youtube_channel_id"], name: "index_youtube_videos_on_youtube_channel_id", using: :btree
 
   add_foreign_key "categories", "users"
   add_foreign_key "feeds", "users"

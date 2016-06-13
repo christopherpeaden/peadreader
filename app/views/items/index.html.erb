@@ -1,0 +1,18 @@
+<div class="text-center">
+  <%= will_paginate @items, renderer: BootstrapPagination::Rails %>
+
+  <div id="refresh">
+    <p id="refresh-btn" class="btn btn-lg btn-primary">Refresh</p>
+  </div>
+
+  <div id="update-status"></div>
+</div>
+</br>
+
+<div id="items">
+  <%= render @items %>
+</div>
+
+<div class="text-center">
+  <%= will_paginate @items, renderer: BootstrapPagination::Rails %>
+</div>

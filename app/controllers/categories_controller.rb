@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
-  before_action :get_categories 
   before_action :authenticate_user!
+  before_action :get_categories 
   before_action :find_category, except: [:new, :create, :index]
 
   def new
@@ -8,8 +8,8 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    arr = []
     @category = current_user.categories.build(category_params)
+
     if @category.save
       flash[:success] = "Category saved successfully."
       redirect_to @category
@@ -20,10 +20,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    arr = []
-    @feeds = @category.feeds
-    @feeds.each {|feed| feed.items.each { |item| arr << item } }
-    @items = arr.sort! { |x,y| y.published_at <=> x.published_at }
+    @ items = @category.items.order(published_at: :desc)
     @items = @items.paginate(page: params[:page])
   end
 
@@ -36,6 +33,8 @@ class CategoriesController < ApplicationController
   def update
     if @category.update_attributes(category_params)
       flash[:success] = "Category updated successfully."
+      @items = @category.items.order(published_at: :desc)
+      @items = @items.paginate(page: params[:page])
       redirect_to @category
     else
       flash.now[:danger] = "There was a problem saving your category."
@@ -44,9 +43,13 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    flash[:success] = "Category deleted successfully."
-    @category.destroy
-    redirect_to categories_path
+    if @category.destroy
+      flash[:success] = "Category deleted successfully."
+      redirect_to categories_path
+    else
+      flash[:danger] = "There was a problem deleteing this category."
+      render @category
+    end
   end
 
 

@@ -10,11 +10,12 @@ class FeedsUpdateStatusChannel < ApplicationCable::Channel
 
   def update
     current_user.feeds.each do |feed|
-      ActionCable.server.broadcast 'feeds_update_status_channel', "Updating #{feed.title}..."
-      parsed_feed = Feedjira::Feed.fetch_and_parse(feed.url)
-      store_items(parsed_feed, feed)
-      ActionCable.server.broadcast 'feeds_update_status_channel',
-                                   "Feeds have been successfully updated." if feed == current_user.feeds.last
+      ActionCable.server.broadcast("feeds_update_status_channel", "Updating #{feed.title}...")
+      fetch_feed_items(feed)
+      ActionCable.server.broadcast(
+        "feeds_update_status_channel",
+        "Feeds have been successfully updated."
+      ) if feed == current_user.feeds.last
     end
   end
 end

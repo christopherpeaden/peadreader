@@ -23,13 +23,13 @@ class FeedsController < ApplicationController
     if @feed.save
       redirect_to @feed
     else
+      flash.now[:danger] = "There was a problem saving your feed."
       render 'new'
     end
   end
 
   def show
-    @items = @feed.items
-    @items = @items.order(published_at: :desc)
+    @items = @feed.items.order(published_at: :desc)
     @items = @items.paginate(page: params[:page])
   end
 
@@ -42,44 +42,22 @@ class FeedsController < ApplicationController
 
   def update
     if @feed.update(feed_params)
-      @items = @feed.items
+      @items = @feed.items.order(published_at: :desc)
       @items = @items.paginate(page: params[:page])
       redirect_to @feed
     else
-      flash[:danger] = "There was a problem updating this feed."
+      flash.now[:danger] = "There was a problem updating this feed."
       render 'edit'
     end
   end
 
   def destroy
-    @feed.destroy
-    @feeds = current_user.feeds
-    redirect_to feeds_path
-  end
-
-  def dashboard
-    !params[:q].nil? ? @items = current_user.items.where("item.title ~* /#{params[:q].downcase}/") : @items = current_user.items
-    @items = @items.order(:published_at => :desc)
-    @items = @items.paginate(page: params[:page])
-  end
-
-  def check_for_newest_items
-    if job_watcher = current_user.job_watchers.first
-      arr = []
-      @feeds = current_user.feeds
-
-      @feeds.each do |feed|
-        items_arr = feed.items.where("published_at > ?", params[:after])
-        items_arr.each { |item| arr << item }
-      end
-
-      @items = arr.sort! { |x,y| x.published_at <=> y.published_at }
-      job_watcher.destroy if job_watcher.completed == true
-
-      render json: @items
+    if @feed.destroy
+      flash[:success] = "Feed deleted successfully."
+      redirect_to feeds_path
     else
-      @items = ["completed"]
-      render json: @items
+      flash[:danger] = "There was a problem deleteing this feed."
+      render @feed
     end
   end
 
