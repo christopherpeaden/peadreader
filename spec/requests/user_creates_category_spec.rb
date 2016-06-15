@@ -26,4 +26,29 @@ RSpec.describe "User creates category" do
       expect(page).to have_content "problem"
     end
   end
+
+  describe "edit category" do
+    it "changes and saves category title" do
+      fill_in "Title", with: category.title
+      click_button "Submit"
+      expect(page).to have_selector('h1', text: category.title)
+      expect(Category.first.title).to eq category.title
+      click_link "Edit"
+      new_title = "test title"
+      fill_in "Title", with: new_title
+      click_button "Submit"
+      expect(Category.first.title).to eq new_title 
+    end
+  end
+
+  describe "delete category" do
+    it "removes feed from database" do
+      fill_in "Title", with: category.title
+      click_button "Submit"
+      expect(page).to have_selector('h1', text: category.title)
+      expect(Category.first.title).to eq category.title
+      click_link "Delete"
+      expect(Category.first).to be_nil
+    end
+  end
 end
