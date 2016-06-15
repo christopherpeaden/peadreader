@@ -21,6 +21,7 @@ class YoutubeController < ApplicationController
   def subscriptions 
     @youtube_channels = current_user.youtube_channels
     @youtube_channels.each {|youtube_channel| @videos = youtube_channel.youtube_videos.order(published_at: :desc).map {|youtube_video| youtube_video}}
-    @videos = @videos.paginate(page: params[:page], per_page: 10)
+    #@videos = @videos.paginate(page: params[:page], per_page: 10)
+#    @videos = @videos.paginate(page: params[:page], per_page: 10)
   end
 end
