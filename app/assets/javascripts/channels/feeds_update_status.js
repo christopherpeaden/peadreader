@@ -20,7 +20,19 @@
           }
         }
       } else {
-        $('#items').prepend(data['item']); 
+        //$('#items').prepend(data['item']); 
+        var itemDiv = document.getElementById("items");
+        var items = itemDiv.childNodes;
+        console.log(items);
+
+        $("#hidden-item").prepend(data["item"]);
+        var hiddenDiv = document.getElementById("hidden-item");
+
+        for(var x = 0; x < items.length; x++) {
+          if (hiddenDiv.childNodes[0].dataset.published < items[x]) {
+            itemDiv.insertBefore(data["item"], items.childNodes[x]);
+          }
+        }
       }
     },
 

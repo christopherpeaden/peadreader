@@ -6,11 +6,15 @@
   </div>
 
   <div id="update-status"></div>
+  <div style="display:none;" id="hidden-item"></div>
 </div>
+
 </br>
 
 <div id="items">
-  <%= render @items %>
+  <ul class="list-group">
+    <%= render @items %>
+  </ul>
 </div>
 
 <div class="text-center">
