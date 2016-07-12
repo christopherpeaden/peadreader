@@ -4,17 +4,17 @@ default: &default
   hostname: localhost
   pool: 5
   username:
-  password: <%= ENV[""] %>
+  password: <%= ENV[""] %> 
   timeout: 5000
 
 development:
   <<: *default
-  database: pead_reader_development 
+  database: peadreader_development 
 
 test:
   <<: *default
-  database: pead_reader_test 
+  database: peadreader_test 
 
 production:
   <<: *default
-  database: pead_reader_production
+  database: peadreader_production
