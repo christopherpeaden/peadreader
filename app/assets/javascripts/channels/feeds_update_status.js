@@ -3,36 +3,38 @@
     connected: function() {},
     disconnected: function() {},
 
-
     received: function(data) {
-      refreshButton = document.getElementById("refresh-btn");
-      refreshDiv = document.getElementById("refresh"); 
+      var refreshButton = document.getElementById("refresh-btn");
+      var refreshDiv = document.getElementById("refresh"); 
 
       if (typeof data != "object") {
         if (refreshButton != null) {
-          textData = document.createTextNode(data);
+          var textData = document.createTextNode(data);
           refreshDiv.replaceChild(textData, refreshButton);
         } else {
-          textData = document.createTextNode(data);
+          var textData = document.createTextNode(data);
           refreshDiv.replaceChild(textData, refreshDiv.childNodes[1]);
-          if (data == "Feeds have been successfully updated.") {
-            refreshDiv.className = "alert alert-success";
-          }
+
+          if (data == "Feeds have been successfully updated.") {refreshDiv.className = "alert alert-success";}
         }
       } else {
-        //$('#items').prepend(data['item']); 
-        var itemDiv = document.getElementById("items");
-        var items = itemDiv.childNodes;
-        console.log(items);
+        var itemList = document.getElementsByClassName("list-group")[0];
+        var items = document.getElementById("items").childNodes[1].childNodes;
 
-        $("#hidden-item").prepend(data["item"]);
-        var hiddenDiv = document.getElementById("hidden-item");
+        for(var x = 0; x <= items.length; x++) {
+          if(items[x].dataset != undefined) {
+            var dataPublished = data['item'].match(/2.*C/)[0];
 
-        for(var x = 0; x < items.length; x++) {
-          if (hiddenDiv.childNodes[0].dataset.published < items[x]) {
-            itemDiv.insertBefore(data["item"], items.childNodes[x]);
-          }
-        }
+            console.log(x);
+            console.log(items[x]);
+            if (dataPublished > items[x].dataset.published) {
+              //$('#items .list-group').prepend(data['item']); 
+              $(data["item"]).insertBefore(items[x]);
+              $("").insertBefore(items[x]);
+              break;
+            }
+	  }
+	}
       }
     },
 
