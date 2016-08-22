@@ -10,6 +10,12 @@ set :repo_url, 'git@github.com:whicheverpeady/peadreader.git'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/deploy/peadreader'
 set :passenger_restart_with_touch, true
+set :ssh_options, {
+  forward_agent: true,
+  auth_methods: ["publickey"],
+  keys: ["/home/peady/.ssh/AWS-2.pem"]
+}
+
 
 # Default value for :scm is :git
 # set :scm, :git
