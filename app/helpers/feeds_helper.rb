@@ -6,11 +6,16 @@ module FeedsHelper
     
     if feed_xml.body
       parsed_feed = Feedjira::Feed.parse(feed_xml.body)
+      failed_save_counter = 0
+
       parsed_feed.entries.each do |entry|
         item = build_item(parsed_feed, entry)
         item.category_ids = feed.category_ids
-        feed.items.create(item.attributes)
+
+        failed_save_counter += 1 if !feed.items.create(item.attributes).id
+        break if failed_save_counter == 4
       end
+
       feed.reload
       feed.update(last_modified: feed_xml.headers['last-modified'] || "", etag: feed_xml.headers['etag'] || "")
     end
