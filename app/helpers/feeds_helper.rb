@@ -25,7 +25,15 @@ module FeedsHelper
     Item.new(
       title: entry.title,
       url: entry.url,
-      image_thumbnail_url: ("http://img.youtube.com/vi/#{entry.url.split('=')[1]}/hqdefault.jpg" if entry.url =~ /youtube/),
+      image_thumbnail_url: ( 
+                             if entry.url =~ /youtube/ 
+                               "http://img.youtube.com/vi/#{entry.url.split('=')[1]}/hqdefault.jpg"
+                             elsif entry.url
+                               entry.content.match(/https:\/\/b.thumbs.redditmedia.com\/.*jpg/).to_s if entry.url[0] =~ /reddit/
+                             else
+                               entry.image if entry.respond_to?(:image)
+                             end
+                           ),
       published_at: entry.published,
       feed_title: parsed_feed.title,
       user_id: current_user.id
