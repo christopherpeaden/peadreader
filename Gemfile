@@ -10,7 +10,7 @@ gem 'coffee-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'therubyracer', platforms: :ruby
-gem 'devise', '~> 4.1.1'
+gem 'devise', '~> 4.2.0'
 gem 'feedjira', '~> 2.0.0'
 gem 'will_paginate', '~> 3.1.0'
 gem 'omniauth-google-oauth2'

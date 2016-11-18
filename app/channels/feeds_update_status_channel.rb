@@ -11,7 +11,7 @@ class FeedsUpdateStatusChannel < ApplicationCable::Channel
   def update
     current_user.feeds.each do |feed|
       ActionCable.server.broadcast("feeds_update_status_channel", "Updating #{feed.title}...")
-      fetch_feed_items(feed)
+      feed.fetch_and_save_new_items
       ActionCable.server.broadcast(
         "feeds_update_status_channel",
         "Feeds have been successfully updated."

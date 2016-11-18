@@ -12,7 +12,7 @@ class FeedsController < ApplicationController
 
   def create_opml_import
     opml_doc = Nokogiri::XML(params[:file])
-    save_outlines_from_opml(opml_doc, params[:category_id])
+    OPMLImporter.save_outlines(current_user, opml_doc)
     flash[:notice] = "Successfully imported OPML file"
     redirect_to root_path
   end

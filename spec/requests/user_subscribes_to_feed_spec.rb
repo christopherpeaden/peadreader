@@ -55,17 +55,4 @@ RSpec.describe "User subscribes to feed" do
       expect(Feed.first).to be_nil
     end
   end
-
-  describe "import opml file" do
-    context "successful" do
-      it "imports all feeds" do
-        visit '/new_opml_import'
-        expect(page).to have_selector('label', text: "Import OPML File")
-        page.attach_file('file', Rails.root + 'spec/support/sample_opml')
-        click_button "Submit"
-        expect(page).to have_selector("div", text: "Successfully imported OPML file")
-        expect(Feed.first.title).to eq 'RSDBrad'
-      end
-    end
-  end
 end
