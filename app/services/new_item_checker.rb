@@ -31,8 +31,8 @@ class NewItemChecker
     def self.build_image_thumbnail_url(entry)
       if entry.url =~ /youtube/ 
         "http://img.youtube.com/vi/#{entry.url.split('=')[1]}/hqdefault.jpg"
-      elsif entry.url
-        entry.content.match(/https:\/\/b.thumbs.redditmedia.com\/.*jpg/).to_s if entry.url[0] =~ /reddit/
+      elsif entry.url =~ /reddit/
+        entry.content.match(/https:\/\/b.thumbs.redditmedia.com\/.*jpg/).to_s
       else
         entry.image if entry.respond_to?(:image)
       end
