@@ -26,7 +26,7 @@ Rails.application.configure do
   config.assets.compile = false
 
   config.action_cable.url = "/cable"
-  config.action_cable.allowed_request_origins = ["http://104.236.2.108"]
+  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
