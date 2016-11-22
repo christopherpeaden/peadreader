@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "User subscribes to feed" do
+RSpec.describe "User managing feed" do
   let(:feed) { build(:feed) }
   let(:user) { create(:user) }
 
@@ -29,8 +29,8 @@ RSpec.describe "User subscribes to feed" do
     end
   end
 
-  describe "edit feed" do
-    it "changes and saves feed data" do
+  describe "editing" do
+    it "changes and saves new data" do
       fill_in "Title", with: feed.title
       fill_in "Url", with: feed.url
       click_button "Submit"
@@ -44,8 +44,8 @@ RSpec.describe "User subscribes to feed" do
     end
   end
 
-  describe "delete feed" do
-    it "removes feed from database" do
+  describe "deleting" do
+    it "removes from database" do
       fill_in "Title", with: feed.title
       fill_in "Url", with: feed.url
       click_button "Submit"

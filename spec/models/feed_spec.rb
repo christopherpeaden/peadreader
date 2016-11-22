@@ -55,7 +55,7 @@ RSpec.describe Feed do
   end
 
   describe "#parse" do
-    it "returns xml from feed instance" do
+    it "returns parsed feed object from xml" do
       feed.save
       stub_request(:any, feed.url).to_return(body: File.open(File.expand_path('./spec/support/sample_xml.rss')))
       xml = feed.fetch(last_modified: feed.last_modified, etag: feed.etag)

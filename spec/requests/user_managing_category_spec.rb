@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "User creates category" do
+RSpec.describe "User managing category" do
   let(:category) { build(:category) }
   let(:user) { create(:user) }
 
@@ -9,26 +9,29 @@ RSpec.describe "User creates category" do
     visit '/categories/new'
   end
 
-  context "successful" do
-    it "saves category to database" do
-      fill_in "Title", with: category.title
-      click_button "Submit"
-      expect(page).to have_selector('h1', text: category.title)
-      expect(Category.first.title).to eq category.title
+  describe "creation" do
+
+    context "successful" do
+      it "saves to database" do
+        fill_in "Title", with: category.title
+        click_button "Submit"
+        expect(page).to have_selector('h1', text: category.title)
+        expect(Category.first.title).to eq category.title
+      end
+    end
+
+    context "failure" do
+      it "does not save to database" do
+        fill_in "Title", with: "" 
+        click_button "Submit"
+        expect(Category.count).to be 0
+        expect(page).to have_content "problem"
+      end
     end
   end
 
-  context "failure" do
-    it "saves category to database" do
-      fill_in "Title", with: "" 
-      click_button "Submit"
-      expect(Category.count).to be 0
-      expect(page).to have_content "problem"
-    end
-  end
-
-  describe "edit category" do
-    it "changes and saves category title" do
+  describe "editing" do
+    it "changes and saves title" do
       fill_in "Title", with: category.title
       click_button "Submit"
       expect(page).to have_selector('h1', text: category.title)
@@ -41,8 +44,8 @@ RSpec.describe "User creates category" do
     end
   end
 
-  describe "delete category" do
-    it "removes feed from database" do
+  describe "deleting" do
+    it "removes from database" do
       fill_in "Title", with: category.title
       click_button "Submit"
       expect(page).to have_selector('h1', text: category.title)
