@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '5.0.0.1'
 gem 'pg', '~> 0.18.4'
 gem 'puma', '~> 3.4.0'
-gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'coffee-rails'
@@ -19,7 +18,10 @@ gem 'cocoon', '~> 1.2.9'
 gem 'redis'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
-
+gem 'rack', github: 'rack/rack'
+gem 'sass-rails', github: 'rails/sass-rails'
+gem 'sprockets', github: 'rails/sprockets'
+gem 'sprockets-rails', github: 'rails/sprockets-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5.0beta3'
@@ -34,8 +36,7 @@ group :development, :test do
   gem 'capybara' 
   gem 'database_cleaner'
   gem 'webmock', '~> 2.1.0'
-#  gem 'guard-rspec', '~> 4.6', '>= 4.6.5'
-#  gem 'guard-livereload'
+  gem 'sinatra', github: 'sinatra/sinatra'
 end
 
 group :development do
