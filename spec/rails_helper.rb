@@ -46,6 +46,10 @@ RSpec.configure do |config|
   # 
   config.include Devise::Test::IntegrationHelpers
 
+  config.before(:each, :api => :external) do
+    stub_request(:any, /www.example.com/).to_rack(FakeService)
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

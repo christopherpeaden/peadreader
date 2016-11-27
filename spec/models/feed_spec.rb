@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/fake_service.rb'
 
 RSpec.describe Feed do
   let(:user) { create(:user) }
@@ -45,20 +46,36 @@ RSpec.describe Feed do
   end
 
   describe "#fetch" do
-    it "returns xml from feed instance" do
-      feed.save
-      stub_request(:any, feed.url).to_return(body: File.open('/home/peady/Projects/peadreader/spec/support/sample_xml.rss'))
-      xml = feed.fetch(last_modified: feed.last_modified, etag: feed.etag)
-      expect(xml.body).not_to be nil 
-      expect(xml.class).to be HTTParty::Response
+    context "success" do
+      it "returns xml from feed instance" do
+        feed.save
+        stub_request(:any, feed.url).to_rack(FakeService)
+        xml = feed.fetch(last_modified: feed.last_modified , etag: feed.etag)
+        expect(xml.body).not_to be nil 
+        expect(xml.class).to be HTTParty::Response
+      end
     end
+
+    context "conditional GET request cache headers match" do
+      it "returns nil and 304 Not Modified code" do
+        feed.last_modified = "Tue, 01 Nov 2016 18:39:41 GMT"
+        feed.etag = "\"5818e16d-84069\""
+        feed.save
+        stub_request(:any, feed.url).to_rack(FakeService)
+        xml = feed.fetch(last_modified: feed.last_modified, etag: feed.etag)
+        expect(xml.body).to be nil 
+        expect(xml.code).to be 304
+      end
+    end
+
+
   end
 
   describe "#parse" do
     it "returns parsed feed object from xml" do
       feed.save
-      stub_request(:any, feed.url).to_return(body: File.open(File.expand_path('./spec/support/sample_xml.rss')))
-      xml = feed.fetch(last_modified: feed.last_modified, etag: feed.etag)
+      stub_request(:any, feed.url).to_rack(FakeService)
+      xml = feed.fetch(last_modified: feed.last_modified , etag: feed.etag)
       parsed_feed = feed.parse(xml.body)
       expect(parsed_feed).not_to be nil 
       expect(parsed_feed.entries.count).to be 202
@@ -68,8 +85,7 @@ RSpec.describe Feed do
   describe '#fetch_and_save_new_items' do
     it 'fetches feed xml and saves new items to database' do
       feed.save
-      file = File.open(File.expand_path('./spec/support/sample_xml.rss'))
-      stub_request(:any, feed.url).to_return(status: 200, body: file)
+      stub_request(:any, feed.url).to_rack(FakeService)
       feed.fetch_and_save_new_items
       expect(Item.count).to eq 202
     end

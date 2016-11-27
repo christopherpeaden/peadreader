@@ -19,9 +19,9 @@ gem 'redis'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 gem 'rack', github: 'rack/rack'
-gem 'sass-rails', github: 'rails/sass-rails'
-gem 'sprockets', github: 'rails/sprockets'
-gem 'sprockets-rails', github: 'rails/sprockets-rails'
+gem 'sass-rails'
+gem 'sprockets', '~> 3.7.0'
+gem 'sprockets-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5.0beta3'
