@@ -15,8 +15,10 @@
           var textData = document.createTextNode(data);
           refreshDiv.replaceChild(textData, refreshDiv.childNodes[1]);
 
-          if (data == "Feeds have been successfully updated.") {refreshDiv.className = "alert alert-success";}
+          if(data == "Feeds have been successfully updated.") {refreshDiv.className = "alert alert-success"};
+          if(data.slice(0, 5) == "There") {refreshDiv.className = "alert alert-danger"};
         }
+
       } else {
         var itemList = document.getElementsByClassName("list-group")[0];
         var items = document.getElementById("items").childNodes[1].childNodes;

@@ -28,7 +28,6 @@ class Feed < ActiveRecord::Base
     end
   end
 
-
   private
 
     def update_after_checking_for_new_items(parsed_feed, feed_xml)
