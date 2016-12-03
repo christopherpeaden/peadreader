@@ -32,7 +32,8 @@ class NewItemChecker
       if entry.url =~ /youtube/ 
         "http://img.youtube.com/vi/#{entry.url.split('=')[1]}/hqdefault.jpg"
       elsif entry.url =~ /reddit/
-        entry.content.match(/https:\/\/b.thumbs.redditmedia.com\/.*jpg/).to_s
+        url_string = entry.content.match(/https:\/\/b.thumbs.redditmedia.com\/.*jpg/).to_s
+        url_string.length > 0 ? url_string : nil
       else
         entry.image if entry.respond_to?(:image)
       end

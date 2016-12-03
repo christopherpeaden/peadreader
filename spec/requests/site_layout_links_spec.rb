@@ -60,7 +60,7 @@ RSpec.describe 'Site layout' do
     end
 
     it "paginates results" do
-      31.times { create(:item, feed: feed, user: user) }
+      51.times { create(:item, feed: feed, user: user) }
       visit '/'
       expect(page).to_not have_selector('a', text: Item.first.title)
       expect(page).to have_selector('a', text: Item.second.title)
