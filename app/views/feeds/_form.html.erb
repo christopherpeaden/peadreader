@@ -13,7 +13,7 @@
   <div class="form-group">
     <p><%= f.label :categories %></p>
     <%= hidden_field_tag "feed[category_ids][]", nil %>
-    <% Category.all.each do |category| %>
+    <% current_user.categories.each do |category| %>
       <%= check_box_tag "feed[category_ids][]", category.id, @feed.category_ids.include?(category.id), id: dom_id(category) %>
       <%= label_tag dom_id(category), category.title %></br>
     <% end %>
