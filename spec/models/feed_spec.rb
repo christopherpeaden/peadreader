@@ -78,7 +78,7 @@ RSpec.describe Feed do
       xml = feed.fetch(last_modified: feed.last_modified , etag: feed.etag)
       parsed_feed = feed.parse(xml.body)
       expect(parsed_feed).not_to be nil 
-      expect(parsed_feed.entries.count).to be 202
+      expect(parsed_feed.entries.count).to eq 202
     end
   end
 
@@ -87,7 +87,7 @@ RSpec.describe Feed do
       feed.save
       stub_request(:any, feed.url).to_rack(FakeService)
       feed.fetch_and_save_new_items
-      expect(Item.count).to eq 202
+      expect(Item.count).to eq 30 
     end
   end
 end

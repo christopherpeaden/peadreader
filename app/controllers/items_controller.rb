@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = current_user.items.order(published_at: :desc)
-    @items = @items.paginate(page: params[:page], per_page: 50)
+    @items = @items.paginate(page: params[:page], per_page: 30)
   end
 
   def add_to_favorites

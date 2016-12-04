@@ -19,6 +19,7 @@ class FeedsUpdateStatusChannel < ApplicationCable::Channel
       end
       broadcast_status(feeds_with_errors) if feed == current_user.feeds.last
     end
+    ItemCleanupJob.perform_now(current_user)
   end
 
     private

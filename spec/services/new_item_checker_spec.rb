@@ -13,7 +13,7 @@ RSpec.describe NewItemChecker do
       feed_xml = feed.fetch(last_modified: feed.last_modified, etag: feed.etag)
       parsed_feed = feed.parse(feed_xml)
       NewItemChecker.check(parsed_feed, feed)
-      expect(Item.count).to eq 202
+      expect(Item.count).to eq 30
     end
 
     it "stops checking for new items if 4 items already in database" do

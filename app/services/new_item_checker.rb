@@ -2,9 +2,11 @@ class NewItemChecker
 
   def self.check(parsed_feed, feed)
     failed_saves = 0
+    successful_saves = 0
     parsed_feed.entries.each do |entry|
-      failed_saves += 1 if !build_and_save_item_from_entry_attributes(feed, entry)
+      build_and_save_item_from_entry_attributes(feed, entry) ? successful_saves +=1 : failed_saves +=1
       break if failed_saves == 4
+      break if successful_saves == 30
     end
   end
 
