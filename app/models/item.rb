@@ -1,5 +1,4 @@
 class Item < ActiveRecord::Base
-  after_create_commit { ItemBroadcastJob.perform_now self }
   belongs_to :feed
   belongs_to :user
   has_many :itemizations

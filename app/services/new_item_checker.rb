@@ -15,7 +15,7 @@ class NewItemChecker
     def  self.build_and_save_item_from_entry_attributes(feed, entry)
       item = build(feed, entry)
       item.category_ids = feed.category_ids
-      item.save
+        ActionCable.server.broadcast "feeds_update_status_channel_user_#{feed.user.id}", item: render_item(item) if item.save
       #feed.items.create(item.attributes).id
     end
 
@@ -39,5 +39,9 @@ class NewItemChecker
       else
         entry.image if entry.respond_to?(:image)
       end
+    end
+
+    def self.render_item(item)
+      ApplicationController.renderer.render(partial: 'items/item', locals: { item: item })
     end
 end

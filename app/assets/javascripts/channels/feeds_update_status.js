@@ -22,21 +22,29 @@
       } else {
         var itemList = document.getElementsByClassName("list-group")[0];
         var items = document.getElementById("items").childNodes[1].childNodes;
+        
+        if(items.length < 2) {
+          console.log(items.length);
+          console.log(items[0]);
+          $(data["item"]).insertBefore(items[0]);
+          $("").insertBefore(items[0]);
+        } else {
 
-        for(var x = 0; x <= items.length; x++) {
-          if(items[x].dataset != undefined) {
-            var dataPublished = data['item'].match(/2.*C/)[0];
+          for(var x = 0; x <= items.length; x++) {
+            if(items[x].dataset != undefined) {
+              var dataPublished = data['item'].match(/2.*C/)[0];
+              console.log(items.length);
+              console.log(items[0]);
 
-            console.log(x);
-            console.log(items[x]);
-            if (dataPublished > items[x].dataset.published) {
-              //$('#items .list-group').prepend(data['item']); 
-              $(data["item"]).insertBefore(items[x]);
-              $("").insertBefore(items[x]);
-              break;
+              if (dataPublished > items[x].dataset.published) {
+                //$('#items .list-group').prepend(data['item']); 
+                $(data["item"]).insertBefore(items[x]);
+                $("").insertBefore(items[x]);
+                break;
+              }
             }
-	  }
-	}
+          }
+        }
       }
     },
 
