@@ -13,6 +13,8 @@ RSpec.describe 'Site layout' do
       expect(page).to have_selector('div#items')
       click_link 'Create new feed'
       expect(page).to have_selector('h1', text: 'Subscribe to new feed')
+      click_link 'Create new category'
+      expect(page).to have_selector('h1', text: 'New Category')
       click_link 'Show all feeds'
       expect(page).to have_selector('h1', text: 'All Feeds')
       click_link 'Import OPML File'
