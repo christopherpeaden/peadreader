@@ -5,6 +5,7 @@ RSpec.describe Feed do
   let(:user) { create(:user) }
   subject { build(:feed, user: user) } 
   let(:feed) { subject }
+  let(:user_2) { create(:user, email: "snorlax123@example.com", password: "12345678", password_confirmation: "12345678") }
 
   describe "messages" do
     it {should respond_to(:id) }
@@ -27,10 +28,18 @@ RSpec.describe Feed do
       expect(feed).to be_invalid
     end
 
-    it "rejects duplicate title" do
+    it "rejects duplicate title from same user" do
+      feed.user_id = user.id
       feed.save
-      dup_feed = build(:feed, title: feed.title)
+      dup_feed = build(:feed, title: feed.title, user: user)
       expect(dup_feed.save).to be false
+    end
+
+    it "accepts duplicate title from different user" do
+      feed.user_id = user.id
+      feed.save
+      dup_feed = build(:feed, title: feed.title, user: user_2)
+      expect(dup_feed.save).to be true
     end
 
     it "rejects blank url" do
@@ -38,9 +47,17 @@ RSpec.describe Feed do
       expect(feed).to_not be_valid
     end
     
-    it "rejects duplicate url" do
+    it "accepts duplicate url from different user" do
+      feed.user_id = user.id
       feed.save
-      dup_feed = build(:feed, url: feed.url)
+      dup_feed = build(:feed, url: feed.url, user: user_2)
+      expect(dup_feed.save).to be true
+    end
+
+    it "rejects duplicate url from same user" do
+      feed.user_id = user.id
+      feed.save
+      dup_feed = build(:feed, url: feed.url, user: user)
       expect(dup_feed.save).to be false
     end
   end

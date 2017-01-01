@@ -5,5 +5,5 @@ class Category < ActiveRecord::Base
   has_many :feeds, through: :categorizations
   has_many :items, through: :itemizations
 
-  validates :title, presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: { :scope => :user_id }
 end

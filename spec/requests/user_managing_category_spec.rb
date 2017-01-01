@@ -10,13 +10,22 @@ RSpec.describe "User managing category" do
   end
 
   describe "creation" do
+    let(:user_2) { create(:user, email: "snorlax123@example.com", password: "12345678", password_confirmation: "12345678") }
 
-    context "successful" do
+    context "successfully saves duplicate category title scoped to user" do
       it "saves to database" do
         fill_in "Title", with: category.title
         click_button "Submit"
         expect(page).to have_selector('h1', text: category.title)
         expect(Category.first.title).to eq category.title
+        click_link 'Sign Out'
+
+        sign_in_valid_user(user_2)
+        visit '/categories/new'
+        fill_in "Title", with: category.title
+        click_button "Submit"
+        expect(page).to have_selector('h1', text: category.title)
+        expect(Category.second.title).to eq Category.first.title 
       end
     end
 

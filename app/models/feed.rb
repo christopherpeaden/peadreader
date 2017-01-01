@@ -5,8 +5,8 @@ class Feed < ActiveRecord::Base
   has_many :items, dependent: :destroy
   accepts_nested_attributes_for :categories
 
-  validates :title, presence: true, uniqueness: true
-  validates :url,   presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: { :scope => :user_id }
+  validates :url,   presence: true, uniqueness: { :scope => :user_id }
 
   def fetch(options = {})
     headers = {

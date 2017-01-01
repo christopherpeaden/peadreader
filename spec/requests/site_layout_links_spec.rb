@@ -21,8 +21,6 @@ RSpec.describe 'Site layout' do
       expect(page).to have_selector('h1', text: 'Favorites')
       click_link 'Saved for later'
       expect(page).to have_selector('h1', text: 'Saved for later')
-      click_link 'Categories'
-      expect(page).to have_selector('h1', text: 'Categories')
       click_link 'Edit Profile'
       expect(page).to have_selector('h1', text: 'Edit User')
       click_link 'Sign Out'
@@ -39,6 +37,15 @@ RSpec.describe 'Site layout' do
       click_link category.title
       expect(page).to have_selector('h1', text: category.title)
     end
+
+
+    it "displays category header link" do
+      category = create(:category, user: user)
+      visit '/'
+      click_link 'Categories'
+      expect(page).to have_selector('h1', text: 'Categories')
+    end
+
 
     it "navigates to respective feed page" do
       category = create(:category, user: user)
