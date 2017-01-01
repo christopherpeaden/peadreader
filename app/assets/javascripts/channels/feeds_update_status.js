@@ -20,34 +20,44 @@
         }
 
       } else {
-        var itemList = document.getElementsByClassName("list-group")[0];
-        var items = document.getElementById("items").childNodes[1].childNodes;
+        let items = document.getElementById("items").children[0];
         
-        if(items.length < 2) {
-          console.log(items.length);
-          console.log(items[0]);
-          $(data["item"]).insertBefore(items[0]);
-          $("").insertBefore(items[0]);
+        if(items.children.length < 1) {
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(data["item"], "text/html");
+            items.appendChild(doc.firstChild);
         } else {
+          let positionFound = false;
 
-          for(var x = 0; x <= items.length; x++) {
-            if(items[x].dataset != undefined) {
+          for(var x = 0; x < items.children.length; x++) {
               var dataPublished = data['item'].match(/2.*C/)[0];
-              console.log(items.length);
-              console.log(items[0]);
 
-              if (dataPublished > items[x].dataset.published) {
-                //$('#items .list-group').prepend(data['item']); 
-                $(data["item"]).insertBefore(items[x]);
-                $("").insertBefore(items[x]);
-                break;
+              if (items.children[x].children[1]) {
+                  if (dataPublished > items.children[x].children[1].children[0].dataset.published) {
+                      let parser = new DOMParser();
+                      let doc = parser.parseFromString(data["item"], "text/html");
+                      items.insertBefore(doc.firstChild, items.children[x]);
+                      positionFound = true;
+                      break;
+                  }
+              } else if(items.children[x]) {
+                  if (dataPublished > items.children[x].dataset.published) {
+                      let parser = new DOMParser();
+                      let doc = parser.parseFromString(data["item"], "text/html");
+                      items.insertBefore(doc.firstChild, items.children[x]);
+                      positionFound = true;
+                      break; 
+                  }
               }
-            }
+          }
+          if (positionFound == false) {
+              let parser = new DOMParser();
+              let doc = parser.parseFromString(data["item"], "text/html");
+              items.appendChild(doc.firstChild);
           }
         }
       }
     },
-
 
     update: function() {
       return this.perform('update');
