@@ -20,30 +20,30 @@
         }
 
       } else {
-        let items = document.getElementById("items").children[0];
+        var items = document.getElementById("items").children[0];
         
         if(items.children.length < 1) {
-            let parser = new DOMParser();
-            let doc = parser.parseFromString(data["item"], "text/html");
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(data["item"], "text/html");
             items.appendChild(doc.firstChild);
         } else {
-          let positionFound = false;
+          var positionFound = false;
 
           for(var x = 0; x < items.children.length; x++) {
               var dataPublished = data['item'].match(/2.*C/)[0];
 
               if (items.children[x].children[1]) {
                   if (dataPublished > items.children[x].children[1].children[0].dataset.published) {
-                      let parser = new DOMParser();
-                      let doc = parser.parseFromString(data["item"], "text/html");
+                      var parser = new DOMParser();
+                      var doc = parser.parseFromString(data["item"], "text/html");
                       items.insertBefore(doc.firstChild, items.children[x]);
                       positionFound = true;
                       break;
                   }
               } else if(items.children[x]) {
                   if (dataPublished > items.children[x].dataset.published) {
-                      let parser = new DOMParser();
-                      let doc = parser.parseFromString(data["item"], "text/html");
+                      var parser = new DOMParser();
+                      var doc = parser.parseFromString(data["item"], "text/html");
                       items.insertBefore(doc.firstChild, items.children[x]);
                       positionFound = true;
                       break; 
@@ -51,8 +51,8 @@
               }
           }
           if (positionFound == false) {
-              let parser = new DOMParser();
-              let doc = parser.parseFromString(data["item"], "text/html");
+              var parser = new DOMParser();
+              var doc = parser.parseFromString(data["item"], "text/html");
               items.appendChild(doc.firstChild);
           }
         }
