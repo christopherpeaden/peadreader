@@ -26,11 +26,7 @@
         <% end %>
 
         <div class="col-xs-12 col-md-4">
-          <% if controller_name == "youtube" || controller_name == "youtube_channels" %>
-            <%= render "youtube/youtube_sidebar" %>
-          <% else %>
-            <%= render "layouts/sidebar" %>
-          <% end %>
+          <%= render "layouts/sidebar" %>
         </div>
         <%= debug(params) if Rails.env.development? %>
       </div>

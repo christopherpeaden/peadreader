@@ -1,7 +1,0 @@
-<h1><%= @youtube_channel.title %></h1>
-<p><%= image_tag(@youtube_channel.image, size: "380x300") %></p>
-
-<% @youtube_channel.youtube_videos.each do |youtube_video| %>
-  <p><%= image_tag(youtube_video.image, size: "300x200")  %></p>
-  <p><%= link_to youtube_video.title, youtube_video.url %></p>
-<% end %>
