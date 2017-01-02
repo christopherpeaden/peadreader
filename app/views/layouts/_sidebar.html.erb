@@ -14,7 +14,7 @@
         <li class="list-group-item"><%= link_to category.title, category, class: "btn" %>
           <ul>
             <% category.feeds.order(:title).each do |feed| %>
-              <li><%= link_to feed.title, feed %></li>
+              <li><%= link_to feed.title, feed_path(id: feed.id, :is_feed? => true ) %></li>
             <% end %>
           </ul>
         </li>

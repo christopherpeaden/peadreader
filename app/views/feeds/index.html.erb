@@ -3,7 +3,7 @@
 <ul class="list-group">
   <% @feeds.each do |feed| %>
     <li class="list-group-item">
-      <%= link_to feed.title, feed %>
+      <%= link_to feed.title, feed_path(id: feed.id, is_feed?: true) %>
     </li>
   <% end %>
 

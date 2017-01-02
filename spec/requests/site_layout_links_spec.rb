@@ -43,9 +43,12 @@ RSpec.describe 'Site layout' do
 
     it "displays category header link" do
       category = create(:category, user: user)
+      create(:item, category_ids: [category.id])
       visit '/'
       click_link 'Categories'
       expect(page).to have_selector('h1', text: 'Categories')
+      click_link category.title, match: :first
+      expect(page).to have_selector('a', text: 'More')
     end
 
 
@@ -66,6 +69,8 @@ RSpec.describe 'Site layout' do
       expect(page).to have_selector('a', text: "More")
       expect(page).to have_selector('a', text: "Add to favorites")
       expect(page).to have_selector('a', text: "Save for later")
+      click_link "More", match: :first
+      expect(page).to_not have_selector('a', text: "More")
     end
 
     it "paginates results" do
