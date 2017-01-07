@@ -26,7 +26,6 @@ RSpec.describe User do
     it { should respond_to(:feeds) }
     it { should respond_to(:categories) }
     it { should respond_to(:items) }
-    it { should respond_to(:job_watchers) }
   end
 
   describe "validations" do

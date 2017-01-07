@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828010358) do
+ActiveRecord::Schema.define(version: 20170107220619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,20 +66,6 @@ ActiveRecord::Schema.define(version: 20160828010358) do
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
 
-  create_table "job_watchers", force: :cascade do |t|
-    t.boolean  "completed",  default: false, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_job_watchers_on_user_id", using: :btree
-  end
-
-  create_table "jobwatchers", force: :cascade do |t|
-    t.boolean  "completed",  default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                   default: "", null: false
     t.string   "encrypted_password",      default: "", null: false
@@ -106,41 +92,8 @@ ActiveRecord::Schema.define(version: 20160828010358) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "youtube_channels", force: :cascade do |t|
-    t.string   "title"
-    t.string   "channel_id"
-    t.string   "url"
-    t.string   "video_count"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.string   "image"
-    t.integer  "user_id"
-    t.string   "upload_playlist_id"
-    t.index ["user_id"], name: "index_youtube_channels_on_user_id", using: :btree
-  end
-
-  create_table "youtube_videos", force: :cascade do |t|
-    t.string   "title"
-    t.string   "url"
-    t.string   "playlist_id"
-    t.string   "video_id"
-    t.string   "image"
-    t.integer  "youtube_channel_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.datetime "published_at"
-    t.string   "channel_id"
-    t.index ["playlist_id"], name: "index_youtube_videos_on_playlist_id", using: :btree
-    t.index ["published_at"], name: "index_youtube_videos_on_published_at", using: :btree
-    t.index ["title"], name: "index_youtube_videos_on_title", using: :btree
-    t.index ["youtube_channel_id"], name: "index_youtube_videos_on_youtube_channel_id", using: :btree
-  end
-
   add_foreign_key "categories", "users"
   add_foreign_key "feeds", "users"
   add_foreign_key "items", "feeds"
   add_foreign_key "items", "users"
-  add_foreign_key "job_watchers", "users"
-  add_foreign_key "youtube_channels", "users"
-  add_foreign_key "youtube_videos", "youtube_channels"
 end
