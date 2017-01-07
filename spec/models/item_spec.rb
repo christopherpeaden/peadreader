@@ -10,8 +10,6 @@ RSpec.describe Item do
   describe "messages" do
     it { should respond_to(:id) }
     it { should respond_to(:title) }
-    it { should respond_to(:favorite) }
-    it { should respond_to(:saved_for_later) }
   end
 
   describe "associations" do

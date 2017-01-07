@@ -19,10 +19,6 @@ RSpec.describe 'Site layout' do
       expect(page).to have_selector('h1', text: 'All Feeds')
       click_link 'Import OPML File'
       expect(page).to have_selector('label', text: 'Import OPML File')
-      click_link 'Favorites'
-      expect(page).to have_selector('h1', text: 'Favorites')
-      click_link 'Saved for later'
-      expect(page).to have_selector('h1', text: 'Saved for later')
       click_link 'Edit Profile'
       expect(page).to have_selector('h1', text: 'Edit User')
       click_link 'Sign Out'
@@ -67,8 +63,6 @@ RSpec.describe 'Site layout' do
       expect(page).to have_selector('a', text: Item.second.title)
       expect(page).to have_selector('a', text: Item.third.title)
       expect(page).to have_selector('a', text: "More")
-      expect(page).to have_selector('a', text: "Add to favorites")
-      expect(page).to have_selector('a', text: "Save for later")
       click_link "More", match: :first
       expect(page).to_not have_selector('a', text: "More")
     end
