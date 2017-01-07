@@ -9,8 +9,6 @@
       <%= "#{item.published_at.strftime("%B %d, %Y %l:%M %p")},  #{time_ago_in_words(item.published_at)} ago" %>                                                                                                  
       </br>
       <%= link_to "More", feed_path(item.feed, is_feed?: true), class: "btn btn-default" if !params[:is_feed?] %>        
-      <%= link_to "Add to favorites", add_to_favorites_path(id: item.id), remote: true, class: "btn btn-default" %>  
-      <%= link_to "Save for later", save_for_later_path(id: item.id), remote: true, class: "btn btn-default" %></br> 
     </div>
   </div>
 </li>                                                                                                

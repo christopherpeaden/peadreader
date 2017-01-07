@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107220619) do
+ActiveRecord::Schema.define(version: 20170107222353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,16 +53,12 @@ ActiveRecord::Schema.define(version: 20170107220619) do
     t.string   "url"
     t.datetime "published_at"
     t.integer  "feed_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "image_thumbnail_url"
     t.string   "feed_title"
-    t.boolean  "favorite",            default: false
-    t.boolean  "saved_for_later",     default: false
     t.integer  "user_id"
-    t.index ["favorite"], name: "index_items_on_favorite", using: :btree
     t.index ["feed_id"], name: "index_items_on_feed_id", using: :btree
-    t.index ["saved_for_later"], name: "index_items_on_saved_for_later", using: :btree
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
 
