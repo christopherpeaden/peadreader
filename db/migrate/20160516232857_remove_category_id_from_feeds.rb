@@ -1,5 +1,5 @@
 class RemoveCategoryIdFromFeeds < ActiveRecord::Migration
   def change
-    remove_column :feeds, :category_id, :integer
+    remove_reference :feeds, :category, index: true, foreign_key: true
   end
 end

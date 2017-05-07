@@ -19,3 +19,6 @@
 # Ignore database configuration
 /config/database.yml
 /config/secrets.yml
+
+# Ignore Ctags
+/tags
