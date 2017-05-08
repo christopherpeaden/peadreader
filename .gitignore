@@ -22,3 +22,11 @@
 
 # Ignore Ctags
 /tags
+
+# Ignore vim swap files
+*.swp
+
+# Ignore Capistrano config
+/Capfile
+/config/deploy.rb
+/config/deploy/production.rb

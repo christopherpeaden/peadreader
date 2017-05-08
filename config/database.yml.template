@@ -4,7 +4,7 @@ default: &default
   hostname: localhost
   pool: 5
   username:
-  password: <%= ENV[""] %> 
+  password: ENV["DATABASE_PASSWORD"]
   timeout: 5000
 
 development:
